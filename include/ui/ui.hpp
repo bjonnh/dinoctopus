@@ -37,6 +37,10 @@ namespace UI {
 
         void errorStrip();
 
+        static void dirtyStrip();
+
+        static void normalStrip();
+
     private:
         char buffer[50];
 
@@ -52,11 +56,15 @@ namespace UI {
 
         void encoderPoll();
 
-        void normalStrip();
-
         bool query_for_router_requested;
 
         bool update_for_router_ready;
+
+        bool updated=true;
+
+        void readEncoder();
+
+        bool dirty=true;
 
     };
 }

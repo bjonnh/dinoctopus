@@ -16,9 +16,9 @@ public:
 private:
     uint8_t current_cable_limited();
     routing_matrix matrix = {
-            {0,0,0,255},
-            {0,0,0,255},
-            {0,0,0,255},
+            {0,0,0,0},
+            {0,0,0,0},
+            {0,0,0,0},
             {0,0,0,0}
     };
 };

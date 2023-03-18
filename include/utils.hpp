@@ -5,6 +5,8 @@
 #ifndef DINOCTOPUS_2040_UTILS_HPP
 #define DINOCTOPUS_2040_UTILS_HPP
 
+#define CURRENT_TIME_MS to_ms_since_boot(get_absolute_time())
+
 #define LATENCY_VARIABLES(id) static uint32_t count_latency_##id = 0; \
     static uint32_t processor_time_##id; \
     static uint32_t processor_max_latency_##id = 0;

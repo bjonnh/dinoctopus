@@ -4,10 +4,10 @@
 #include "queue.hpp"
 #include "utils.hpp"
 #include "config.hpp"
+#include "storage.hpp"
 
 MidiRouter midi_router;
 UI::Manager ui;
-
 
 // Core 0, running the MIDI will only receive requests never send any
 queue_t request_queue;

@@ -70,6 +70,7 @@ namespace UI {
 
         void (*update_callbacks[UI_WIDGET_CALLBACKS])() = {nullptr};
         uint8_t inserted_update_callback = 0;
+
     protected:
         U8G2_ST7567_JLX12864_F_4W_HW_SPI *display;
         bool focus = false;

@@ -22,6 +22,9 @@ namespace UI::Widgets {
         char buffer[50] = {0};
         routing_matrix current_matrix = {0};
         MatrixState state;
+        void (*dirty_callbacks[UI_WIDGET_CALLBACKS])(bool) = {nullptr};
+        uint8_t inserted_dirty_callback = 0;
+
     public:
         Matrix(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent) : Widget(display, parent) {
         }
@@ -39,6 +42,14 @@ namespace UI::Widgets {
         routing_matrix *getMatrix() {
             return &current_matrix;
         }
+
+        bool dirty = false;
+
+        void set_dirty(bool b);
+
+        bool get_dirty();
+        void onDirtyCall(void (*fun)(bool));
+
     };
 }
 

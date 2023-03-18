@@ -109,12 +109,30 @@ namespace UI {
                     p0_selected_output=1;
                     break;
                 case route_select:
+                    set_dirty(true);
                     current_matrix[p0_selected_input-1][p0_selected_output-1] ^= 255;
                     update();
                     break;
             }
 
             return true;
+        }
+
+        void Matrix::onDirtyCall(void (*fun)(bool)) {
+            if (inserted_dirty_callback<=UI_WIDGET_CALLBACKS) {
+                dirty_callbacks[inserted_dirty_callback++] = fun;
+            }
+        }
+
+        void Matrix::set_dirty(bool b) {
+            dirty = b;
+            for (const auto &item: dirty_callbacks)
+                if (item != nullptr)
+                    (*item)(b);
+        }
+
+        bool Matrix::get_dirty() {
+            return dirty;
         }
     }
 }

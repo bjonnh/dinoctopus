@@ -36,3 +36,11 @@ void UI::Manager::normalStrip() {
     strip.setPixelColor(2, Adafruit_NeoPixel::Color(15, 255, 45));
     strip.show();
 }
+
+void UI::Manager::dirtyStrip() {
+    strip.setBrightness(255);
+    strip.setPixelColor(0, Adafruit_NeoPixel::Color(151, 255, 85));
+    strip.setPixelColor(1, Adafruit_NeoPixel::Color(151, 255, 145));
+    strip.setPixelColor(2, Adafruit_NeoPixel::Color(155, 205, 45));
+    strip.show();
+}

@@ -5,20 +5,15 @@
 #include <Arduino.h>
 #include <cstdint>
 #include <pico/time.h>
-#include <hardware/gpio.h>
 #include "ui/ui.hpp"
 #include "config.hpp"
+#include "utils.hpp"
 
-bool CLKstate;
-bool DTstate;
-
-// Mega gross, but that works as long as you don't forget to initialize it before using it
-UI::Manager *ui_for_encoder;
-static uint8_t state=0;
 // https://forum.arduino.cc/t/reading-rotary-encoders-as-a-state-machine/937388
-void readEncoder() {
-    CLKstate = digitalRead(ENC_B);
-    DTstate = digitalRead(ENC_C);
+void UI::Manager::readEncoder() {
+    static uint8_t state=0;
+    bool CLKstate = digitalRead(ENC_C);
+    bool DTstate = digitalRead(ENC_B);
     switch (state) {
         // Start state
         case 0:
@@ -42,7 +37,7 @@ void readEncoder() {
         case 3:
             if (CLKstate && DTstate) {  // Both CLK and DT now high as the encoder completes one step clockwise
                 state = 0;
-                ui_for_encoder->encoder_right();
+                encoder_left();
             }
             break;
             // Anticlockwise rotation
@@ -59,7 +54,7 @@ void readEncoder() {
         case 6:
             if (CLKstate && DTstate) {
                 state = 0;
-                ui_for_encoder->encoder_left();
+                encoder_right();
             }
             break;
     }
@@ -68,23 +63,13 @@ void readEncoder() {
 unsigned long time_a = to_ms_since_boot(get_absolute_time());
 int delayTime_a = 200;
 
-void encoderUpdate() {
-    CLKstate = digitalRead(ENC_B);
-    DTstate = digitalRead(ENC_C);
-}
-
 void UI::Manager::initEncoder() {
-    ui_for_encoder=this;
     pinMode(ENC_A, INPUT_PULLUP);
     pinMode(ENC_B, INPUT_PULLUP);
     pinMode(ENC_C, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(ENC_B), encoderUpdate, RISING);
-    attachInterrupt(digitalPinToInterrupt(ENC_C), encoderUpdate, RISING);
-
-    interrupts();
 }
 
-#define CURRENT_TIME_MS to_ms_since_boot(get_absolute_time())
+
 
 bool clicked = false;
 
