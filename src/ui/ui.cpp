@@ -3,9 +3,11 @@
 //
 
 #include <Arduino.h>
-#include "ui.hpp"
+#include "ui/ui.hpp"
 #include "U8g2lib.h"
 #include "config.hpp"
+#include "ui/widget.hpp"
+#include "ui/horizontalmenu.hpp"
 #include <SPI.h>
 
 
@@ -15,7 +17,7 @@ U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2,
                                           LCD_RESET);
 
 
-void UI::initLCD() {
+void UI::Manager::initLCD() {
     SPI.setRX(0);
     SPI.setCS(1);
     SPI.setSCK(LCD_CLOCK);
@@ -41,10 +43,20 @@ int clickcount = 0;
 int16_t inputDelta = 0;             // Counts up or down depending which way the encoder is turned
 
 
-void UI::init() {
+UI::Widget root = UI::Widget(&u8g2_lcd);
+UI::Widgets::Horizontal_menu horizontal_menu(&u8g2_lcd, &root);
+
+void UI::Manager::init() {
     initStrip();
     initLCD();
     initEncoder();
+    root.set_visible(true);
+    horizontal_menu.set_visible(true);
+    horizontal_menu.set_focus(true);
+
+    horizontal_menu.add_item((char*)"ROUTING");
+    horizontal_menu.add_item((char*)"SETTINGS");
+    horizontal_menu.add_item((char*)"DEBUG");
 }
 
 char matrix_sign(uint32_t v) {
@@ -62,7 +74,7 @@ uint8_t zone = 0; // 0 menu bar anything above is in the page itself and should 
 uint8_t p0_selected_input = 1;
 uint8_t p0_selected_output = 0;
 
-void UI::page0() {
+void UI::Manager::page0() {
     // zone 1: select input
     // zone 2: select output
     if (zone == 1) {
@@ -78,7 +90,7 @@ void UI::page0() {
             u8g2_lcd.setDrawColor(0);
         else
             u8g2_lcd.setDrawColor(1);
-        snprintf(buffer, 3, "%d", i);
+        snprintf(buffer, 3, "%d", i+1);
         u8g2_lcd.drawStr(0, (3.5 + i) * LINE_HEIGHT, buffer);
         u8g2_lcd.setDrawColor(1);
         u8g2_lcd.drawStr(10, (3.5 + i) * LINE_HEIGHT, "|");
@@ -94,43 +106,18 @@ void UI::page0() {
     }
 }
 
-void UI::common() {
+void UI::Manager::common() {
     u8g2_lcd.setFont(u8g2_font_5x8_mf);
     u8g2_lcd.setDrawColor(1);
 
-    if (page == 0)
-        if ((zone == 0) || cursor_position == 0)
-            u8g2_lcd.setDrawColor(0);
-        else {
-            u8g2_lcd.drawHLine(0, LINE_HEIGHT + 1, 50);
-        }
-    u8g2_lcd.drawStr(0, LINE_HEIGHT, "ROUTING");
-    u8g2_lcd.setDrawColor(1);
-
-    if (page == 1)
-        if (zone == 0 || cursor_position == 0)
-            u8g2_lcd.setDrawColor(0);
-        else {
-            u8g2_lcd.drawHLine(50, LINE_HEIGHT + 1, 50);
-        }
-    u8g2_lcd.drawStr(50, LINE_HEIGHT, "SETTINGS");
-    u8g2_lcd.setDrawColor(1);
-
-    if (page == 2)
-        if (zone == 0 || cursor_position == 0)
-            u8g2_lcd.setDrawColor(0);
-        else {
-            u8g2_lcd.drawHLine(100, LINE_HEIGHT + 1, 50);
-        }
-    u8g2_lcd.drawStr(100, LINE_HEIGHT, "DEBUG");
-    u8g2_lcd.setDrawColor(1);
+    root.draw();
 
     u8g2_lcd.setDrawColor(1);
     snprintf(buffer, 50, "L [0:%4d] [1:%4d]", latency_cpu[0], latency_cpu[1]);
     u8g2_lcd.drawStr(0, 8 * LINE_HEIGHT - 1, buffer);
 }
 
-void UI::display_update() {
+void UI::Manager::display_update() {
     u8g2_lcd.clearBuffer();
     if (page == 0) {
         page0();
@@ -142,7 +129,7 @@ void UI::display_update() {
 
 int count = 0;
 
-void UI::loop() {
+void UI::Manager::loop() {
     encoderPoll();
     if (oldclickcount != clickcount) {
         query_router_for = clickcount;
@@ -151,21 +138,22 @@ void UI::loop() {
     display_update();
 }
 
-void UI::set_latency(uint8_t cpu, uint32_t value) {
+void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
     latency_cpu[cpu] = value;
 }
 
-uint32_t UI::query_for_router() {
+uint32_t UI::Manager::query_for_router() {
     uint32_t request = query_router_for;
     query_router_for = 0;
     return request;
 }
 
-void UI::set_routing_response(routing_matrix &new_matrix) {
+void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
     memcpy(current_matrix, new_matrix, sizeof(uint32_t) * 4 * 4);
 }
 
-void UI::encoder_right() {
+void UI::Manager::encoder_right() {
+    root.move_right();
     cursor_position += 1;
     if (zone == 0) {
         if (cursor_position > 2)
@@ -182,7 +170,8 @@ void UI::encoder_right() {
     }
 }
 
-void UI::encoder_left() {
+void UI::Manager::encoder_left() {
+    root.move_left();
     if (cursor_position > 0)
         cursor_position -= 1;
 
@@ -191,7 +180,8 @@ void UI::encoder_left() {
     }
 }
 
-void UI::encoder_click() {
+void UI::Manager::encoder_click() {
+    root.click();
     if (zone>0 && cursor_position==0) {
         zone = 0;
         cursor_position = page;
@@ -207,6 +197,4 @@ void UI::encoder_click() {
     } else if (zone == 2) { // TODO This should go in page  management
         current_matrix[p0_selected_input-1][p0_selected_output-1] ^= 255;
     }
-
-
 }

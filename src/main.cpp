@@ -1,12 +1,12 @@
 #include <Arduino.h>  // necessary for setup/loop
 #include "midi_router.hpp"
-#include "ui.hpp"
+#include "ui/ui.hpp"
 #include "queue.hpp"
 #include "utils.hpp"
 #include "config.hpp"
 
 MidiRouter midi_router;
-UI ui;
+UI::Manager ui;
 
 
 

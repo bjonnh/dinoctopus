@@ -4,14 +4,13 @@
 
 
 
-#include "ui.hpp"
+#include "ui/ui.hpp"
 #include "Adafruit_NeoPixel.h"
 #include "config.hpp"
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(3, NEOPIXEL_PIN, NEO_RGB + NEO_KHZ800);
 
-
-void UI::initStrip() {
+void UI::Manager::initStrip() {
     strip.begin();
     strip.setBrightness(255);
     strip.setPixelColor(0, Adafruit_NeoPixel::Color(255, 25, 0));

@@ -6,14 +6,14 @@
 #include <cstdint>
 #include <pico/time.h>
 #include <hardware/gpio.h>
-#include "ui.hpp"
+#include "ui/ui.hpp"
 #include "config.hpp"
 
 bool CLKstate;
 bool DTstate;
 
 // Mega gross, but that works as long as you don't forget to initialize it before using it
-UI *ui_for_encoder;
+UI::Manager *ui_for_encoder;
 static uint8_t state=0;
 // https://forum.arduino.cc/t/reading-rotary-encoders-as-a-state-machine/937388
 void readEncoder() {
@@ -73,7 +73,7 @@ void encoderUpdate() {
     DTstate = digitalRead(ENC_C);
 }
 
-void UI::initEncoder() {
+void UI::Manager::initEncoder() {
     ui_for_encoder=this;
     pinMode(ENC_A, INPUT_PULLUP);
     pinMode(ENC_B, INPUT_PULLUP);
@@ -87,7 +87,7 @@ void UI::initEncoder() {
 #define CURRENT_TIME_MS to_ms_since_boot(get_absolute_time())
 
 
-void UI::encoderPoll() {
+void UI::Manager::encoderPoll() {
     bool click = digitalRead(ENC_A);
     if (click == 0) {
         if ((CURRENT_TIME_MS - time_a) > delayTime_a) {
