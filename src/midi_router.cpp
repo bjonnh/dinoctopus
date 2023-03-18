@@ -145,3 +145,7 @@ void MidiRouter::loop() {
 void MidiRouter::get_matrix(routing_matrix& matrix_out) {
     memcpy(matrix_out, matrix, 4*4*sizeof(uint32_t));
 }
+
+void MidiRouter::set_matrix(routing_matrix& matrix_in) {
+    memcpy(matrix, matrix_in, 4*4*sizeof(uint32_t));
+}

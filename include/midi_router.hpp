@@ -12,6 +12,7 @@ public:
     void init();
     void loop();
     void get_matrix(routing_matrix &);
+    void set_matrix(routing_matrix &);
 private:
     uint8_t current_cable_limited();
     routing_matrix matrix = {

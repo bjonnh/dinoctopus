@@ -18,6 +18,18 @@ void UI::Manager::initStrip() {
     strip.setPixelColor(2, Adafruit_NeoPixel::Color(255, 25, 0));
     strip.show();
     delay(1000);
+    normalStrip();
+}
+
+void UI::Manager::errorStrip() {
+    strip.setBrightness(255);
+    strip.setPixelColor(0, Adafruit_NeoPixel::Color(255, 1, 85));
+    strip.setPixelColor(1, Adafruit_NeoPixel::Color(255, 1, 145));
+    strip.setPixelColor(2, Adafruit_NeoPixel::Color(255, 85, 45));
+    strip.show();
+}
+
+void UI::Manager::normalStrip() {
     strip.setBrightness(255);
     strip.setPixelColor(0, Adafruit_NeoPixel::Color(1, 255, 85));
     strip.setPixelColor(1, Adafruit_NeoPixel::Color(1, 255, 145));

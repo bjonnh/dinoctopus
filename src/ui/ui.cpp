@@ -8,6 +8,9 @@
 #include "config.hpp"
 #include "ui/widget.hpp"
 #include "ui/horizontalmenu.hpp"
+#include "ui/matrix.hpp"
+#include "ui/statusbar.hpp"
+#include "ui/page.hpp"
 #include <SPI.h>
 
 
@@ -37,104 +40,76 @@ void UI::Manager::initLCD() {
     u8g2_lcd.sendBuffer();
 }
 
-int oldclickcount = 0;
-int clickcount = 0;
-
-int16_t inputDelta = 0;             // Counts up or down depending which way the encoder is turned
-
-
 UI::Widget root = UI::Widget(&u8g2_lcd);
 UI::Widgets::Horizontal_menu horizontal_menu(&u8g2_lcd, &root);
+UI::Widgets::StatusBar status_bar(&u8g2_lcd, &root);
+UI::Widgets::Page page_routing(&u8g2_lcd, &root);
+UI::Widgets::Page page_settings(&u8g2_lcd, &root);
+UI::Widgets::Page page_debug(&u8g2_lcd, &root);
+UI::Widgets::Matrix matrix(&u8g2_lcd, &page_routing);
+
+void set_current_position(uint8_t position) {
+    page_routing.setVisible(position==0);
+    page_settings.setVisible(position==1);
+    page_debug.setVisible(position==2);
+}
+
+void enter_page(uint8_t position) {
+    horizontal_menu.setFocus(false);
+    page_routing.setFocus(true);
+    page_settings.setFocus(false);
+    page_debug.setFocus(false);
+}
+
+void re_enter_menu() {
+    page_routing.setFocus(false);
+    page_settings.setFocus(false);
+    page_debug.setFocus(false);
+    horizontal_menu.setFocus(true);
+}
+
+UI::Manager *current_manager = nullptr;
+
+void update_router() {
+    if (current_manager!= nullptr)
+        current_manager->has_update_for_router();
+}
+
 
 void UI::Manager::init() {
+    current_manager = this;
     initStrip();
     initLCD();
     initEncoder();
-    root.set_visible(true);
-    horizontal_menu.set_visible(true);
-    horizontal_menu.set_focus(true);
+    root.setVisible(true);
+    horizontal_menu.setVisible(true);
+    set_current_position(0);
+    horizontal_menu.setFocus(true);
+    query_for_router_requested = true;
 
-    horizontal_menu.add_item((char*)"ROUTING");
-    horizontal_menu.add_item((char*)"SETTINGS");
-    horizontal_menu.add_item((char*)"DEBUG");
+    horizontal_menu.addItem((char *) "ROUTING");
+    horizontal_menu.addItem((char *) "SETTINGS");
+    horizontal_menu.addItem((char *) "DEBUG");
+    horizontal_menu.onHighlightedCall(&set_current_position);
+    horizontal_menu.onSelectedCall(&enter_page);
+    matrix.onExitCall(&re_enter_menu);
+    matrix.onUpdateCall(&update_router);
 }
 
-char matrix_sign(uint32_t v) {
-    return v > 0 ? 'X' : '.';
-}
-
-#define LINE_HEIGHT 8
-
-uint8_t page = 0;
-uint8_t cursor_position = 0;
-uint8_t zone = 0; // 0 menu bar anything above is in the page itself and should be handled by it
-
-// TODO make those pages as classes so they can receive events
-// TODO make it able to go back to the previous zone if going to cursor 0
-uint8_t p0_selected_input = 1;
-uint8_t p0_selected_output = 0;
-
-void UI::Manager::page0() {
-    // zone 1: select input
-    // zone 2: select output
-    if (zone == 1) {
-        p0_selected_input = cursor_position;
-    } else if (zone == 2) {
-        p0_selected_output = cursor_position;
-    }
-    u8g2_lcd.setFont(u8g2_font_5x8_mf);
-    u8g2_lcd.drawStr(0, 2.5 * LINE_HEIGHT, "IO|   1   2   3   4 ");
-    u8g2_lcd.drawHLine(0, 2.5 * LINE_HEIGHT, 100);
-    for (uint8_t i = 0; i < 4; i++) {
-        if (zone>0 && p0_selected_input == i+1)
-            u8g2_lcd.setDrawColor(0);
-        else
-            u8g2_lcd.setDrawColor(1);
-        snprintf(buffer, 3, "%d", i+1);
-        u8g2_lcd.drawStr(0, (3.5 + i) * LINE_HEIGHT, buffer);
-        u8g2_lcd.setDrawColor(1);
-        u8g2_lcd.drawStr(10, (3.5 + i) * LINE_HEIGHT, "|");
-        for (int j = 0; j<4 ; j++) {
-            if ((p0_selected_output == j+1) && (p0_selected_input == i+1))
-                u8g2_lcd.setDrawColor(0);
-            else
-                u8g2_lcd.setDrawColor(1);
-            snprintf(buffer, 50, "   %c", matrix_sign(current_matrix[i][j]));
-            u8g2_lcd.drawStr(15+20*j, (3.5 + i) * LINE_HEIGHT, buffer);
-        }
-
-    }
-}
-
-void UI::Manager::common() {
-    u8g2_lcd.setFont(u8g2_font_5x8_mf);
-    u8g2_lcd.setDrawColor(1);
-
-    root.draw();
-
-    u8g2_lcd.setDrawColor(1);
-    snprintf(buffer, 50, "L [0:%4d] [1:%4d]", latency_cpu[0], latency_cpu[1]);
-    u8g2_lcd.drawStr(0, 8 * LINE_HEIGHT - 1, buffer);
+void UI::Manager::has_update_for_router() {
+    update_for_router_ready=true;
 }
 
 void UI::Manager::display_update() {
+    snprintf(buffer, 50, "L [0:%4d] [1:%4d]", latency_cpu[0], latency_cpu[1]);
+    status_bar.set_message(buffer);
     u8g2_lcd.clearBuffer();
-    if (page == 0) {
-        page0();
-    }
-
-    common();
+    root.draw();
     u8g2_lcd.sendBuffer();
 }
 
-int count = 0;
-
 void UI::Manager::loop() {
     encoderPoll();
-    if (oldclickcount != clickcount) {
-        query_router_for = clickcount;
-        oldclickcount = clickcount;
-    }
     display_update();
 }
 
@@ -142,59 +117,39 @@ void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
     latency_cpu[cpu] = value;
 }
 
-uint32_t UI::Manager::query_for_router() {
-    uint32_t request = query_router_for;
-    query_router_for = 0;
-    return request;
+bool UI::Manager::query_for_router() {
+    if (query_for_router_requested) {
+        query_for_router_requested = false;
+        return true;
+    }
+    return false;
 }
 
+bool UI::Manager::update_for_router() {
+    if (update_for_router_ready) {
+        update_for_router_ready = false;
+        return true;
+    }
+    return false;
+}
+
+
 void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
-    memcpy(current_matrix, new_matrix, sizeof(uint32_t) * 4 * 4);
+    matrix.set_matrix(new_matrix);
 }
 
 void UI::Manager::encoder_right() {
     root.move_right();
-    cursor_position += 1;
-    if (zone == 0) {
-        if (cursor_position > 2)
-            cursor_position = 2;
-        page = cursor_position;
-    } else if (zone == 1) { // TODO This should go in page management
-        if (page == 0)
-            if (cursor_position > 4)
-                cursor_position = 4;
-    } else if (zone == 2) { // TODO This should go in the page management
-        if (page == 0)
-            if (cursor_position > 4)
-                cursor_position = 4;
-    }
 }
 
 void UI::Manager::encoder_left() {
     root.move_left();
-    if (cursor_position > 0)
-        cursor_position -= 1;
-
-    if (zone == 0) {
-        page = cursor_position;
-    }
 }
 
 void UI::Manager::encoder_click() {
     root.click();
-    if (zone>0 && cursor_position==0) {
-        zone = 0;
-        cursor_position = page;
-        return;
-    }
+}
 
-    if (zone == 0) {
-        zone = 1;
-        cursor_position = 1;
-    } else if (zone == 1) {
-      zone = 2;
-      cursor_position = 1;
-    } else if (zone == 2) { // TODO This should go in page  management
-        current_matrix[p0_selected_input-1][p0_selected_output-1] ^= 255;
-    }
+routing_matrix *UI::Manager::current_route() {
+    return matrix.getMatrix();
 }

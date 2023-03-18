@@ -6,7 +6,7 @@
 #define DINOCTOPUS_2040_UI_HPP
 
 
-#include "routingmatrix.hpp"
+#include "../routingmatrix.hpp"
 
 #define UI_LINE_HEIGHT 8
 
@@ -19,7 +19,7 @@ namespace UI {
 
         void set_latency(uint8_t cpu, uint32_t value);
 
-        uint32_t query_for_router();
+        bool query_for_router();
 
         void set_routing_response(routing_matrix &matrix);
 
@@ -28,6 +28,14 @@ namespace UI {
         void encoder_right();
 
         void encoder_left();
+
+        bool update_for_router();
+
+        routing_matrix *current_route();
+
+        void has_update_for_router();
+
+        void errorStrip();
 
     private:
         char buffer[50];
@@ -42,15 +50,14 @@ namespace UI {
 
         uint8_t latency_cpu[2] = {0, 0};
 
-        int query_router_for = 1; // We request an update when starting
-
-        routing_matrix current_matrix;
-
-        void page0();
-
-        void common();
-
         void encoderPoll();
+
+        void normalStrip();
+
+        bool query_for_router_requested;
+
+        bool update_for_router_ready;
+
     };
 }
 

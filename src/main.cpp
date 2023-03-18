@@ -9,7 +9,6 @@ MidiRouter midi_router;
 UI::Manager ui;
 
 
-
 // Core 0, running the MIDI will only receive requests never send any
 queue_t request_queue;
 queue_t response_queue;
@@ -37,13 +36,21 @@ void loop() {
     if (queue_get_level(&request_queue) > 0) {
         queue_request_t request;
         queue_remove_blocking(&request_queue, &request);
-        if (request.code == REQUEST_LATENCY) {
-            queue_response_t entry = {RESPONSE_LATENCY, processor_max_latency_0};
-            queue_add_blocking(&response_queue, &entry);
-        } else if (request.code == REQUEST_ROUTING) {
-            queue_response_t entry = {RESPONSE_ROUTING};
-            midi_router.get_matrix(entry.data);
-            queue_add_blocking(&response_queue, &entry);
+        switch(request.code){
+            case REQUEST_LATENCY: {
+                queue_response_t entry = {RESPONSE_LATENCY, processor_max_latency_0};
+                queue_add_blocking(&response_queue, &entry);
+            }
+                break;
+            case REQUEST_ROUTING: {
+                queue_response_t entry = {RESPONSE_ROUTING};
+                midi_router.get_matrix(entry.data);
+                queue_add_blocking(&response_queue, &entry);
+            }
+                break;
+            case REQUEST_SET_ROUTING:
+                midi_router.set_matrix(request.data);
+                break;
         }
     }
 
@@ -52,7 +59,7 @@ void loop() {
 
 void loop1() {
     LATENCY_CALCULATOR(1);
-    if (count_latency_1==N_LOOPS_MAX_LATENCY_CORE1)
+    if (count_latency_1 == N_LOOPS_MAX_LATENCY_CORE1)
         ui.set_latency(1, processor_max_latency_1);
 
     if (queue_get_level(&response_queue) > 0) {
@@ -65,10 +72,14 @@ void loop1() {
         }
     }
 
-    uint32_t query = ui.query_for_router();
     // Unless we are asking for something specific, let's just ask for latency
-    if (query != 0) {
-        queue_request_t entry = {REQUEST_ROUTING, query};
+    if (ui.query_for_router()) {
+        queue_request_t entry = {REQUEST_ROUTING, 0};
+        queue_add_blocking(&request_queue, &entry);
+    }
+    if (ui.update_for_router()) {
+        queue_request_t entry = {REQUEST_SET_ROUTING};
+        memcpy(entry.data, ui.current_route(), 4*4*sizeof(uint32_t));
         queue_add_blocking(&request_queue, &entry);
     } else {
         queue_request_t entry = {REQUEST_LATENCY, 0};

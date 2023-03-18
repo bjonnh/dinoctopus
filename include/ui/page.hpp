@@ -5,11 +5,19 @@
 #ifndef DINOCTOPUS_2040_PAGE_HPP
 #define DINOCTOPUS_2040_PAGE_HPP
 
-namespace UI {
-    class Page {
-        void click();
-        void cursor_left();
-        void cursor_right();
+#include "widget.hpp"
+
+namespace UI::Widgets {
+    class Page : public UI::Widget { ;
+
+    public:
+        Page(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent): Widget(display, parent) {
+        }
+
+        void setVisible(bool f) override;
+
+        // Pages focus the first child
+        void setFocus(bool f) override;
     };
 }
 

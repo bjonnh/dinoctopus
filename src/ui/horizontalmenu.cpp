@@ -7,7 +7,7 @@
 
 namespace UI {
     namespace Widgets {
-        bool Horizontal_menu::add_item(char *item) {
+        bool Horizontal_menu::addItem(char *item) {
             if (inserted_items < HORIZONTAL_MENU_ITEM_NUMBERS) {
                 memcpy(items[inserted_items++], item, HORIZONTAL_MENU_ITEM_LENGTH);
                 return true;
@@ -30,30 +30,26 @@ namespace UI {
                     (*item)(new_item);
         }
 
-        bool Horizontal_menu::click() {
-            if (!visible)
+        bool Horizontal_menu::clickAction() {
+            if (!visible or !focus)
                 return false;
             set_selected_item_to(current_item);
-            UI::Widget::click();
             return true;
         }
 
-        bool Horizontal_menu::move_left() {
-            if (!visible)
+        bool Horizontal_menu::leftAction() {
+            if (current_item==0 or !visible or !focus)
                 return false;
-            if (current_item>0)
-                current_item--;
 
-            UI::Widget::move_left();
+            set_highlighted_item_to(current_item-1);
             return true;
         }
 
-        bool Horizontal_menu::move_right() {
-            if (!visible)
+        bool Horizontal_menu::rightAction() {
+            if ((current_item>inserted_items-1) or !visible or !focus)
                 return false;
-            if (current_item<inserted_items-1)
-                current_item++;
-            UI::Widget::move_right();
+
+            set_highlighted_item_to(current_item+1);
             return true;
         }
 
@@ -67,9 +63,15 @@ namespace UI {
                 highlighted_callbacks[inserted_highlighted_callbacks++] = fun;
         }
 
+        char buffer[50];
+
         void Horizontal_menu::draw() {
+            if (!visible)
+                return;
+
             display->setFont(u8g2_font_5x8_mf);
             display->setDrawColor(1);
+
             for (uint8_t i=0; i < inserted_items;i++) {
                 uint8_t shift_x = 48 * i;
                 if (current_item == i) {
@@ -78,7 +80,11 @@ namespace UI {
                     else
                         display->drawHLine(shift_x, UI_LINE_HEIGHT + 1, 50);
                 }
-                display->drawStr(shift_x, UI_LINE_HEIGHT, items[i]);
+                if (selected_item == i)
+                    snprintf(buffer, 50, ">%s", items[i]);
+                else
+                    snprintf(buffer, 50, " %s", items[i]);
+                display->drawStr(shift_x, UI_LINE_HEIGHT, buffer);
                 display->setDrawColor(1);
             }
         }

@@ -86,14 +86,18 @@ void UI::Manager::initEncoder() {
 
 #define CURRENT_TIME_MS to_ms_since_boot(get_absolute_time())
 
+bool clicked = false;
 
 void UI::Manager::encoderPoll() {
     bool click = digitalRead(ENC_A);
-    if (click == 0) {
+    if ((click == 0) and !clicked) {
         if ((CURRENT_TIME_MS - time_a) > delayTime_a) {
             time_a = CURRENT_TIME_MS;
             encoder_click();
+            clicked=true;
         }
+    } else {
+        clicked = (click==0);
     }
     readEncoder();
 }
