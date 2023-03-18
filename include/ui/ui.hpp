@@ -41,6 +41,7 @@ namespace UI {
 
         static void normalStrip();
 
+        bool latency_watch=false;
     private:
         char buffer[50];
 

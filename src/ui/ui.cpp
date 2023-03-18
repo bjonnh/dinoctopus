@@ -17,7 +17,7 @@
 #include <SPI.h>
 
 Storage storage;
-U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2,LCD_CS,LCD_RS,LCD_RESET);
+U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
 
 void UI::Manager::initLCD() {
     SPI.setRX(0);
@@ -53,16 +53,16 @@ UI::Widgets::Page page_debug(&u8g2_lcd, &root);
 
 
 void set_current_position(uint8_t position) {
-    page_routing.setVisible(position==0);
-    page_settings.setVisible(position==1);
-    page_debug.setVisible(position==2);
+    page_routing.setVisible(position == 0);
+    page_settings.setVisible(position == 1);
+    page_debug.setVisible(position == 2);
 }
 
 void enter_page(uint8_t position) {
     main_menu.setFocus(false);
-    page_routing.setFocus(position==0);
-    page_settings.setFocus(position==1);
-    page_debug.setFocus(position==2);
+    page_routing.setFocus(position == 0);
+    page_settings.setFocus(position == 1);
+    page_debug.setFocus(position == 2);
 }
 
 void re_enter_menu() {
@@ -81,7 +81,7 @@ void reset_ui() {
 }
 
 void settings_menu_options(uint8_t option) {
-    switch(option) {
+    switch (option) {
         case 1: // Save
             storage.save_routing_matrix(matrix.getMatrix());
             matrix.set_dirty(false);
@@ -102,7 +102,7 @@ void settings_menu_options(uint8_t option) {
 UI::Manager *current_manager = nullptr;
 
 void update_router() {
-    if (current_manager!= nullptr)
+    if (current_manager != nullptr)
         current_manager->has_update_for_router();
 }
 
@@ -150,16 +150,20 @@ void UI::Manager::init() {
 }
 
 void UI::Manager::has_update_for_router() {
-    update_for_router_ready=true;
+    update_for_router_ready = true;
 }
+
 char subuf[20] = {0};
 
 void UI::Manager::display_update() {
     if (matrix.get_dirty())
-        snprintf(subuf,20, " Mod");
+        snprintf(subuf, 20, " Mod");
     else
-        snprintf(subuf,20, "");
-    snprintf(buffer, 50, "L [0:%4d] [1:%4d]%s", latency_cpu[0], latency_cpu[1],subuf);
+        snprintf(subuf, 20, "");
+    if (latency_watch)
+        snprintf(buffer, 50, "L [0:%4d] [1:%4d]%s", latency_cpu[0], latency_cpu[1], subuf);
+    else
+        snprintf(buffer, 50, "%s", subuf);
     status_bar.set_message(buffer);
     u8g2_lcd.clearBuffer();
     root.draw();
@@ -168,11 +172,12 @@ void UI::Manager::display_update() {
 
 uint32_t last_update_time = CURRENT_TIME_MS;
 
-bool updated_last_time =false;
+bool updated_last_time = false;
+
 void UI::Manager::loop() {
     encoderPoll();
     // We wait 10ms before trying to update if we had an interaction if not we wait 100ms
-    if ((CURRENT_TIME_MS-last_update_time)>(updated_last_time ? 10: 100)) {
+    if ((CURRENT_TIME_MS - last_update_time) > (updated_last_time ? 10 : 100)) {
         display_update();
         updated_last_time = false;
         last_update_time = CURRENT_TIME_MS;
@@ -210,17 +215,17 @@ void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
 }
 
 void UI::Manager::encoder_right() {
-    updated=true;
+    updated = true;
     root.move_right();
 }
 
 void UI::Manager::encoder_left() {
-    updated=true;
+    updated = true;
     root.move_left();
 }
 
 void UI::Manager::encoder_click() {
-    updated=true;
+    updated = true;
     root.click();
 }
 
