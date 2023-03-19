@@ -2,8 +2,8 @@
 // Created by bjo on 1/7/23.
 //
 
-#ifndef DINOCTOPUS_2040_USBCABLEMIDI_HPP
-#define DINOCTOPUS_2040_USBCABLEMIDI_HPP
+#ifndef DINOCTOPUS_2040_USB_CABLE_MIDI_HPP
+#define DINOCTOPUS_2040_USB_CABLE_MIDI_HPP
 
 #include <midi/Adafruit_USBD_MIDI.h>
 #include <utility>
@@ -14,6 +14,7 @@ typedef struct {
     uint8_t index;
     uint8_t total;
 } midid_stream_t;
+
 BEGIN_MIDI_NAMESPACE
     class UsbJackMIDI {
     public:
@@ -30,7 +31,7 @@ BEGIN_MIDI_NAMESPACE
 
         static bool beginTransmission(midi::MidiType);
 
-        void write(uint8_t value);
+        void write(uint8_t value) const;
 
         void endTransmission();
 
@@ -50,4 +51,4 @@ BEGIN_MIDI_NAMESPACE
         midid_stream_t stream_read = {{0, 0, 0, 0}, 0, 0};
     };
 END_MIDI_NAMESPACE
-#endif //DINOCTOPUS_2040_USBCABLEMIDI_HPP
+#endif //DINOCTOPUS_2040_USB_CABLE_MIDI_HPP

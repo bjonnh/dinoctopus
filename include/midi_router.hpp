@@ -9,18 +9,18 @@
 
 class MidiRouter {
 public:
-    void init();
+    static void init();
+
     void loop();
+
     void get_matrix(routing_matrix &);
+
     void set_matrix(routing_matrix &);
+
 private:
-    uint8_t current_cable_limited();
-    routing_matrix matrix = {
-            {0,0,0,0},
-            {0,0,0,0},
-            {0,0,0,0},
-            {0,0,0,0}
-    };
+    static uint8_t current_cable_limited();
+
+    routing_matrix matrix = { 0 };
 };
 
 #endif //DINOCTOPUS_2040_MIDI_ROUTER_HPP

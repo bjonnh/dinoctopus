@@ -18,21 +18,21 @@ BEGIN_MIDI_NAMESPACE
 
     bool MySerialMIDI::beginTransmission(MidiType) {
         return true;
-    };
+    }
 
     void MySerialMIDI::write(byte value) {
         uart_putc(uart0, value);
-    };
+    }
 
     void MySerialMIDI::endTransmission() {
-    };
+    }
 
     byte MySerialMIDI::read() {
         return uart_getc(uart0);
-    };
+    }
 
     unsigned MySerialMIDI::available() {
         return uart_is_readable(uart0);
-    };
+    }
 
 END_MIDI_NAMESPACE

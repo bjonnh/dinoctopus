@@ -6,6 +6,7 @@
 #include "ui/ui.hpp"
 #include "U8g2lib.h"
 #include "config.hpp"
+#include "ui/root.hpp"
 #include "ui/widget.hpp"
 #include "ui/horizontalmenu.hpp"
 #include "ui/verticalmenu.hpp"
@@ -39,17 +40,17 @@ void UI::Manager::initLCD() {
     u8g2_lcd.sendBuffer();
 }
 
-UI::Widget root = UI::Widget(&u8g2_lcd);
-UI::Widgets::Horizontal_menu main_menu(&u8g2_lcd, &root);
-UI::Widgets::StatusBar status_bar(&u8g2_lcd, &root);
+UI::Widgets::Root root((U8G2 &) u8g2_lcd);
+UI::Widgets::Horizontal_menu main_menu(&root);
+UI::Widgets::StatusBar status_bar(&root);
 
-UI::Widgets::Page page_routing(&u8g2_lcd, &root);
-UI::Widgets::Matrix matrix(&u8g2_lcd, &page_routing);
+UI::Widgets::Page page_routing(&root);
+UI::Widgets::Matrix matrix(&page_routing);
 
-UI::Widgets::Page page_settings(&u8g2_lcd, &root);
-UI::Widgets::Vertical_menu settings_menu(&u8g2_lcd, &page_settings);
+UI::Widgets::Page page_settings(&root);
+UI::Widgets::Vertical_menu settings_menu(&page_settings);
 
-UI::Widgets::Page page_debug(&u8g2_lcd, &root);
+UI::Widgets::Page page_debug(&root);
 
 
 void set_current_position(uint8_t position) {

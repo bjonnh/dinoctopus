@@ -11,23 +11,15 @@
 #include "routingmatrix.hpp"
 
 
-
 namespace UI::Widgets {
-    enum MatrixState { back, input_select, route_select };
-    class Matrix : public UI::Widget {
-        uint8_t p0_selected_input = 1;
-        uint8_t p0_selected_output = 0;
-        uint8_t zone = 0;
-        uint8_t cursor_position = 0;
-        char buffer[50] = {0};
-        routing_matrix current_matrix = {0};
-        MatrixState state;
-        void (*dirty_callbacks[UI_WIDGET_CALLBACKS])(bool) = {nullptr};
-        uint8_t inserted_dirty_callback = 0;
+    enum MatrixState {
+        back, input_select, route_select
+    };
 
+    template<typename D>
+    class Matrix : public UI::Widget<D> {
     public:
-        Matrix(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent) : Widget(display, parent) {
-        }
+        explicit Matrix(Widget<D> *parent) : Widget<D>(parent) {}
 
         void draw() override;
 
@@ -35,20 +27,30 @@ namespace UI::Widgets {
 
         bool clickAction() override;
 
-        bool leftAction();
+        bool leftAction() override;
 
-        bool rightAction();
+        bool rightAction() override;
 
-        routing_matrix *getMatrix() {
-            return &current_matrix;
-        }
+        routing_matrix *getMatrix();
 
         bool dirty = false;
 
         void set_dirty(bool b);
 
-        bool get_dirty();
+        [[nodiscard]] bool get_dirty() const;
+
         void onDirtyCall(void (*fun)(bool));
+
+    private:
+        uint8_t p0_selected_input = 1;
+        uint8_t p0_selected_output = 0;
+        char buffer[50] = {0};
+        routing_matrix current_matrix = {0};
+        MatrixState state = back;
+
+        void (*dirty_callbacks[UI_WIDGET_CALLBACKS])(bool) = {nullptr};
+
+        uint8_t inserted_dirty_callback = 0;
 
     };
 }

@@ -11,7 +11,7 @@
 
 // https://forum.arduino.cc/t/reading-rotary-encoders-as-a-state-machine/937388
 void UI::Manager::readEncoder() {
-    static uint8_t state=0;
+    static uint8_t state = 0;
     bool CLKstate = digitalRead(ENC_C);
     bool DTstate = digitalRead(ENC_B);
     switch (state) {
@@ -57,6 +57,9 @@ void UI::Manager::readEncoder() {
                 encoder_right();
             }
             break;
+        default:
+            state = 0;
+            break;
     }
 }
 
@@ -70,7 +73,6 @@ void UI::Manager::initEncoder() {
 }
 
 
-
 bool clicked = false;
 
 void UI::Manager::encoderPoll() {
@@ -79,10 +81,10 @@ void UI::Manager::encoderPoll() {
         if ((CURRENT_TIME_MS - time_a) > delayTime_a) {
             time_a = CURRENT_TIME_MS;
             encoder_click();
-            clicked=true;
+            clicked = true;
         }
     } else {
-        clicked = (click==0);
+        clicked = (click == 0);
     }
     readEncoder();
 }

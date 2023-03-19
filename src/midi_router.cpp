@@ -37,9 +37,9 @@ midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_4(jack_3);
 midi::MySerialMIDI real_serial_0(PIN_MIDI_1_RX, PIN_MIDI_1_TX);
 midi::MidiInterface<midi::MySerialMIDI> MIDI_IF_1(real_serial_0);
 
-PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX);
-PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX);
-PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX);
+PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX)
+PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX)
+PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
 
 uint8_t MidiRouter::current_cable_limited() {
     uint8_t cable = jack_0.current_cable();
@@ -143,7 +143,7 @@ void MidiRouter::loop() {
 }
 
 void MidiRouter::get_matrix(routing_matrix& matrix_out) {
-    memcpy(matrix_out, matrix, 4*4*sizeof(uint32_t));
+    memcpy(matrix_out, matrix, 4 * 4 * sizeof(uint32_t));
 }
 
 void MidiRouter::set_matrix(routing_matrix& matrix_in) {

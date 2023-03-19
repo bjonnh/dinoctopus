@@ -8,10 +8,11 @@
 #include "widget.hpp"
 
 namespace UI::Widgets {
-    class Page : public UI::Widget { ;
+    template<typename D>
+    class Page : public UI::Widget<D> { ;
 
     public:
-        Page(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent): Widget(display, parent) {
+        explicit Page(Widget<D> *parent) : Widget<D>(parent) {
         }
 
         void setVisible(bool f) override;

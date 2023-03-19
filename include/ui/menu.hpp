@@ -15,19 +15,19 @@
 typedef char menu_item[MENU_ITEM_LENGTH];
 
 namespace UI::Widgets {
-    class Menu : public Widget {
+    template<typename D>
+    class Menu : public Widget<D> {
 
     public:
-        Menu(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent) : Widget(display, parent) {}
+        explicit Menu(Widget<D> *parent) : Widget<D>(parent) {}
 
-        virtual void draw() override;
+        void draw() override;
 
         bool addItem(char *item);
 
         void onHighlightedCall(void (*fun)(uint8_t));
 
         void onSelectedCall(void (*fun)(uint8_t));
-
 
         void set_highlighted_item_to(uint8_t new_item);
 

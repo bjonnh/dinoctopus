@@ -3,29 +3,35 @@
 //
 
 #include "ui/page.hpp"
+#include "ui/ui.hpp"
+
 namespace UI::Widgets {
-    void Page::setFocus(bool f) {
+    template class Page<UI_TYPE>;
+
+    template<typename D>
+    void Page<D>::setFocus(bool f) {
         if (f) {
-            if (current_child>0) {
-                if (childs[0] != nullptr)
-                    childs[0]->setFocus(true);
-                for (uint8_t i = 1; i <= current_child; i++)
-                    if (childs[i] != nullptr)
-                        childs[i]->setFocus(false);
+            if (this->current_child > 0) {
+                if (this->childs[0] != nullptr)
+                    this->childs[0]->setFocus(true);
+                for (uint8_t i = 1; i <= this->current_child; i++)
+                    if (this->childs[i] != nullptr)
+                        this->childs[i]->setFocus(false);
             }
         } else {
-            if (current_child>0) {
-                for (uint8_t i = 0; i <= current_child; i++)
-                    if (childs[i] != nullptr)
-                        childs[i]->setFocus(f);
+            if (this->current_child > 0) {
+                for (uint8_t i = 0; i <= this->current_child; i++)
+                    if (this->childs[i] != nullptr)
+                        this->childs[i]->setFocus(f);
             }
         }
     }
 
-    void Page::setVisible(bool f) {
-        visible = f;
-        for (uint8_t i = 0; i <= current_child; i++)
-            if (childs[i] != nullptr)
-                childs[i]->setVisible(f);
+    template<typename D>
+    void Page<D>::setVisible(bool f) {
+        this->visible = f;
+        for (uint8_t i = 0; i <= this->current_child; i++)
+            if (this->childs[i] != nullptr)
+                this->childs[i]->setVisible(f);
     }
 }

@@ -1,3 +1,11 @@
+/**
+ * Adapted from the tinyusb.org library
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2019 Ha Thach (tinyusb.org)
+ *
+ */
 //
 // Created by bjo on 1/7/23.
 //
@@ -15,15 +23,14 @@ BEGIN_MIDI_NAMESPACE
 
     bool UsbJackMIDI::beginTransmission(midi::MidiType) {
         return true;
-    };
+    }
 
-    void UsbJackMIDI::write(uint8_t value) {
+    void UsbJackMIDI::write(uint8_t value) const {
         tud_midi_stream_write(cable, &value, 1);
-        //usb_midi.write(value);
-    };
+    }
 
     void UsbJackMIDI::endTransmission() {
-    };
+    }
 
     // This is modified from the tinyUSB library
     uint32_t UsbJackMIDI::tud_midi_n_stream_read_cable_aware(void *buffer, uint32_t bufsize) {
@@ -100,9 +107,9 @@ BEGIN_MIDI_NAMESPACE
 
     unsigned UsbJackMIDI::available() {
         return tud_midi_n_available();
-    };
+    }
 
-    [[nodiscard]] uint8_t UsbJackMIDI::current_cable() const  {
+    [[nodiscard]] uint8_t UsbJackMIDI::current_cable() const {
         return cable;
     }
 

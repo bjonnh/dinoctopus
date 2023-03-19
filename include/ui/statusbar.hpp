@@ -2,18 +2,18 @@
 // Created by bjo on 3/18/23.
 //
 
-#ifndef DINOCTOPUS_2040_STATUSBAR_HPP
-#define DINOCTOPUS_2040_STATUSBAR_HPP
+#ifndef DINOCTOPUS_2040_STATUS_BAR_HPP
+#define DINOCTOPUS_2040_STATUS_BAR_HPP
 
 
 #include "widget.hpp"
 
 namespace UI::Widgets {
-    class StatusBar : public UI::Widget {
+    template<typename D>
+    class StatusBar : public UI::Widget<D> {
         char buffer[50] = {0};
     public:
-        StatusBar(U8G2_ST7567_JLX12864_F_4W_HW_SPI *display, Widget *parent) : Widget(display, parent) {
-        }
+        explicit StatusBar(Widget<D> *parent) : Widget<D>(parent) {}
 
         void draw() override;
 
@@ -22,4 +22,4 @@ namespace UI::Widgets {
 }
 
 
-#endif //DINOCTOPUS_2040_STATUSBAR_HPP
+#endif //DINOCTOPUS_2040_STATUS_BAR_HPP

@@ -21,7 +21,7 @@ void UI::Manager::initStrip() {
     normalStrip();
 }
 
-void UI::Manager::errorStrip() {
+[[maybe_unused]] void UI::Manager::errorStrip() {
     strip.setBrightness(255);
     strip.setPixelColor(0, Adafruit_NeoPixel::Color(255, 1, 85));
     strip.setPixelColor(1, Adafruit_NeoPixel::Color(255, 1, 145));

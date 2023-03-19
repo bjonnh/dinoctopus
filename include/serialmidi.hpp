@@ -2,8 +2,8 @@
 // Created by bjo on 1/7/23.
 //
 
-#ifndef DINOCTOPUS_2040_SERIALMIDI_HPP
-#define DINOCTOPUS_2040_SERIALMIDI_HPP
+#ifndef DINOCTOPUS_2040_SERIAL_MIDI_HPP
+#define DINOCTOPUS_2040_SERIAL_MIDI_HPP
 
 #include <Arduino.h>
 #include <midi_Namespace.h>
