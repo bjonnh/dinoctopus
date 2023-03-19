@@ -6,8 +6,6 @@
 #include "ui/ui.hpp"
 
 namespace UI::Widgets {
-    template class Vertical_menu<UI_TYPE>;
-
     template<>
     void Vertical_menu<UI_TYPE>::draw() {
         if (!visible)

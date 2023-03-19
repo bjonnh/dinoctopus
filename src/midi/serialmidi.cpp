@@ -2,7 +2,7 @@
 // Created by bjo on 1/7/23.
 //
 
-#include "../include/serialmidi.hpp"
+#include "midi/serialmidi.hpp"
 
 BEGIN_MIDI_NAMESPACE
     void MySerialMIDI::begin() const {

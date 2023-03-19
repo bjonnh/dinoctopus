@@ -6,7 +6,6 @@
 #define DINOCTOPUS_2040_WIDGET_HPP
 
 #include <cstdint>
-#include "U8g2lib.h"
 
 #define UI_WIDGET_CALLBACKS 3
 #define UI_WIDGET_MAX_CHILDS 8
@@ -15,12 +14,16 @@ namespace UI {
     template<typename D>
     class Widget {
     public:
-        explicit Widget(Widget<D> *parent);
+        explicit Widget(Widget<D> &parent);
         /**
          * For the root widget only, all the child widgets will inherit the display (fancy right?)
          * @param display
          */
         explicit Widget(D &display);
+
+        explicit Widget();
+
+        virtual void start();
 
         virtual void setFocus(bool f);
 

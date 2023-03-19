@@ -6,7 +6,8 @@
 #include "ui/ui.hpp"
 
 namespace UI::Widgets {
-    template class Menu<UI_TYPE>;
+    template
+    class Menu<UI_TYPE>;
 
     template<typename D>
     bool Menu<D>::addItem(char *item) {
@@ -69,10 +70,5 @@ namespace UI::Widgets {
     void Menu<D>::onHighlightedCall(void (*fun)(uint8_t)) {
         if (inserted_highlighted_callbacks < UI_WIDGET_CALLBACKS - 1)
             highlighted_callbacks[inserted_highlighted_callbacks++] = fun;
-    }
-
-    template<>
-    void Menu<UI_TYPE>::draw() {
-        Widget::draw();
     }
 } // Widgets

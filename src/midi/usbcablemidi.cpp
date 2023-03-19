@@ -10,7 +10,7 @@
 // Created by bjo on 1/7/23.
 //
 
-#include "../include/usbcablemidi.hpp"
+#include "midi/usbcablemidi.hpp"
 
 BEGIN_MIDI_NAMESPACE
 

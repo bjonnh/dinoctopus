@@ -5,10 +5,11 @@
 #ifndef DINOCTOPUS_2040_UI_HPP
 #define DINOCTOPUS_2040_UI_HPP
 
-
+#include "U8g2lib.h"
 #include "../routingmatrix.hpp"
 
 #define UI_LINE_HEIGHT 8
+#define UI_CHARACTERS_PER_LINE 30
 #define UI_TYPE U8G2
 
 namespace UI {
@@ -44,7 +45,7 @@ namespace UI {
 
         bool latency_watch = false;
     private:
-        char buffer[50] = {0};
+        char buffer[UI_CHARACTERS_PER_LINE] = {0};
 
         uint8_t latency_cpu[2] = {0, 0};
 

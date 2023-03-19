@@ -6,9 +6,9 @@
 #define DINOCTOPUS_2040_SERIAL_MIDI_HPP
 
 #include <Arduino.h>
-#include <midi_Namespace.h>
+#include "midi_Namespace.h"
 #include "hardware/uart.h"
-#include <midi_Defs.h>
+#include "midi_Defs.h"
 
 
 #define SERIAL_BAUD 31250

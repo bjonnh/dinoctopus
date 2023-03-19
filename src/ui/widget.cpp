@@ -10,17 +10,20 @@ namespace UI {
     template class Widget<UI_TYPE>;
 
     template<typename D>
-    Widget<D>::Widget(Widget<D> *p) {
-        parent = p;
-        display = p->display;
+    Widget<D>::Widget(Widget<D> &p) {
+        parent = &p;
+        display = p.display;
 
-        p->add_child(this);
+        p.add_child(this);
     }
 
     template<typename D>
     Widget<D>::Widget(D &d) {
         display = &d;
     }
+
+    template<typename D>
+    Widget<D>::Widget() { }
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "misc-no-recursion"
@@ -139,6 +142,11 @@ namespace UI {
         for (const auto &item: focus_callbacks)
             if (item != nullptr)
                 (*item)(f);
+    }
+
+    template<typename D>
+    void Widget<D>::start() {
+
     }
 
     template<typename D>

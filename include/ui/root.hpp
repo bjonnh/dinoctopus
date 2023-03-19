@@ -9,12 +9,13 @@
 #include "widget.hpp"
 
 namespace UI::Widgets {
-    template<typename D>
+    template<class D>
     class Root : public UI::Widget<D> {
 
     public:
-        explicit Root(D &display) : Widget<D>(display) {
-        }
+        Root();
+
+        explicit Root(D &display) : Widget<D>(display) {}
     };
 }
 

@@ -12,7 +12,7 @@ namespace UI::Widgets {
     class Page : public UI::Widget<D> { ;
 
     public:
-        explicit Page(Widget<D> *parent) : Widget<D>(parent) {
+        explicit Page(Widget<D> &parent) : Widget<D>(parent) {
         }
 
         void setVisible(bool f) override;

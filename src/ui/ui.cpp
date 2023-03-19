@@ -3,6 +3,7 @@
 //
 
 #include <Arduino.h>
+#include <SPI.h>
 #include "ui/ui.hpp"
 #include "U8g2lib.h"
 #include "config.hpp"
@@ -15,9 +16,10 @@
 #include "ui/page.hpp"
 #include "utils.hpp"
 #include "storage.hpp"
-#include <SPI.h>
+
 
 Storage storage;
+
 U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
 
 void UI::Manager::initLCD() {
@@ -38,19 +40,20 @@ void UI::Manager::initLCD() {
     u8g2_lcd.drawStr(0, 20, "The only winning move");
     u8g2_lcd.drawStr(0, 30, " is not to play");
     u8g2_lcd.sendBuffer();
+
 }
 
 UI::Widgets::Root root((U8G2 &) u8g2_lcd);
-UI::Widgets::Horizontal_menu main_menu(&root);
-UI::Widgets::StatusBar status_bar(&root);
+UI::Widgets::Horizontal_menu main_menu(root);
+UI::Widgets::StatusBar status_bar(root);
 
-UI::Widgets::Page page_routing(&root);
-UI::Widgets::Matrix matrix(&page_routing);
+UI::Widgets::Page page_routing(root);
+UI::Widgets::Matrix matrix(page_routing);
 
-UI::Widgets::Page page_settings(&root);
-UI::Widgets::Vertical_menu settings_menu(&page_settings);
+UI::Widgets::Page page_settings(root);
+UI::Widgets::Vertical_menu settings_menu(page_settings);
 
-UI::Widgets::Page page_debug(&root);
+UI::Widgets::Page page_debug(root);
 
 
 void set_current_position(uint8_t position) {

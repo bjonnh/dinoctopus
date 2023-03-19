@@ -7,19 +7,19 @@
 
 
 #include "widget.hpp"
+#include "ui.hpp"
 
 namespace UI::Widgets {
     template<typename D>
     class StatusBar : public UI::Widget<D> {
-        char buffer[50] = {0};
+        char buffer[UI_CHARACTERS_PER_LINE] = {0};
     public:
-        explicit StatusBar(Widget<D> *parent) : Widget<D>(parent) {}
+        explicit StatusBar(Widget<D> &parent) : Widget<D>(parent) {}
 
         void draw() override;
 
         void set_message(char string[50]);
     };
 }
-
 
 #endif //DINOCTOPUS_2040_STATUS_BAR_HPP

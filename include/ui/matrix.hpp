@@ -9,6 +9,7 @@
 #include <cstdint>
 #include "widget.hpp"
 #include "routingmatrix.hpp"
+#include "ui.hpp"
 
 
 namespace UI::Widgets {
@@ -19,7 +20,7 @@ namespace UI::Widgets {
     template<typename D>
     class Matrix : public UI::Widget<D> {
     public:
-        explicit Matrix(Widget<D> *parent) : Widget<D>(parent) {}
+        explicit Matrix(Widget<D> &parent) : Widget<D>(parent) {}
 
         void draw() override;
 
@@ -44,7 +45,7 @@ namespace UI::Widgets {
     private:
         uint8_t p0_selected_input = 1;
         uint8_t p0_selected_output = 0;
-        char buffer[50] = {0};
+        char buffer[UI_CHARACTERS_PER_LINE] = {0};
         routing_matrix current_matrix = {0};
         MatrixState state = back;
 

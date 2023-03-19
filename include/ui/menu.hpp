@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <cstring>
 #include "ui/widget.hpp"
+#include "ui.hpp"
 
 #define MENU_ITEM_LENGTH 20
 #define MENU_ITEM_NUMBERS 3
@@ -19,9 +20,7 @@ namespace UI::Widgets {
     class Menu : public Widget<D> {
 
     public:
-        explicit Menu(Widget<D> *parent) : Widget<D>(parent) {}
-
-        void draw() override;
+        explicit Menu(Widget<D> &parent) : Widget<D>(parent) {}
 
         bool addItem(char *item);
 
@@ -34,7 +33,7 @@ namespace UI::Widgets {
         void set_selected_item_to(uint8_t new_item);
 
     protected:
-        char buffer[50] = {0};
+        char buffer[UI_CHARACTERS_PER_LINE] = {0};
         uint8_t inserted_items = 0;
         uint8_t selected_item = 0;
         menu_item items[MENU_ITEM_NUMBERS] = {""};

@@ -1,5 +1,5 @@
 #include <Arduino.h>  // necessary for setup/loop
-#include "midi_router.hpp"
+#include "midi/midirouter.hpp"
 #include "ui/ui.hpp"
 #include "queue.hpp"
 #include "utils.hpp"

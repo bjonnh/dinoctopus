@@ -14,7 +14,7 @@ namespace UI::Widgets {
     class Horizontal_menu : public Menu<D> {
 
     public:
-        explicit Horizontal_menu(Widget<D> *parent) : Menu<D>(parent) {}
+        explicit Horizontal_menu(Widget<D> &parent) : Menu<D>(parent) {}
 
         void draw() override;
     };

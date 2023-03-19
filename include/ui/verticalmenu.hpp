@@ -14,7 +14,7 @@ namespace UI::Widgets {
     class Vertical_menu : public Menu<D> {
 
     public:
-        explicit Vertical_menu(Widget<D> *parent) : Menu<D>(parent) {}
+        explicit Vertical_menu(Widget<D> &parent) : Menu<D>(parent) {}
 
         void draw() override;
     };

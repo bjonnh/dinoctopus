@@ -2,8 +2,8 @@
 // Created by bjo on 3/11/23.
 //
 
-#include <Adafruit_TinyUSB.h>
-#include "midi_router.hpp"
+#include "Adafruit_TinyUSB.h"
+#include "midi/midirouter.hpp"
 #include "midi_Defs.h"
 #include "config.hpp"
 
