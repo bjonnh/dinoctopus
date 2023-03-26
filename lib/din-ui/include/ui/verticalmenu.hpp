@@ -5,8 +5,6 @@
 #ifndef DINOCTOPUS_2040_VERTICAL_MENU_HPP
 #define DINOCTOPUS_2040_VERTICAL_MENU_HPP
 
-#include <cstdint>
-#include <cstring>
 #include "menu.hpp"
 
 namespace UI::Widgets {

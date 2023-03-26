@@ -2,7 +2,17 @@
 // Created by bjo on 3/18/23.
 //
 
+#include <cstddef>
+#include <cstring>
+
 #include "storage.hpp"
+
+#ifdef ARDUINO
+#include <EEPROM.h>
+#else
+#include <EEPROMS.h>
+EEPROMSClass EEPROM;
+#endif
 
 void Storage::init() {
     EEPROM.begin(1024);
@@ -40,3 +50,5 @@ void Storage::load_routing_matrix(routing_matrix *new_routing_matrix) {
         routing_matrix_buffer[i] = EEPROM.read(offset_routing_table + i);
     memcpy(new_routing_matrix, routing_matrix_buffer, 4 * 4 * 4);
 }
+
+Storage storage;

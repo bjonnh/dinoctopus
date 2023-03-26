@@ -5,11 +5,6 @@
 #ifndef DINOCTOPUS_2040_CONFIG_HPP
 #define DINOCTOPUS_2040_CONFIG_HPP
 
-#include "MIDI.h"
-#include "midi/piomidi.hpp"
-#include "midi/serialmidi.hpp"
-#include "midi/usbcablemidi.hpp"
-
 //
 // LCD
 //

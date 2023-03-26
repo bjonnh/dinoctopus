@@ -3,11 +3,11 @@
 //
 
 #include "ui/matrix.hpp"
-#include "ui/ui.hpp"
+#include "ui/manager.hpp"
+#include "U8g2lib.h"
 
 namespace UI::Widgets {
-    template
-    class Matrix<UI_TYPE>;
+    template class Matrix<U8G2>;
 
     template<typename D>
     void Matrix<D>::set_matrix(routing_matrix &new_matrix) {
@@ -113,3 +113,4 @@ namespace UI::Widgets {
         return &current_matrix;
     }
 }
+

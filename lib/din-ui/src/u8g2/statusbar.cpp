@@ -3,11 +3,12 @@
 //
 
 #include "ui/statusbar.hpp"
+#include "U8g2lib.h"
 #include "ui/ui.hpp"
 
 namespace UI::Widgets {
     template<>
-    void StatusBar<UI_TYPE>::draw() {
+    void StatusBar<U8G2>::draw() {
         display->setDrawColor(1);
         display->drawStr(0, 8 * UI_LINE_HEIGHT - 2, buffer);
     }

@@ -2,8 +2,8 @@
 // Created by bjo on 3/12/23.
 //
 
-#ifndef DINOCTOPUS_2040_UTILS_HPP
-#define DINOCTOPUS_2040_UTILS_HPP
+#ifndef DINOCTOPUS_2040_UTILS_RP2040_HPP
+#define DINOCTOPUS_2040_UTILS_RP2040_HPP
 
 #define CURRENT_TIME_MS to_ms_since_boot(get_absolute_time())
 
@@ -24,4 +24,4 @@
         }
 
 
-#endif //DINOCTOPUS_2040_UTILS_HPP
+#endif //DINOCTOPUS_2040_UTILS_RP2040_HPP

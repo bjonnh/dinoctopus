@@ -3,11 +3,10 @@
 //
 
 #include <Arduino.h>
-#include <cstdint>
 #include <pico/time.h>
-#include "ui/ui.hpp"
+#include "ui/manager.hpp"
 #include "config.hpp"
-#include "utils.hpp"
+#include "utils_rp2040.hpp"
 
 // https://forum.arduino.cc/t/reading-rotary-encoders-as-a-state-machine/937388
 void UI::Manager::readEncoder() {

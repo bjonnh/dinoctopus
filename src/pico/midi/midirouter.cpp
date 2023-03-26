@@ -6,6 +6,11 @@
 #include "midi/midirouter.hpp"
 #include "midi_Defs.h"
 #include "config.hpp"
+#include "MIDI.h"
+#include "midi/piomidi.hpp"
+#include "midi/serialmidi.hpp"
+#include "midi/usbcablemidi.hpp"
+
 
 template <typename T, typename U>
 void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {

@@ -3,11 +3,10 @@
 //
 
 #include "ui/menu.hpp"
-#include "ui/ui.hpp"
+#include "U8g2lib.h"
 
 namespace UI::Widgets {
-    template
-    class Menu<UI_TYPE>;
+    template class Menu<U8G2>;  // TODO Put that in a u8g2 specific place
 
     template<typename D>
     bool Menu<D>::addItem(char *item) {

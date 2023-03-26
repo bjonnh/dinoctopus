@@ -2,12 +2,12 @@
 // Created by bjo on 3/17/23.
 //
 
-#include "ui/widget.hpp"
-#include "ui/ui.hpp"
+#include "../include/ui/widget.hpp"
+#include "U8g2lib.h"
 
 
 namespace UI {
-    template class Widget<UI_TYPE>;
+    template class Widget<U8G2>; // TODO Move that somewhere u8g2 specific if possible?
 
     template<typename D>
     Widget<D>::Widget(Widget<D> &p) {

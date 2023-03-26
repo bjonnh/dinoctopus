@@ -4,10 +4,12 @@
 
 #include "ui/matrix.hpp"
 #include "ui/ui.hpp"
+#include "ui/manager.hpp"
+#include "U8g2lib.h"
 
 namespace UI::Widgets {
     template
-    class Matrix<UI_TYPE>;
+    class Matrix<U8G2>;
 
     char matrix_sign(uint32_t v) {
         return v > 0 ? 'X' : '.';
@@ -17,7 +19,7 @@ namespace UI::Widgets {
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"  // nope they are exactly what they should be
 
     template<>
-    void Matrix<UI_TYPE>::draw() {
+    void Matrix<U8G2>::draw() {
         if (!visible)
             return;
 

@@ -1,0 +1,30 @@
+{
+  "name": "EEPROM simulator",
+  "version": "1.0.0",
+  "description": "Simulates Arduino EEPROM (wildly incomplete)",
+  "keywords": "u8g2",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/bjonnh/eeprom-simulator.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Jonathan Bisson",
+      "email": "bjonnh-emb@bjonnh.net",
+      "url": "https://www.bjonnh.net"
+    }
+  ],
+  "license": "BSD",
+  "homepage": "https://www.bjonnh.net/",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "srcDir": "./",
+    "includeDir": "./",
+    "flags": [
+      "-I."
+      ]
+  }
+}

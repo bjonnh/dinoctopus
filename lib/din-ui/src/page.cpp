@@ -3,10 +3,10 @@
 //
 
 #include "ui/page.hpp"
-#include "ui/ui.hpp"
+#include "U8g2lib.h"
 
 namespace UI::Widgets {
-    template class Page<UI_TYPE>;
+    template class Page<U8G2>;
 
     template<typename D>
     void Page<D>::setFocus(bool f) {

@@ -5,12 +5,10 @@
 #ifndef DINOCTOPUS_2040_MATRIX_HPP
 #define DINOCTOPUS_2040_MATRIX_HPP
 
-
 #include <cstdint>
-#include "widget.hpp"
+#include "ui/widget.hpp"
 #include "routingmatrix.hpp"
-#include "ui.hpp"
-
+#include "ui/ui.hpp"
 
 namespace UI::Widgets {
     enum MatrixState {

@@ -7,8 +7,8 @@
 
 #include <cstdint>
 #include <cstring>
-#include "ui/widget.hpp"
-#include "ui.hpp"
+#include "widget.hpp"
+#include "ui/ui.hpp"
 
 #define MENU_ITEM_LENGTH 20
 #define MENU_ITEM_NUMBERS 3

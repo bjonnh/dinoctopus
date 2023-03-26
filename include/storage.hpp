@@ -5,8 +5,7 @@
 #ifndef DINOCTOPUS_2040_STORAGE_HPP
 #define DINOCTOPUS_2040_STORAGE_HPP
 
-
-#include <EEPROM.h>
+#include <cstddef>
 #include "routingmatrix.hpp"
 
 class Storage {
@@ -44,5 +43,6 @@ public:
     void load_routing_matrix(routing_matrix *);
 };
 
+extern Storage storage;
 
 #endif //DINOCTOPUS_2040_STORAGE_HPP

@@ -1,13 +1,15 @@
 #include <Arduino.h>  // necessary for setup/loop
+#include <SPI.h>
 #include "midi/midirouter.hpp"
-#include "ui/ui.hpp"
+#include "ui/manager.hpp"
 #include "queue.hpp"
-#include "utils.hpp"
+#include "utils_rp2040.hpp"
 #include "config.hpp"
 #include "storage.hpp"
 
 MidiRouter midi_router;
-UI::Manager ui;
+U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
+UI::Manager ui(reinterpret_cast<U8G2 &>(u8g2_lcd));
 
 // Core 0, running the MIDI will only receive requests never send any
 queue_t request_queue;
@@ -25,6 +27,15 @@ void setup() {
 
 void setup1() {
     LATENCY_INIT(1)
+
+    // Init the SPI
+    SPI.setRX(0);
+    SPI.setCS(1);
+    SPI.setSCK(LCD_CLOCK);
+    SPI.setTX(LCD_MOSI);
+
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(64000000, MSBFIRST, SPI_MODE0));
     ui.init();
 }
 

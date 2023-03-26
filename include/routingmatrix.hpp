@@ -9,4 +9,4 @@
 
 typedef uint32_t routing_matrix[4][4];
 
-#endif //DINOCTOPUS_2040_MATRIX_HPP
+#endif //DINOCTOPUS_2040_ROUTING_MATRIX_HPP

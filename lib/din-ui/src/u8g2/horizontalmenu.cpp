@@ -2,12 +2,13 @@
 // Created by bjo on 3/17/23.
 //
 
-#include "ui/verticalmenu.hpp"
+#include "../../include/ui/horizontalmenu.hpp"
 #include "ui/ui.hpp"
+#include "U8g2lib.h"
 
 namespace UI::Widgets {
     template<>
-    void Vertical_menu<UI_TYPE>::draw() {
+    void Horizontal_menu<U8G2>::draw() {
         if (!visible)
             return;
 
@@ -15,16 +16,18 @@ namespace UI::Widgets {
         display->setDrawColor(1);
 
         for (uint8_t i = 0; i < inserted_items; i++) {
-            uint8_t shift_y = 9 * (i + 2);
+            uint8_t shift_x = 48 * i;
             if (current_item == i) {
-                display->setDrawColor(0);
-                display->drawHLine(5, shift_y, 50);
+                if (focus)
+                    display->setDrawColor(0);
+                else
+                    display->drawHLine(shift_x, UI_LINE_HEIGHT + 1, 50);
             }
-            if (selected_item == i)
+            if (!focus & (selected_item == i))
                 snprintf(buffer, 50, ">%s", items[i]);
             else
                 snprintf(buffer, 50, " %s", items[i]);
-            display->drawStr(5, shift_y, buffer);
+            display->drawStr(shift_x, UI_LINE_HEIGHT, buffer);
             display->setDrawColor(1);
         }
     }

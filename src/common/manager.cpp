@@ -2,9 +2,7 @@
 // Created by bjo on 3/11/23.
 //
 
-#include <Arduino.h>
-#include <SPI.h>
-#include "ui/ui.hpp"
+#include "ui/manager.hpp"
 #include "U8g2lib.h"
 #include "config.hpp"
 #include "ui/root.hpp"
@@ -14,87 +12,64 @@
 #include "ui/matrix.hpp"
 #include "ui/statusbar.hpp"
 #include "ui/page.hpp"
-#include "utils.hpp"
 #include "storage.hpp"
 
-
-Storage storage;
-
-U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
-
 void UI::Manager::initLCD() {
-    SPI.setRX(0);
-    SPI.setCS(1);
-    SPI.setSCK(LCD_CLOCK);
-    SPI.setTX(LCD_MOSI);
-
-    SPI.begin();
-    SPI.beginTransaction(SPISettings(64000000, MSBFIRST, SPI_MODE0));
     u8g2_lcd.begin();
     u8g2_lcd.setContrast(180);  // This is extremely important
     u8g2_lcd.clearBuffer();
     u8g2_lcd.firstPage();
     u8g2_lcd.setFontMode(0);
     u8g2_lcd.clearBuffer();
+    u8g2_lcd.setDrawColor(1);
+    u8g2_lcd.setFont(u8g2_font_5x8_mf);
     u8g2_lcd.drawStr(0, 10, "A strange game.");
     u8g2_lcd.drawStr(0, 20, "The only winning move");
     u8g2_lcd.drawStr(0, 30, " is not to play");
     u8g2_lcd.sendBuffer();
-
 }
 
-UI::Widgets::Root root((U8G2 &) u8g2_lcd);
-UI::Widgets::Horizontal_menu main_menu(root);
-UI::Widgets::StatusBar status_bar(root);
-
-UI::Widgets::Page page_routing(root);
-UI::Widgets::Matrix matrix(page_routing);
-
-UI::Widgets::Page page_settings(root);
-UI::Widgets::Vertical_menu settings_menu(page_settings);
-
-UI::Widgets::Page page_debug(root);
-
+UI::Manager *current_manager;
 
 void set_current_position(uint8_t position) {
-    page_routing.setVisible(position == 0);
-    page_settings.setVisible(position == 1);
-    page_debug.setVisible(position == 2);
+    current_manager->page_routing.setVisible(position == 0);
+    current_manager->page_settings.setVisible(position == 1);
+    current_manager->page_debug.setVisible(position == 2);
 }
 
 void enter_page(uint8_t position) {
-    main_menu.setFocus(false);
-    page_routing.setFocus(position == 0);
-    page_settings.setFocus(position == 1);
-    page_debug.setFocus(position == 2);
+    current_manager->main_menu.setFocus(false);
+    current_manager->page_routing.setFocus(position == 0);
+    current_manager->page_settings.setFocus(position == 1);
+    current_manager->page_debug.setFocus(position == 2);
 }
 
 void re_enter_menu() {
-    page_routing.setFocus(false);
-    page_settings.setFocus(false);
-    page_debug.setFocus(false);
-    main_menu.setFocus(true);
+    current_manager->page_routing.setFocus(false);
+    current_manager->page_settings.setFocus(false);
+    current_manager->page_debug.setFocus(false);
+    current_manager->main_menu.setFocus(true);
 }
 
 void reset_ui() {
-    settings_menu.set_selected_item_to(0);
-    settings_menu.set_highlighted_item_to(0);
+    current_manager->settings_menu.set_selected_item_to(0);
+    current_manager->settings_menu.set_highlighted_item_to(0);
     re_enter_menu();
-    main_menu.set_highlighted_item_to(0);
-    main_menu.set_selected_item_to(0);
+    current_manager->main_menu.set_highlighted_item_to(0);
+    current_manager->main_menu.set_selected_item_to(0);
 }
 
 void settings_menu_options(uint8_t option) {
     switch (option) {
         case 1: // Save
-            storage.save_routing_matrix(matrix.getMatrix());
-            matrix.set_dirty(false);
+            storage.save_routing_matrix(current_manager->matrix.getMatrix());
+            current_manager->matrix.set_dirty(false);
             reset_ui();
             break;
         case 2: // Load
-            storage.load_routing_matrix(matrix.getMatrix());
-            matrix.update();
-            matrix.set_dirty(false);
+            storage.load_routing_matrix(current_manager->matrix.getMatrix());
+            current_manager->matrix.update();
+            current_manager->matrix.set_dirty(false);
             reset_ui();
             break;
         default:
@@ -102,8 +77,6 @@ void settings_menu_options(uint8_t option) {
             break;
     }
 }
-
-UI::Manager *current_manager = nullptr;
 
 void update_router() {
     if (current_manager != nullptr)
@@ -153,10 +126,6 @@ void UI::Manager::init() {
     settings_menu.onSelectedCall(&settings_menu_options);
 }
 
-void UI::Manager::has_update_for_router() {
-    update_for_router_ready = true;
-}
-
 char subuf[20] = {0};
 
 void UI::Manager::display_update() {
@@ -173,6 +142,28 @@ void UI::Manager::display_update() {
     root.draw();
     u8g2_lcd.sendBuffer();
 }
+
+void UI::Manager::encoder_right() {
+    updated = true;
+    root.move_right();
+}
+
+void UI::Manager::encoder_left() {
+    updated = true;
+    root.move_left();
+}
+
+void UI::Manager::encoder_click() {
+    updated = true;
+    root.click();
+}
+
+void UI::Manager::has_update_for_router() {
+    update_for_router_ready = true;
+}
+
+/*
+
 
 uint32_t last_update_time = CURRENT_TIME_MS;
 
@@ -235,4 +226,47 @@ void UI::Manager::encoder_click() {
 
 routing_matrix *UI::Manager::current_route() {
     return matrix.getMatrix();
+}
+*/
+
+
+void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
+    latency_cpu[cpu] = value;
+}
+
+bool UI::Manager::query_for_router() {
+    if (query_for_router_requested) {
+        query_for_router_requested = false;
+        return true;
+    }
+    return false;
+}
+
+bool UI::Manager::update_for_router() {
+    if (update_for_router_ready) {
+        update_for_router_ready = false;
+        return true;
+    }
+    return false;
+}
+
+
+void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
+    current_manager->matrix.set_matrix(new_matrix);
+}
+
+routing_matrix *UI::Manager::current_route() {
+    return current_manager->matrix.getMatrix();
+}
+
+UI::Manager::Manager(U8G2 &u8G2Lcd) : u8g2_lcd(u8G2Lcd),
+    root(u8G2Lcd),
+    main_menu(root),
+    status_bar(root),
+    page_routing(root),
+    matrix(page_routing),
+    page_settings(root),
+    settings_menu(page_settings),
+    page_debug(root)
+{
 }
