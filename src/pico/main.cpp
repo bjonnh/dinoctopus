@@ -85,10 +85,10 @@ void loop1() {
         switch (response.code) {
             case RESPONSE_LATENCY:
                 if (ui.latency_watch)
-                    ui.set_latency(0, response.data[0][0]);
+                    ui.set_latency(0, response.data[0]);
                 break;
             case RESPONSE_ROUTING:
-                UI::Manager::set_routing_response(response.data);
+                UI::Manager::current_route().load_from_array(response.data);
                 break;
             case RESPONSE_SET_ROUTING:
                 // Not handled by this core
@@ -102,7 +102,7 @@ void loop1() {
         queue_add_blocking(&request_queue, &entry);
     } else if (ui.update_for_router()) {
         queue_request_t entry = {REQUEST_SET_ROUTING};
-        memcpy(entry.data, UI::Manager::current_route(), 4 * 4 * sizeof(uint32_t));
+        UI::Manager::current_route().save_to_array(entry.data);
         queue_add_blocking(&request_queue, &entry);
     } else {
         if (ui.latency_watch) {

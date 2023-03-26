@@ -8,7 +8,7 @@
 #include "ui/matrix.hpp"
 #include "ui/statusbar.hpp"
 #include "ui/page.hpp"
-#include "storage.hpp"
+#include "../../lib/storage/storage.hpp"
 #include "u8g2.h"
 #include <iostream>
 

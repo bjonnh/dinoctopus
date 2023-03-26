@@ -5,9 +5,9 @@
 #ifndef DINOCTOPUS_2040_MANAGER_HPP
 #define DINOCTOPUS_2040_MANAGER_HPP
 
-#include "routingmatrix.hpp"
+#include "../../lib/routing-matrix/routingmatrix.hpp"
 #include "ui/ui.hpp"
-#include "storage.hpp"
+#include "../../lib/storage/storage.hpp"
 #include "U8g2lib.h"
 #include "ui/root.hpp"
 #include "ui/horizontalmenu.hpp"
@@ -29,7 +29,7 @@ namespace UI {
 
         bool query_for_router();
 
-        static void set_routing_response(routing_matrix &matrix);
+        static void set_routing_response(RoutingMatrix &matrix);
 
         void encoder_click();
 
@@ -39,7 +39,7 @@ namespace UI {
 
         bool update_for_router();
 
-        static routing_matrix *current_route();
+        static RoutingMatrix current_route();
 
         void has_update_for_router();
 
@@ -62,6 +62,7 @@ namespace UI {
         UI::Widgets::Vertical_menu<U8G2> settings_menu;
 
         UI::Widgets::Page<U8G2> page_debug;
+        UI::Widgets::Vertical_menu<U8G2> debug_menu;
 
     private:
         char buffer[UI_CHARACTERS_PER_LINE] = {0};

@@ -2,7 +2,7 @@
 // Created by bjo on 3/11/23.
 //
 #include <cstdint>  // necessary for uint8_t
-#include "routingmatrix.hpp"
+#include "../../lib/routing-matrix/routingmatrix.hpp"
 
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
@@ -13,14 +13,14 @@ public:
 
     void loop();
 
-    void get_matrix(routing_matrix &);
+    void get_matrix(uint8_t *);
 
-    void set_matrix(routing_matrix &);
+    void set_matrix(uint8_t *);
 
 private:
     static uint8_t current_cable_limited();
 
-    routing_matrix matrix = { 0 };
+    RoutingMatrix matrix;
 };
 
 #endif //DINOCTOPUS_2040_MIDI_ROUTER_HPP

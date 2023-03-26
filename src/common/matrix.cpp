@@ -3,15 +3,13 @@
 //
 
 #include "ui/matrix.hpp"
-#include "ui/manager.hpp"
 #include "U8g2lib.h"
 
 namespace UI::Widgets {
     template class Matrix<U8G2>;
 
-    template<typename D>
-    void Matrix<D>::set_matrix(routing_matrix &new_matrix) {
-        memcpy(current_matrix, new_matrix, sizeof(uint32_t) * 4 * 4);
+    template<typename D> void Matrix<D>::set_matrix(RoutingMatrix &new_matrix) {
+        current_matrix.set_from_matrix(new_matrix);
     }
 
 #pragma clang diagnostic pop
@@ -80,7 +78,9 @@ namespace UI::Widgets {
                 break;
             case route_select:
                 set_dirty(true);
-                current_matrix[p0_selected_input - 1][p0_selected_output - 1] ^= 255;
+                uint32_t current_value = current_matrix.get_element_2d(p0_selected_input - 1,p0_selected_output - 1);
+                uint32_t new_value = (current_value>0) ? 0 : 255;
+                current_matrix.set_element_2d(p0_selected_input - 1, p0_selected_output - 1, new_value);
                 this->update();
                 break;
         }
@@ -109,8 +109,8 @@ namespace UI::Widgets {
     }
 
     template<typename D>
-    routing_matrix *Matrix<D>::getMatrix() {
-        return &current_matrix;
+    RoutingMatrix & Matrix<D>::getMatrix() {
+        return current_matrix;
     }
 }
 

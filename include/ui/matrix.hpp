@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include "ui/widget.hpp"
-#include "routingmatrix.hpp"
+#include "../../lib/routing-matrix/routingmatrix.hpp"
 #include "ui/ui.hpp"
 
 namespace UI::Widgets {
@@ -22,7 +22,7 @@ namespace UI::Widgets {
 
         void draw() override;
 
-        void set_matrix(routing_matrix &new_matrix);
+        void set_matrix(RoutingMatrix &new_matrix);
 
         bool clickAction() override;
 
@@ -30,7 +30,7 @@ namespace UI::Widgets {
 
         bool rightAction() override;
 
-        routing_matrix *getMatrix();
+        RoutingMatrix & getMatrix();
 
         bool dirty = false;
 
@@ -44,7 +44,7 @@ namespace UI::Widgets {
         uint8_t p0_selected_input = 1;
         uint8_t p0_selected_output = 0;
         char buffer[UI_CHARACTERS_PER_LINE] = {0};
-        routing_matrix current_matrix = {0};
+        RoutingMatrix current_matrix;
         MatrixState state = back;
 
         void (*dirty_callbacks[UI_WIDGET_CALLBACKS])(bool) = {nullptr};

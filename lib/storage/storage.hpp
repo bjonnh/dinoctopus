@@ -6,13 +6,17 @@
 #define DINOCTOPUS_2040_STORAGE_HPP
 
 #include <cstddef>
-#include "routingmatrix.hpp"
+#include <cstdint>
+#include "../routing-matrix/routingmatrix.hpp"
+
+
 
 class Storage {
-    char signature[8] = {0x42, 'D', 'I', 'N', 'V', '0', '0', '0'};
-    const size_t offset_routing_table = 64;
-    const size_t memory_size = 256;
-    uint8_t routing_matrix_buffer[4 * 4 * 4] = {0}; // 4x4 for 32bits
+    char signature[8] = {0x42, 'D', 'I', 'N', 'V', '0', '0', '1'};
+    const uint16_t offset_matrix_size = 8;
+    const uint16_t offset_routing_table = 64;
+    const uint16_t memory_size = 256;
+    uint8_t routing_buffer[ROUTING_MATRIX_BINARY_SIZE];
     char buffer[8] = {0};
 
 public:
@@ -35,12 +39,12 @@ public:
     /**
      * Save the given routing_matrix
      */
-    void save_routing_matrix(routing_matrix *);
+    void save_routing_matrix(RoutingMatrix &);
 
     /**
      * Load into the given routing_matrix
      */
-    void load_routing_matrix(routing_matrix *);
+    void load_routing_matrix(RoutingMatrix &);
 };
 
 extern Storage storage;

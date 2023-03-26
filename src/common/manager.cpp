@@ -4,15 +4,8 @@
 
 #include "ui/manager.hpp"
 #include "U8g2lib.h"
-#include "config.hpp"
-#include "ui/root.hpp"
-#include "ui/widget.hpp"
-#include "ui/horizontalmenu.hpp"
-#include "ui/verticalmenu.hpp"
-#include "ui/matrix.hpp"
 #include "ui/statusbar.hpp"
-#include "ui/page.hpp"
-#include "storage.hpp"
+#include "../../lib/storage/storage.hpp"
 
 void UI::Manager::initLCD() {
     u8g2_lcd.begin();
@@ -78,6 +71,15 @@ void settings_menu_options(uint8_t option) {
     }
 }
 
+void debug_menu_options(uint8_t option) {
+    switch (option) {
+        default:
+            re_enter_menu();
+            break;
+    }
+}
+
+
 void update_router() {
     if (current_manager != nullptr)
         current_manager->has_update_for_router();
@@ -124,6 +126,9 @@ void UI::Manager::init() {
     settings_menu.addItem((char *) "Save");
     settings_menu.addItem((char *) "Load");
     settings_menu.onSelectedCall(&settings_menu_options);
+
+    debug_menu.addItem((char *) "Back");
+    debug_menu.onSelectedCall(&debug_menu_options);
 }
 
 char subuf[20] = {0};
@@ -162,28 +167,6 @@ void UI::Manager::has_update_for_router() {
     update_for_router_ready = true;
 }
 
-/*
-
-
-uint32_t last_update_time = CURRENT_TIME_MS;
-
-bool updated_last_time = false;
-
-void UI::Manager::loop() {
-    encoderPoll();
-    // We wait 10ms before trying to update if we had an interaction if not we wait 100ms
-    if ((CURRENT_TIME_MS - last_update_time) > (updated_last_time ? 10 : 100)) {
-        display_update();
-        updated_last_time = false;
-        last_update_time = CURRENT_TIME_MS;
-    }
-    if (updated) {
-        last_update_time = CURRENT_TIME_MS;
-        updated_last_time = true;
-        updated = false;
-    }
-}
-
 void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
     latency_cpu[cpu] = value;
 }
@@ -204,58 +187,11 @@ bool UI::Manager::update_for_router() {
     return false;
 }
 
-
-void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
-    matrix.set_matrix(new_matrix);
-}
-
-void UI::Manager::encoder_right() {
-    updated = true;
-    root.move_right();
-}
-
-void UI::Manager::encoder_left() {
-    updated = true;
-    root.move_left();
-}
-
-void UI::Manager::encoder_click() {
-    updated = true;
-    root.click();
-}
-
-routing_matrix *UI::Manager::current_route() {
-    return matrix.getMatrix();
-}
-*/
-
-
-void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
-    latency_cpu[cpu] = value;
-}
-
-bool UI::Manager::query_for_router() {
-    if (query_for_router_requested) {
-        query_for_router_requested = false;
-        return true;
-    }
-    return false;
-}
-
-bool UI::Manager::update_for_router() {
-    if (update_for_router_ready) {
-        update_for_router_ready = false;
-        return true;
-    }
-    return false;
-}
-
-
-void UI::Manager::set_routing_response(routing_matrix &new_matrix) {
+void UI::Manager::set_routing_response(RoutingMatrix &new_matrix) {
     current_manager->matrix.set_matrix(new_matrix);
 }
 
-routing_matrix *UI::Manager::current_route() {
+RoutingMatrix UI::Manager::current_route() {
     return current_manager->matrix.getMatrix();
 }
 
@@ -267,6 +203,7 @@ UI::Manager::Manager(U8G2 &u8G2Lcd) : u8g2_lcd(u8G2Lcd),
     matrix(page_routing),
     page_settings(root),
     settings_menu(page_settings),
-    page_debug(root)
+    page_debug(root),
+    debug_menu(page_debug)
 {
 }
