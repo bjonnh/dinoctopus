@@ -23,16 +23,8 @@
 #include "../lib/routing-matrix/routingmatrix.hpp"
 #include "../lib/storage/storage.hpp"
 
-void setUp(void)
-{
-    std::cout << "Setting up" << std::endl;
-}
 
-void tearDown(void) {
-    std::cout << std::endl << "Tearing down" << std::endl;
-}
-
-void test_request(void)
+void test_storage_and_matrix(void)
 {
     storage.init();
     storage.erase();
@@ -68,26 +60,3 @@ void test_request(void)
         for (int j=0;j<ROUTING_MATRIX_SIZE*2;j++)
             TEST_ASSERT_EQUAL(0, r.get_element_2d(i,j));
 }
-#ifdef ARDUINO
-void setup() {
-    delay(2000);
-    UNITY_BEGIN();
-
-    RUN_TEST(test_request);
-
-    UNITY_END();
-}
-void loop()
-{
-
-}
-#else
-int main(int argc, char **argv)
-{
-    UNITY_BEGIN();
-
-    RUN_TEST(test_request);
-
-    return UNITY_END();
-}
-#endif

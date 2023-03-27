@@ -8,12 +8,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        submodules: true
       - uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pip
             ~/.platformio/.cache
           key: ${{ runner.os }}-pio
+      - run: |
+          apt-get -y update && apt-get install -y  libsdl2-dev
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
