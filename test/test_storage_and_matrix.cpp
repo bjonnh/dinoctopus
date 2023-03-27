@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2023. Jonathan Bisson
+ * SPDX-License-Identifier: MIT
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ */
+
 #include <unity.h>
 #include <iostream>
 
@@ -55,24 +67,6 @@ void test_request(void)
     for (int i=0;i<ROUTING_MATRIX_SIZE*2;i++)
         for (int j=0;j<ROUTING_MATRIX_SIZE*2;j++)
             TEST_ASSERT_EQUAL(0, r.get_element_2d(i,j));
-    /*When(Method(ArduinoFake(Client), stop)).AlwaysReturn();
-    When(Method(ArduinoFake(Client), available)).Return(1, 1, 1, 0);
-    When(OverloadedMethod(ArduinoFake(Client), read, int())).Return(2, 0, 0);
-    When(OverloadedMethod(ArduinoFake(Client), connect, int(const char*, uint16_t))).Return(1);
-
-    Client* clientMock = ArduinoFakeMock(Client);
-
-    MyService service(clientMock);
-
-    String response = service.request("myserver.com");
-
-    TEST_ASSERT_EQUAL(3, response.length());
-    TEST_ASSERT_TRUE(response.equals("200"));
-
-    Verify(Method(ArduinoFake(Client), stop)).Once();
-    Verify(Method(ArduinoFake(Client), available)).Exactly(4_Times);
-    Verify(OverloadedMethod(ArduinoFake(Client), read, int())).Exactly(3_Times);
-    Verify(OverloadedMethod(ArduinoFake(Client), connect, int(const char*, uint16_t)).Using("myserver.com", 80)).Once();*/
 }
 #ifdef ARDUINO
 void setup() {
