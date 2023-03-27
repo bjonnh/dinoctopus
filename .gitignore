@@ -2,3 +2,4 @@
 CMakeListsPrivate.txt
 cmake-build-*/ 
 /eeprom.bin
+/scratch_1
