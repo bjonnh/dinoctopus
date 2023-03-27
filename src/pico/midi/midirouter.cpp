@@ -11,15 +11,15 @@
  */
 
 
-#include "Adafruit_TinyUSB.h"
+//#include "Adafruit_TinyUSB.h"
+#include <midi/Adafruit_USBD_MIDI.h>
 #include "midi/midirouter.hpp"
 #include "midi_Defs.h"
 #include "config.hpp"
 #include "MIDI.h"
-#include "midi/piomidi.hpp"
-#include "midi/serialmidi.hpp"
+#include "piomidi.hpp"
+#include "serialmidi.hpp"
 #include "midi/usbcablemidi.hpp"
-
 
 template <typename T, typename U>
 void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
@@ -35,21 +35,13 @@ void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
 //                          CC        Note OFF     Note On
 // we can also add channels with higher numbers and shifting, will see
 
-Adafruit_USBD_MIDI usb_midi(4); // number of virtual cables, you will need to define all the interfaces here
-midi::UsbJackMIDI jack_0(usb_midi, 0);
-midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_1(jack_0);
+Adafruit_USBD_MIDI usb_midi(4);
+USB_MIDI(1)
+USB_MIDI(2)
+USB_MIDI(3)
+USB_MIDI(4)
 
-midi::UsbJackMIDI jack_1(usb_midi, 1);
-midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_2(jack_1);
-
-midi::UsbJackMIDI jack_2(usb_midi, 2);
-midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_3(jack_2);
-
-midi::UsbJackMIDI jack_3(usb_midi, 3);
-midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_4(jack_3);
-
-midi::MySerialMIDI real_serial_0(PIN_MIDI_1_RX, PIN_MIDI_1_TX);
-midi::MidiInterface<midi::MySerialMIDI> MIDI_IF_1(real_serial_0);
+SERIAL_MIDI(uart0, 1, PIN_MIDI_1_RX, PIN_MIDI_1_TX)
 
 PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX)
 PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX)
@@ -57,7 +49,7 @@ PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
 
 
 uint8_t MidiRouter::current_cable_limited() {
-    uint8_t cable = jack_0.current_cable();
+    uint8_t cable = jack_1.current_cable();
     if (cable<1 | cable>3)
         cable = 0;
     return cable;
@@ -77,63 +69,22 @@ void MidiRouter::init() {
     MIDI_IF_2.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_3.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_4.begin(MIDI_CHANNEL_OMNI);
-
 }
 
-
+#define SIMPLE_ROUTER(n) if ( MIDI_IF_##n.read() ) \
+    {                                                               \
+      if (matrix.get_element_2d(n-1, 0) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_1);   \
+      if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
+      if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
+      if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_4);   \
+      copy_midi_data(MIDI_IF_##n, MIDI_USB_##n);                                       \
+    }
 
 void MidiRouter::loop() {
-    if (MIDI_IF_1.read())
-    {
-        if (matrix.get_element_2d(0,0) > 0)
-            copy_midi_data(MIDI_IF_1, MIDI_IF_1);
-        if (matrix.get_element_2d(0,1) > 0)
-            copy_midi_data(MIDI_IF_1, MIDI_IF_2);
-        if (matrix.get_element_2d(0,2) > 0)
-            copy_midi_data(MIDI_IF_1, MIDI_IF_3);
-        if (matrix.get_element_2d(0,3) > 0)
-            copy_midi_data(MIDI_IF_1, MIDI_IF_4);
-        copy_midi_data(MIDI_IF_1, MIDI_USB_1);
-    }
-
-    if (MIDI_IF_2.read())
-    {
-        if (matrix.get_element_2d(1,0) > 0)
-            copy_midi_data(MIDI_IF_2, MIDI_IF_1);
-        if (matrix.get_element_2d(1,1) > 0)
-            copy_midi_data(MIDI_IF_2, MIDI_IF_2);
-        if (matrix.get_element_2d(1,2) > 0)
-            copy_midi_data(MIDI_IF_2, MIDI_IF_3);
-        if (matrix.get_element_2d(1,3) > 0)
-            copy_midi_data(MIDI_IF_2, MIDI_IF_4);
-        copy_midi_data(MIDI_IF_2, MIDI_USB_2);
-    }
-
-    if (MIDI_IF_3.read())
-    {
-        if (matrix.get_element_2d(2,0) > 0)
-            copy_midi_data(MIDI_IF_3, MIDI_IF_1);
-        if (matrix.get_element_2d(2,1) > 0)
-            copy_midi_data(MIDI_IF_3, MIDI_IF_2);
-        if (matrix.get_element_2d(2,2) > 0)
-            copy_midi_data(MIDI_IF_3, MIDI_IF_3);
-        if (matrix.get_element_2d(2,3) > 0)
-            copy_midi_data(MIDI_IF_3, MIDI_IF_4);
-        copy_midi_data(MIDI_IF_3, MIDI_USB_3);
-    }
-
-    if (MIDI_IF_4.read())
-    {
-        if (matrix.get_element_2d(3,0) > 0)
-            copy_midi_data(MIDI_IF_4, MIDI_IF_1);
-        if (matrix.get_element_2d(3,1)  > 0)
-            copy_midi_data(MIDI_IF_4, MIDI_IF_2);
-        if (matrix.get_element_2d(3,2)  > 0)
-            copy_midi_data(MIDI_IF_4, MIDI_IF_3);
-        if (matrix.get_element_2d(3,3)  > 0)
-            copy_midi_data(MIDI_IF_4, MIDI_IF_4);
-        copy_midi_data(MIDI_IF_4, MIDI_USB_4);
-    }
+    SIMPLE_ROUTER(1)
+    SIMPLE_ROUTER(2)
+    SIMPLE_ROUTER(3)
+    SIMPLE_ROUTER(4)
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number

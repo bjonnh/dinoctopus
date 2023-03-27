@@ -10,32 +10,44 @@
  *
  */
 
-#include "midi/piomidi.hpp"
+#ifndef DINOCTOPUS_2040_PIOMIDI_HPP
+#define DINOCTOPUS_2040_PIOMIDI_HPP
 
+#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/Arduino.h"
+#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/SoftwareSerial.h"
+#include "../../.pio/libdeps/pico/MIDI Library/src/midi_Defs.h"
+
+#define PIO_SERIAL_MIDI(number, tx_pin, rx_pin) SerialPIO pio_serial##number(tx_pin, rx_pin, 32); \
+    MIDI_NAMESPACE::PioMIDI pio_midi##number(pio_serial##number); \
+    MIDI_NAMESPACE::MidiInterface<MIDI_NAMESPACE::PioMIDI> MIDI_IF_##number(pio_midi##number);
+
+#define SERIAL_BAUD 31250
+#pragma once
 BEGIN_MIDI_NAMESPACE
-    void PioMIDI::begin() {
-        serialPio.begin(SERIAL_BAUD);
-    }
+    class PioMIDI {
+    public:
+        explicit PioMIDI(const SerialPIO &serialPio)
+                : serialPio(serialPio) {
+        };
 
-    void PioMIDI::end() {
-    }
+        static const bool thruActivated = false;
 
-    bool PioMIDI::beginTransmission(midi::MidiType) {
-        return true;
-    }
+        void begin();
 
-    void PioMIDI::write(byte value) {
-        serialPio.write(value);
-    }
+        void end();
 
-    void PioMIDI::endTransmission() {
-    }
+        static bool beginTransmission(midi::MidiType);
 
-    byte PioMIDI::read() {
-        return serialPio.read();
-    }
+        void write(byte value);
 
-    unsigned PioMIDI::available() {
-        return serialPio.available();
-    }
+        void endTransmission();
+
+        byte read();
+
+        unsigned available();
+
+    private:
+        SerialPIO serialPio;
+    };
 END_MIDI_NAMESPACE
+#endif //DINOCTOPUS_2040_PIOMIDI_HPP

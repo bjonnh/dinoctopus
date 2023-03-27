@@ -16,6 +16,12 @@
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
 
+#define USB_MIDI(n) midi::UsbJackMIDI jack_##n(usb_midi, n-1); \
+     midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_##n(jack_##n);
+
+#define SERIAL_MIDI(uart, n, rxpin, txpin) midi::MySerialMIDI real_serial_##n(uart, rxpin, txpin); \
+    midi::MidiInterface<midi::MySerialMIDI> MIDI_IF_##n(real_serial_##n);
+
 class MidiRouter {
 public:
     static void init();

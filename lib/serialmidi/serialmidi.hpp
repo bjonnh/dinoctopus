@@ -10,37 +10,47 @@
  *
  */
 
-#include "midi/serialmidi.hpp"
+#ifndef DINOCTOPUS_2040_SERIAL_MIDI_HPP
+#define DINOCTOPUS_2040_SERIAL_MIDI_HPP
+
+#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/Arduino.h"
+#include "../../.pio/libdeps/pico/MIDI Library/src/midi_Namespace.h"
+#include "hardware/uart.h"
+#include "../../.pio/libdeps/pico/MIDI Library/src/midi_Defs.h"
+
+
+#define SERIAL_BAUD 31250
 
 BEGIN_MIDI_NAMESPACE
-    void MySerialMIDI::begin() const {
-        uart_init(uart0, SERIAL_BAUD);
+    class MySerialMIDI {
+    public:
+        MySerialMIDI(uart_inst_t *uart, uint rxpin, uint txpin)
+                : uart(uart), rxpin(rxpin), txpin(txpin) {
+        };
 
-        // Set the GPIO pin mux to the UART - 0 is TX, 1 is RX
-        gpio_set_function(rxpin, GPIO_FUNC_UART);
-        gpio_set_function(txpin, GPIO_FUNC_UART);
-    }
+    public:
+        static const bool thruActivated = false;
 
-    void MySerialMIDI::end() {
-    }
+        void begin() const;
 
-    bool MySerialMIDI::beginTransmission(MidiType) {
-        return true;
-    }
+        void end();
 
-    void MySerialMIDI::write(byte value) {
-        uart_putc(uart0, value);
-    }
+        bool beginTransmission(MidiType);
 
-    void MySerialMIDI::endTransmission() {
-    }
+        void write(byte value);
 
-    byte MySerialMIDI::read() {
-        return uart_getc(uart0);
-    }
+        void endTransmission();
 
-    unsigned MySerialMIDI::available() {
-        return uart_is_readable(uart0);
-    }
+        byte read();
 
+        unsigned available();
+
+    private:
+        uart_inst_t *uart;
+        uint rxpin;
+        uint txpin;
+    };
 END_MIDI_NAMESPACE
+
+
+#endif //DINOCTOPUS_2040_PIOMIDI_HPP
