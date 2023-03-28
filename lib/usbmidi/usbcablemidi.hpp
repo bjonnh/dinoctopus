@@ -27,7 +27,7 @@ BEGIN_MIDI_NAMESPACE
     class UsbJackMIDI {
     public:
         explicit UsbJackMIDI(Adafruit_USBD_MIDI usb_midi, int cable)
-                : usb_midi(std::move(usb_midi)), cable(cable) {
+                : usb_midi(std::move(usb_midi)), cable(cable) {  // I don't think it is legal to move it but why not
         };
 
     public:
@@ -56,7 +56,8 @@ BEGIN_MIDI_NAMESPACE
     private:
         Adafruit_USBD_MIDI usb_midi;
         uint8_t cable = 0;
-        midid_stream_t stream_read = {{0, 0, 0, 0}, 0, 0};
+        midid_stream_t stream_read = {0};
     };
+
 END_MIDI_NAMESPACE
 #endif //DINOCTOPUS_2040_USB_CABLE_MIDI_HPP

@@ -16,9 +16,6 @@
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
 
-#define USB_MIDI(n) midi::UsbJackMIDI jack_##n(usb_midi, n-1); \
-     midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_##n(jack_##n);
-
 #define SERIAL_MIDI(uart, n, rxpin, txpin) midi::MySerialMIDI real_serial_##n(uart, rxpin, txpin); \
     midi::MidiInterface<midi::MySerialMIDI> MIDI_IF_##n(real_serial_##n);
 
@@ -33,8 +30,6 @@ public:
     void set_matrix(uint8_t *);
 
 private:
-    static uint8_t current_cable_limited();
-
     RoutingMatrix matrix;
 };
 

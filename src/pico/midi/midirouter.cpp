@@ -11,15 +11,13 @@
  */
 
 
-//#include "Adafruit_TinyUSB.h"
-#include <midi/Adafruit_USBD_MIDI.h>
 #include "midi/midirouter.hpp"
 #include "midi_Defs.h"
 #include "config.hpp"
 #include "MIDI.h"
 #include "piomidi.hpp"
 #include "serialmidi.hpp"
-#include "midi/usbcablemidi.hpp"
+#include "usbmidi.hpp"
 
 template <typename T, typename U>
 void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
@@ -35,11 +33,7 @@ void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
 //                          CC        Note OFF     Note On
 // we can also add channels with higher numbers and shifting, will see
 
-Adafruit_USBD_MIDI usb_midi(4);
-USB_MIDI(1)
-USB_MIDI(2)
-USB_MIDI(3)
-USB_MIDI(4)
+UsbMidi usb_midi;
 
 SERIAL_MIDI(uart0, 1, PIN_MIDI_1_RX, PIN_MIDI_1_TX)
 
@@ -47,23 +41,14 @@ PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX)
 PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX)
 PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
 
-
-uint8_t MidiRouter::current_cable_limited() {
-    uint8_t cable = jack_1.current_cable();
-    if (cable<1 | cable>3)
-        cable = 0;
-    return cable;
-}
-
 void MidiRouter::init() {
-    TinyUSB_Device_Init(0);
-    MIDI_USB_1.begin(MIDI_CHANNEL_OMNI);
-    MIDI_USB_2.begin(MIDI_CHANNEL_OMNI);
-    MIDI_USB_3.begin(MIDI_CHANNEL_OMNI);
-    MIDI_USB_4.begin(MIDI_CHANNEL_OMNI);
+    usb_midi.init();
+    usb_midi(1).begin(MIDI_CHANNEL_OMNI);
+    usb_midi(2).begin(MIDI_CHANNEL_OMNI);
+    usb_midi(3).begin(MIDI_CHANNEL_OMNI);
+    usb_midi(4).begin(MIDI_CHANNEL_OMNI);
 
-    while (!TinyUSBDevice.mounted())
-        delay(1);
+    usb_midi.wait();
 
     MIDI_IF_1.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_2.begin(MIDI_CHANNEL_OMNI);
@@ -77,7 +62,7 @@ void MidiRouter::init() {
       if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
       if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
       if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_4);   \
-      copy_midi_data(MIDI_IF_##n, MIDI_USB_##n);                                       \
+      copy_midi_data(MIDI_IF_##n, usb_midi(n)); \
     }
 
 void MidiRouter::loop() {
@@ -88,12 +73,12 @@ void MidiRouter::loop() {
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number
-    if (MIDI_USB_1.read()) {
-        uint8_t cable = current_cable_limited();
-        midi::MidiType type = MIDI_USB_1.getType();
-        unsigned char data1 = MIDI_USB_1.getData1();
-        unsigned char data2 = MIDI_USB_1.getData2();
-        unsigned char channel = MIDI_USB_1.getChannel();
+    if (usb_midi(1).read()) {
+        uint8_t cable = usb_midi.current_cable_limited();
+        midi::MidiType type = usb_midi(1).getType();
+        unsigned char data1 = usb_midi(1).getData1();
+        unsigned char data2 = usb_midi(1).getData2();
+        unsigned char channel = usb_midi(1).getChannel();
         switch(cable) {
             case 1:
                 MIDI_IF_2.send(type,data1,data2,channel);

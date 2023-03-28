@@ -13,22 +13,13 @@
 
 #include "ui/manager.hpp"
 #include "U8g2lib.h"
-#include "config.hpp"
-#include "ui/root.hpp"
-#include "ui/widget.hpp"
-#include "ui/horizontalmenu.hpp"
-#include "ui/verticalmenu.hpp"
-#include "ui/matrix.hpp"
-#include "ui/statusbar.hpp"
-#include "ui/page.hpp"
-#include "../../lib/storage/storage.hpp"
 #include "u8g2.h"
 #include <iostream>
 
 void UI::Manager::loop() {
     int k;
-        while(true) {
-    std::cout << "running a loop" << std::endl;
+    while (true) {
+        std::cout << "running a loop" << std::endl;
 
         display_update();
         do {
@@ -41,7 +32,7 @@ void UI::Manager::loop() {
             encoder_right();
         else if (k == 0) // enter
             encoder_click();
-        else if (k== 113) // q
+        else if (k == 113) // q
             return;
         else
             std::cout << "Unhandled key: " << k << std::endl;

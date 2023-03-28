@@ -13,7 +13,7 @@
  *
  */
 
-#include "midi/usbcablemidi.hpp"
+#include "usbcablemidi.hpp"
 
 BEGIN_MIDI_NAMESPACE
 
@@ -115,5 +115,4 @@ BEGIN_MIDI_NAMESPACE
     [[nodiscard]] uint8_t UsbJackMIDI::current_cable() const {
         return cable;
     }
-
 END_MIDI_NAMESPACE
