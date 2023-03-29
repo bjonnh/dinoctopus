@@ -1,4 +1,9 @@
 # Dinoctopus
+[![Build documentation](https://github.com/bjonnh/dinoctopus/actions/workflows/doc.yml/badge.svg)](https://github.com/bjonnh/dinoctopus/actions/workflows/doc.yml) [![PlatformIO CI](https://github.com/bjonnh/dinoctopus/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/bjonnh/dinoctopus/actions/workflows/build_and_test.yml)
+
+[Official documentation](https://bjonnh.github.io/dinoctopus/)
+
+
 
 This is a RP2040 based USB-Midi interface that also allows for Midi merging and other MIDI tools
 (coming, I'm porting them from an Arduino Mega).
