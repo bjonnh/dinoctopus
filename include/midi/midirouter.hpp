@@ -11,7 +11,7 @@
  */
 
 #include <cstdint>  // necessary for uint8_t
-#include "../../lib/routing-matrix/routingmatrix.hpp"
+#include "routingmatrix.hpp"
 
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
