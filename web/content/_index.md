@@ -70,7 +70,7 @@ The USB ports are virtual and will through a single cable be displayed as multip
 ### Software
 The Software is already available here: [https://www.github.com/bjonnh/dinoctopus](https://www.github.com/bjonnh/dinoctopus)
 
-The code documentation is at [./doc](./doc)
+The code documentation is at [./dox](./dox)
 
 ### Hardware
 The hardware schematics and PCBs will be made available soon.
