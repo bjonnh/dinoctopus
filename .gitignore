@@ -4,3 +4,4 @@ cmake-build-*/
 /eeprom.bin
 /scratch_1
 doc
+web/public
