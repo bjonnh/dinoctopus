@@ -5,3 +5,4 @@ cmake-build-*/
 /scratch_1
 doc
 web/public
+/web/.hugo_build.lock
