@@ -4,8 +4,7 @@ title = 'DINOctopus'
 theme = 'hugo-book'
 disableKinds = ['taxonomy', 'taxonomyTerm']
 [params]
-    BookTheme = 'auto'
-    BookRepo = 'https://github.com/bjonnh/dinoctopus'
-[module]
-[[module.imports]]
-path = 'github.com/alex-shpak/hugo-book'
+BookTheme = 'auto'
+BookRepo = 'https://github.com/bjonnh/dinoctopus'
+[markup.goldmark.renderer]
+unsafe= true
