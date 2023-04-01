@@ -39,6 +39,8 @@ void UI::Manager::loop() {
     }
 }
 
+void UI::Manager::initHardwareLCD() {}
+
 void UI::Manager::initEncoder() {}
 
 // TODO Use another window for those

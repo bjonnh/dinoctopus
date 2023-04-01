@@ -26,7 +26,7 @@ namespace UI::Widgets {
 
         void draw() override;
 
-        void set_message(char string[UI_CHARACTERS_PER_LINE]);
+        void set_message(const char string[UI_CHARACTERS_PER_LINE]);
     };
 }
 

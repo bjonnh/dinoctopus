@@ -17,6 +17,8 @@
 // LCD
 //
 
+#define BUZZER_PIN 6
+
 #define NEOPIXEL_PIN 9
 
 #define LCD_CS  5    // LCD CS, sometimes called EN or SS

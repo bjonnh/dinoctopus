@@ -1,7 +1,7 @@
 {
-  "name": "U8G2",
+  "name": "u8g2",
   "version": "1.0.0",
-  "description": "A wrapper around U8G2 ",
+  "description": "A wrapper around U8G2",
   "keywords": "u8g2",
   "repository":
   {
@@ -10,22 +10,11 @@
   },
   "authors":
   [
-    {
-      "name": "John Smith",
-      "email": "me@john-smith.com",
-      "url": "https://www.john-smith/contact"
-    },
-    {
-      "name": "Andrew Smith",
-      "email": "me@andrew-smith.com",
-      "url": "https://www.andrew-smith/contact",
-      "maintainer": true
-    }
   ],
   "license": "BSD",
-  "homepage": "https://www.helloworld.org/",
-  "frameworks": "*",
-  "platforms": "*",
+  "homepage": "https://github.com/oligraus/u8g2.git",
+  "frameworks": "",
+  "platforms": "native",
   "build": {
     "srcDir": "u8g2/",
     "srcFilter": "+<cppsrc> +<csrc> +<sys/sdl/common>",

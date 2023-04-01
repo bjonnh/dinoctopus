@@ -16,6 +16,7 @@
 #include "../../lib/storage/storage.hpp"
 
 void UI::Manager::initLCD() {
+    initHardwareLCD();
     u8g2_lcd.begin();
     u8g2_lcd.setContrast(180);  // This is extremely important
     u8g2_lcd.clearBuffer();
@@ -23,7 +24,7 @@ void UI::Manager::initLCD() {
     u8g2_lcd.setFontMode(0);
     u8g2_lcd.clearBuffer();
     u8g2_lcd.setDrawColor(1);
-    u8g2_lcd.setFont(u8g2_font_5x8_mf);
+    u8g2_lcd.setFont(u8g2_font_5x8_mr);
     u8g2_lcd.drawStr(0, 10, "A strange game.");
     u8g2_lcd.drawStr(0, 20, "The only winning move");
     u8g2_lcd.drawStr(0, 30, " is not to play");
@@ -139,13 +140,10 @@ void UI::Manager::init() {
     debug_menu.onSelectedCall(&debug_menu_options);
 }
 
-char subuf[20] = {0};
-
 void UI::Manager::display_update() {
-    if (matrix.get_dirty())
-        snprintf(subuf, 20, " Mod");
-    else
-        snprintf(subuf, 20, "");
+    char subuf[20] = {0};
+    snprintf(subuf, 20, "%s%s", matrix.get_dirty() ? "Mod " : "", usb_enabled ? "USB ": "");
+
     if (latency_watch)
         snprintf(buffer, 50, "L [0:%4d] [1:%4d]%s", latency_cpu[0], latency_cpu[1], subuf);
     else
@@ -214,4 +212,8 @@ UI::Manager::Manager(U8G2 &u8G2Lcd) : u8g2_lcd(u8G2Lcd),
     page_debug(root),
     debug_menu(page_debug)
 {
+}
+
+void UI::Manager::set_usb_enabled(bool i) {
+    usb_enabled = i;
 }

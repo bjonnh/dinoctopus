@@ -1,0 +1,28 @@
+{
+  "name": "din-ui",
+  "version": "1.0.0",
+  "description": "A UI system for DINoctopus",
+  "keywords": ["u8g2", "ui"],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/bjonnh/dinoctopus"
+  },
+  "authors":
+  [
+  ],
+  "license": "BSD",
+  "url": "https://github.com/bjonnh/dinoctopus",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "srcDir": ".",
+    "includeDir": "include/"
+  },
+  "dependencies": {
+    "adafruit/Adafruit TinyUSB Library": "^1.17.0",
+    "SPI": "^1.0",
+    "Wire": "^1.0",
+    "olikraus/U8g2": "^2.34.8"
+  }
+}

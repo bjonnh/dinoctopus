@@ -70,19 +70,17 @@ void UI::Manager::readEncoder() {
     }
 }
 
-unsigned long time_a = to_ms_since_boot(get_absolute_time());
-int delayTime_a = 200;
-
 void UI::Manager::initEncoder() {
     pinMode(ENC_A, INPUT_PULLUP);
     pinMode(ENC_B, INPUT_PULLUP);
     pinMode(ENC_C, INPUT_PULLUP);
 }
 
-
-bool clicked = false;
-
 void UI::Manager::encoderPoll() {
+    static bool clicked = false;
+    static unsigned long time_a = to_ms_since_boot(get_absolute_time());
+    static int delayTime_a = 200;
+
     bool click = digitalRead(ENC_A);
     if ((click == 0) and !clicked) {
         if ((CURRENT_TIME_MS - time_a) > delayTime_a) {

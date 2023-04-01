@@ -72,6 +72,7 @@ namespace UI {
         UI::Widgets::Page<U8G2> page_debug;
         UI::Widgets::Vertical_menu<U8G2> debug_menu;
 
+        void set_usb_enabled(bool i);
     private:
         char buffer[UI_CHARACTERS_PER_LINE] = {0};
 
@@ -89,6 +90,8 @@ namespace UI {
 
         void initLCD();
 
+        void initHardwareLCD();
+
         static void initEncoder();
 
         void display_update();
@@ -98,6 +101,7 @@ namespace UI {
         void readEncoder();
 
         U8G2 &u8g2_lcd;
+        bool usb_enabled;
     };
 }
 

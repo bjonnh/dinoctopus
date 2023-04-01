@@ -26,7 +26,6 @@ public: SDL_U8G2(): U8G2() {
 };
 
 SDL_U8G2 u8g2_lcd;
-
 UI::Manager ui(reinterpret_cast<U8G2 &>(u8g2_lcd));
 
 int main(void)

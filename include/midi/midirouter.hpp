@@ -21,14 +21,14 @@
 
 class MidiRouter {
 public:
-    static void init();
+    void init();
 
     void loop();
 
     void get_matrix(uint8_t *);
 
     void set_matrix(uint8_t *);
-
+    bool usb_enabled();
 private:
     RoutingMatrix matrix;
 };

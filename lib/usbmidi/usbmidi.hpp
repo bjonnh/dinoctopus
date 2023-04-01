@@ -25,39 +25,20 @@
 
 class UsbMidi {
 public:
-    void init() {
-        TinyUSB_Device_Init(0);
-    }
-    void wait() {
-        while (!TinyUSBDevice.mounted())
-            delay(1);
-    }
+    void init();
+    bool active();
 
-    uint8_t current_cable_limited() {
-        uint8_t cable = jack_1.current_cable();
-        if (cable<1 | cable>3)
-            cable = 0;
-        return cable;
-    }
+    uint8_t current_cable_limited();
 
-    midi::MidiInterface<midi::UsbJackMIDI> &operator()(uint8_t cable) {
-        switch(cable) {
-            case 2:
-                return MIDI_USB_2;
-            case 3:
-                return MIDI_USB_3;
-            case 4:
-                return MIDI_USB_4;
-            default:
-                return MIDI_USB_1;
-        }
-    };
+    midi::MidiInterface<midi::UsbJackMIDI> &operator()(uint8_t cable);;
 
     Adafruit_USBD_MIDI usb_midi = Adafruit_USBD_MIDI(4);
     USB_MIDI(1);
     USB_MIDI(2);
     USB_MIDI(3);
     USB_MIDI(4);
+
+
 };
 
 #endif //DINOCTOPUS_2040_USBMIDI_HPP

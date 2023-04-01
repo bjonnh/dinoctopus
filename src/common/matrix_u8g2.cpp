@@ -30,7 +30,6 @@ namespace UI::Widgets {
         if (!visible)
             return;
 
-        display->setFont(u8g2_font_5x8_mf);
         if (focus) {
             display->setDrawColor(state != back);
             display->drawStr(0, 2.5 * UI_LINE_HEIGHT, "<");

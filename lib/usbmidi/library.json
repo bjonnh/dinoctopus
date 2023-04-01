@@ -1,0 +1,26 @@
+{
+  "name": "usbmidi",
+  "version": "1.0.0",
+  "description": "A MIDI system for DINoctopus",
+  "keywords": ["u8g2", "ui"],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/bjonnh/dinoctopus"
+  },
+  "authors":
+  [
+  ],
+  "license": "BSD",
+  "url": "https://github.com/bjonnh/dinoctopus",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "srcDir": ".",
+    "includeDir": "include/"
+  },
+  "dependencies": {
+    "adafruit/Adafruit TinyUSB Library": "^1.17.0",
+    "fortyseveneffects/MIDI Library": "^5.0.2"
+  }
+}

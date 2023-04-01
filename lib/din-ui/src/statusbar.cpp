@@ -17,7 +17,7 @@ namespace UI::Widgets {
     template class StatusBar<U8G2>;
 
     template<typename D>
-    void StatusBar<D>::set_message(char *string) {
+    void StatusBar<D>::set_message(const char string[UI_CHARACTERS_PER_LINE]) {
         strncpy(buffer, string, UI_CHARACTERS_PER_LINE);
     }
 }

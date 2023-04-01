@@ -19,7 +19,7 @@
 #include "config.hpp"
 #include "storage.hpp"
 
-MidiRouter midi_router;
+static MidiRouter midi_router;
 U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
 UI::Manager ui(reinterpret_cast<U8G2 &>(u8g2_lcd));
 
@@ -32,6 +32,9 @@ LATENCY_VARIABLES(1)
 
 void setup() {
     LATENCY_INIT(0)
+    gpio_init(BUZZER_PIN);
+    gpio_set_dir(BUZZER_PIN, GPIO_OUT);
+    gpio_put(BUZZER_PIN, 0);
     queue_init(&request_queue, sizeof(queue_request_t), 2);
     queue_init(&response_queue, sizeof(queue_response_t), 2);
     midi_router.init();
@@ -40,20 +43,19 @@ void setup() {
 void setup1() {
     LATENCY_INIT(1)
 
-    // Init the SPI
-    SPI.setRX(0);
-    SPI.setCS(1);
-    SPI.setSCK(LCD_CLOCK);
-    SPI.setTX(LCD_MOSI);
-
-    SPI.begin();
-    SPI.beginTransaction(SPISettings(64000000, MSBFIRST, SPI_MODE0));
     ui.init();
 }
 
-bool latency_watch_core0 = false;
+void response_usb_status(bool status) {
+    queue_response_t entry = { RESPONSE_GET_USB_ENABLED };
+    *(entry.data) = status;
+    queue_add_blocking(&response_queue, &entry);
+}
 
 void loop() {
+    static bool latency_watch_core0 = false;
+    static bool old_usb_status = false;
+
     if (latency_watch_core0) {
         LATENCY_CALCULATOR(0);
     }
@@ -77,9 +79,15 @@ void loop() {
             case REQUEST_SET_ROUTING:
                 midi_router.set_matrix(request.data);
                 break;
+            case REQUEST_GET_USB_ENABLED:
+                response_usb_status(old_usb_status);
+                break;
         }
     }
-
+    if (midi_router.usb_enabled() != old_usb_status) {
+        old_usb_status = !old_usb_status;
+        response_usb_status(old_usb_status);
+    }
     midi_router.loop();
 }
 
@@ -102,6 +110,8 @@ void loop1() {
             case RESPONSE_ROUTING:
                 UI::Manager::current_route().load_from_array(response.data);
                 break;
+            case RESPONSE_GET_USB_ENABLED:
+                ui.set_usb_enabled(response.data[0]);
             case RESPONSE_SET_ROUTING:
                 // Not handled by this core
                 break;

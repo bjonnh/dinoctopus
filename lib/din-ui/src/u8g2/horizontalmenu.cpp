@@ -10,7 +10,7 @@
  *
  */
 
-#include "../../include/ui/horizontalmenu.hpp"
+#include "../include/ui/horizontalmenu.hpp"
 #include "ui/ui.hpp"
 #include "U8g2lib.h"
 
@@ -20,7 +20,6 @@ namespace UI::Widgets {
         if (!visible)
             return;
 
-        display->setFont(u8g2_font_5x8_mf);
         display->setDrawColor(1);
 
         for (uint8_t i = 0; i < inserted_items; i++) {

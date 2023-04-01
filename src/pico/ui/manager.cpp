@@ -24,11 +24,21 @@
 #include "ui/page.hpp"
 #include "utils_rp2040.hpp"
 
-uint32_t last_update_time = CURRENT_TIME_MS;
+void UI::Manager::initHardwareLCD() {
+    // Init the SPI
+    SPI.setRX(0);
+    SPI.setCS(1);
+    SPI.setSCK(LCD_CLOCK);
+    SPI.setTX(LCD_MOSI);
 
-bool updated_last_time = false;
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(64000000, MSBFIRST, SPI_MODE0));
+}
 
 void UI::Manager::loop() {
+    static uint32_t last_update_time = CURRENT_TIME_MS;
+    static bool updated_last_time = false;
+
     encoderPoll();
     // We wait 10ms before trying to update if we had an interaction if not we wait 100ms
     if ((CURRENT_TIME_MS - last_update_time) > (updated_last_time ? 10 : 100)) {

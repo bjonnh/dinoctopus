@@ -20,7 +20,6 @@ namespace UI::Widgets {
         if (!visible)
             return;
 
-        display->setFont(u8g2_font_5x8_mf);
         display->setDrawColor(1);
 
         for (uint8_t i = 0; i < inserted_items; i++) {

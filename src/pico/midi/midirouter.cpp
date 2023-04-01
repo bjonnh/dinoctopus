@@ -48,8 +48,6 @@ void MidiRouter::init() {
     usb_midi(3).begin(MIDI_CHANNEL_OMNI);
     usb_midi(4).begin(MIDI_CHANNEL_OMNI);
 
-    usb_midi.wait();
-
     MIDI_IF_1.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_2.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_3.begin(MIDI_CHANNEL_OMNI);
@@ -62,7 +60,7 @@ void MidiRouter::init() {
       if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
       if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
       if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_4);   \
-      copy_midi_data(MIDI_IF_##n, usb_midi(n)); \
+      if (usb_midi.active()) copy_midi_data(MIDI_IF_##n, usb_midi(n)); \
     }
 
 void MidiRouter::loop() {
@@ -73,24 +71,26 @@ void MidiRouter::loop() {
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number
-    if (usb_midi(1).read()) {
-        uint8_t cable = usb_midi.current_cable_limited();
-        midi::MidiType type = usb_midi(1).getType();
-        unsigned char data1 = usb_midi(1).getData1();
-        unsigned char data2 = usb_midi(1).getData2();
-        unsigned char channel = usb_midi(1).getChannel();
-        switch(cable) {
-            case 1:
-                MIDI_IF_2.send(type,data1,data2,channel);
-                break;
-            case 2:
-                MIDI_IF_3.send(type,data1,data2,channel);
-                break;
-            case 3:
-                MIDI_IF_4.send(type,data1,data2,channel);
-                break;
-            default:
-                MIDI_IF_1.send(type,data1,data2,channel);
+    if (usb_midi.active()) {
+        if (usb_midi(1).read()) {
+            uint8_t cable = usb_midi.current_cable_limited();
+            midi::MidiType type = usb_midi(1).getType();
+            unsigned char data1 = usb_midi(1).getData1();
+            unsigned char data2 = usb_midi(1).getData2();
+            unsigned char channel = usb_midi(1).getChannel();
+            switch (cable) {
+                case 1:
+                    MIDI_IF_2.send(type, data1, data2, channel);
+                    break;
+                case 2:
+                    MIDI_IF_3.send(type, data1, data2, channel);
+                    break;
+                case 3:
+                    MIDI_IF_4.send(type, data1, data2, channel);
+                    break;
+                default:
+                    MIDI_IF_1.send(type, data1, data2, channel);
+            }
         }
     }
 }
@@ -101,4 +101,8 @@ void MidiRouter::get_matrix(uint8_t *matrix_out) {
 
 void MidiRouter::set_matrix(uint8_t *matrix_in) {
     matrix.load_from_array(matrix_in);
+}
+
+bool MidiRouter::usb_enabled() {
+    return usb_midi.active();
 }

@@ -11,3 +11,31 @@
  */
 
 #include "usbmidi.hpp"
+
+void UsbMidi::init() {
+    TinyUSB_Device_Init(0);
+}
+
+bool UsbMidi::active() {
+    return TinyUSBDevice.mounted();
+}
+
+midi::MidiInterface<midi::UsbJackMIDI> &UsbMidi::operator()(uint8_t cable) {
+    switch(cable) {
+        case 2:
+            return MIDI_USB_2;
+        case 3:
+            return MIDI_USB_3;
+        case 4:
+            return MIDI_USB_4;
+        default:
+            return MIDI_USB_1;
+    }
+}
+
+uint8_t UsbMidi::current_cable_limited() {
+    uint8_t cable = jack_1.current_cable();
+    if (cable<1 | cable>3)
+        cable = 0;
+    return cable;
+}
