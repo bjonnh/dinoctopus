@@ -51,12 +51,6 @@ namespace UI {
 
         void has_update_for_router();
 
-        [[maybe_unused]] static void errorStrip();
-
-        static void dirtyStrip();
-
-        static void normalStrip();
-
         bool latency_watch = false;
 
         UI::Widgets::Root<U8G2> root;

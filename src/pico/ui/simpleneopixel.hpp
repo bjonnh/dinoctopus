@@ -10,18 +10,20 @@
  *
  */
 
-#include "ui/manager.hpp"
-#include "config.hpp"
-#include "simpleneopixel.hpp"
+#ifndef DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
+#define DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
 
-// Turns out, the adafruit library steals a PIO, that's why one of the MIDI ports was not working!
-// this is highly specific to the LEDs on the display I'm using. Use the Adafruit library if you don't know what
-// you are doing, but be warned that it will take a PIO.
+class SimpleNeoPixel {
+public:
+    SimpleNeoPixel(int n, int pin) : pin(pin) {};
 
-SimpleNeoPixel strip = SimpleNeoPixel(3, NEOPIXEL_PIN);
-#define C(r,g,b) SimpleNeoPixel::Color(r,g,b)
+    void begin();
 
-void UI::Manager::initStrip() {
-    strip.begin();
-    strip.show();
-}
+    void show();
+
+private:
+    int n;
+    int pin;
+};
+
+#endif //DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP

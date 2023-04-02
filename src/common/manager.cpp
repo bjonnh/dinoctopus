@@ -95,10 +95,7 @@ void update_router() {
 }
 
 void update_dirty(bool dirty) {
-    if (dirty)
-        UI::Manager::dirtyStrip();
-    else
-        UI::Manager::normalStrip();
+    // Remnant
 }
 
 void UI::Manager::init() {

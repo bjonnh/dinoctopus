@@ -66,7 +66,7 @@ void loop() {
         switch (request.code) {
             case REQUEST_LATENCY: {
                 latency_watch_core0 = true;
-                queue_response_t entry = {RESPONSE_LATENCY, processor_max_latency_0};
+                queue_response_t entry = {RESPONSE_LATENCY, static_cast<uint8_t>(processor_max_latency_0)};
                 queue_add_blocking(&response_queue, &entry);
             }
                 break;

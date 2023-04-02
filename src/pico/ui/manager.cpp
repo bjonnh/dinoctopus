@@ -36,7 +36,7 @@ void UI::Manager::initHardwareLCD() {
 }
 
 void UI::Manager::loop() {
-    static uint32_t last_update_time = CURRENT_TIME_MS;
+    static uint32_t last_update_time = CURRENT_TIME_MS-100;
     static bool updated_last_time = false;
 
     encoderPoll();
