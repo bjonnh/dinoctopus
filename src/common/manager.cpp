@@ -17,18 +17,11 @@
 
 void UI::Manager::initLCD() {
     initHardwareLCD();
-    u8g2_lcd.begin();
-    u8g2_lcd.setContrast(180);  // This is extremely important
-    u8g2_lcd.clearBuffer();
-    u8g2_lcd.firstPage();
-    u8g2_lcd.setFontMode(0);
-    u8g2_lcd.clearBuffer();
-    u8g2_lcd.setDrawColor(1);
-    u8g2_lcd.setFont(u8g2_font_5x8_mr);
-    u8g2_lcd.drawStr(0, 10, "A strange game.");
-    u8g2_lcd.drawStr(0, 20, "The only winning move");
-    u8g2_lcd.drawStr(0, 30, " is not to play");
-    u8g2_lcd.sendBuffer();
+    lcd.begin();
+    lcd.setContrast(180);  // This is extremely important
+    lcd.setFontMode(0);
+    lcd.setDrawColor(1);
+    lcd.setFont(u8g2_font_5x8_mr);
 }
 
 UI::Manager *current_manager;
@@ -37,6 +30,7 @@ void set_current_position(uint8_t position) {
     current_manager->page_routing.setVisible(position == 0);
     current_manager->page_settings.setVisible(position == 1);
     current_manager->page_debug.setVisible(position == 2);
+    current_manager->page_watch.setVisible(position == 3);
 }
 
 void enter_page(uint8_t position) {
@@ -44,12 +38,14 @@ void enter_page(uint8_t position) {
     current_manager->page_routing.setFocus(position == 0);
     current_manager->page_settings.setFocus(position == 1);
     current_manager->page_debug.setFocus(position == 2);
+    current_manager->page_watch.setFocus(position == 3);
 }
 
 void re_enter_menu() {
     current_manager->page_routing.setFocus(false);
     current_manager->page_settings.setFocus(false);
     current_manager->page_debug.setFocus(false);
+    current_manager->page_watch.setFocus(false);
     current_manager->main_menu.setFocus(true);
 }
 
@@ -82,8 +78,15 @@ void settings_menu_options(uint8_t option) {
 
 void debug_menu_options(uint8_t option) {
     switch (option) {
+        case 1: // Watch midi
+            current_manager->debug_mode = true;
+            current_manager->debug_for_router_requested = true;
+            set_current_position(3);
+            enter_page(3);
+            break;
         default:
             re_enter_menu();
+            current_manager->debug_mode = false;
             break;
     }
 }
@@ -134,21 +137,31 @@ void UI::Manager::init() {
     settings_menu.onSelectedCall(&settings_menu_options);
 
     debug_menu.addItem((char *) "Back");
+    debug_menu.addItem((char *) "Watch midi");
     debug_menu.onSelectedCall(&debug_menu_options);
+    midi_watch.onExitCall(&re_enter_menu);
 }
 
 void UI::Manager::display_update() {
     char subuf[20] = {0};
-    snprintf(subuf, 20, "%s%s", matrix.get_dirty() ? "Mod " : "", usb_enabled ? "USB ": "");
+    snprintf(subuf, 20, "%s %s %s", matrix.get_dirty() ? "Mod " : "   ", usb_enabled ? "USB ": "   ", debug_mode ? "DBG" : "   ");
 
     if (latency_watch)
-        snprintf(buffer, 50, "L [0:%4d] [1:%4d]%s", latency_cpu[0], latency_cpu[1], subuf);
+        snprintf(buffer, UI_CHARACTERS_PER_LINE, "L [0:%4d] [1:%4d]%s", latency_cpu[0], latency_cpu[1], subuf);
     else
-        snprintf(buffer, 50, "%s", subuf);
+        snprintf(buffer, UI_CHARACTERS_PER_LINE, "%s", subuf);
     status_bar.set_message(buffer);
-    u8g2_lcd.clearBuffer();
+
+    if (debug_mode) {
+        if (midi_message_updated) {
+            snprintf(midi_watch.buffer, UI_CHARACTERS_PER_LINE, "%2x: %2x %2x %2x %2x", current_midi_message[0], current_midi_message[1], current_midi_message[2], current_midi_message[3], current_midi_message[4]);
+            midi_message_updated = false;
+        }
+    }
+
+    lcd.clearBuffer();
     root.draw();
-    u8g2_lcd.sendBuffer();
+    lcd.sendBuffer();
 }
 
 void UI::Manager::encoder_right() {
@@ -172,6 +185,14 @@ void UI::Manager::has_update_for_router() {
 
 void UI::Manager::set_latency(uint8_t cpu, uint32_t value) {
     latency_cpu[cpu] = value;
+}
+
+bool UI::Manager::debug_for_router() {
+    if (debug_for_router_requested) {
+        debug_for_router_requested = false;
+        return true;
+    }
+    return false;
 }
 
 bool UI::Manager::query_for_router() {
@@ -198,19 +219,27 @@ RoutingMatrix UI::Manager::current_route() {
     return current_manager->matrix.getMatrix();
 }
 
-UI::Manager::Manager(U8G2 &u8G2Lcd) : u8g2_lcd(u8G2Lcd),
-    root(u8G2Lcd),
-    main_menu(root),
-    status_bar(root),
-    page_routing(root),
-    matrix(page_routing),
-    page_settings(root),
-    settings_menu(page_settings),
-    page_debug(root),
-    debug_menu(page_debug)
+UI::Manager::Manager(LCD_t &lcd) : lcd(lcd),
+                                  root(lcd),
+                                  main_menu(root),
+                                  status_bar(root),
+                                  page_routing(root),
+                                  matrix(page_routing),
+                                  page_settings(root),
+                                  settings_menu(page_settings),
+                                  page_debug(root),
+                                  debug_menu(page_debug),
+                                  page_watch(root),
+                                  midi_watch(page_watch),
+                                  usb_enabled(false)
 {
 }
 
 void UI::Manager::set_usb_enabled(bool i) {
     usb_enabled = i;
+}
+
+void UI::Manager::set_midi_message(const uint8_t midi_message[5]) {
+    memcpy(current_midi_message, midi_message, 5);
+    midi_message_updated = true;
 }

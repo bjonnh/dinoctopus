@@ -13,9 +13,10 @@
 
 #include "ui/matrix.hpp"
 #include "U8g2lib.h"
+#include "ui/manager.hpp"
 
 namespace UI::Widgets {
-    template class Matrix<U8G2>;
+    template class Matrix<LCD_t>;
 
     template<typename D> void Matrix<D>::set_matrix(RoutingMatrix &new_matrix) {
         current_matrix.set_from_matrix(new_matrix);

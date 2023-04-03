@@ -38,7 +38,7 @@ namespace UI::Widgets {
         display->drawStr(5, 2.5 * UI_LINE_HEIGHT, " IO|   1   2   3   4 ");
         display->drawHLine(10, 2.5 * UI_LINE_HEIGHT, 100);
         for (uint8_t i = 0; i<4; i++) {
-            if (((state == input_select) or (state == route_select)) && (p0_selected_input == i + 1)) {
+            if (((state == input_select) || (state == route_select)) && (p0_selected_input == (i + 1))) {
                 display->setDrawColor(0);
             }
             else {
@@ -53,7 +53,7 @@ namespace UI::Widgets {
                     display->setDrawColor(0);
                 else
                     display->setDrawColor(1);
-                snprintf(buffer, 50, "   %c", matrix_sign(current_matrix.get_element_2d(i,j)));
+                snprintf(buffer, UI_CHARACTERS_PER_LINE, "   %c", matrix_sign(current_matrix.get_element_2d(i,j)));
                 display->drawStr(25 + 20 * j, (3.5 + i) * UI_LINE_HEIGHT, buffer);
             }
         }

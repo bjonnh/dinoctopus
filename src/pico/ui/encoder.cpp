@@ -10,17 +10,17 @@
  *
  */
 
-#include <Arduino.h>
 #include <pico/time.h>
 #include "ui/manager.hpp"
+#include <hardware/gpio.h>
 #include "config.hpp"
 #include "utils_rp2040.hpp"
 
 // https://forum.arduino.cc/t/reading-rotary-encoders-as-a-state-machine/937388
 void UI::Manager::readEncoder() {
     static uint8_t state = 0;
-    bool CLKstate = digitalRead(ENC_C);
-    bool DTstate = digitalRead(ENC_B);
+    bool CLKstate = gpio_get(ENC_C);
+    bool DTstate = gpio_get(ENC_B);
     switch (state) {
         // Start state
         case 0:
@@ -71,9 +71,15 @@ void UI::Manager::readEncoder() {
 }
 
 void UI::Manager::initEncoder() {
-    pinMode(ENC_A, INPUT_PULLUP);
-    pinMode(ENC_B, INPUT_PULLUP);
-    pinMode(ENC_C, INPUT_PULLUP);
+    gpio_init(ENC_A);
+    gpio_set_dir(ENC_A, GPIO_IN);
+    gpio_set_pulls(ENC_A, true, false);
+    gpio_init(ENC_B);
+    gpio_set_dir(ENC_B, GPIO_IN);
+    gpio_set_pulls(ENC_B, true, false);
+    gpio_init(ENC_C);
+    gpio_set_dir(ENC_C, GPIO_IN);
+    gpio_set_pulls(ENC_C, true, false);
 }
 
 void UI::Manager::encoderPoll() {
@@ -81,7 +87,7 @@ void UI::Manager::encoderPoll() {
     static unsigned long time_a = to_ms_since_boot(get_absolute_time());
     static int delayTime_a = 200;
 
-    bool click = digitalRead(ENC_A);
+    bool click = gpio_get(ENC_A);
     if ((click == 0) and !clicked) {
         if ((CURRENT_TIME_MS - time_a) > delayTime_a) {
             time_a = CURRENT_TIME_MS;
@@ -89,7 +95,7 @@ void UI::Manager::encoderPoll() {
             clicked = true;
         }
     } else {
-        clicked = (click == 0);
+        clicked = !click;
     }
     readEncoder();
 }

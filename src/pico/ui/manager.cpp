@@ -10,7 +10,6 @@
  *
  */
 
-#include <Arduino.h>
 #include <SPI.h>
 #include "ui/manager.hpp"
 #include "U8g2lib.h"

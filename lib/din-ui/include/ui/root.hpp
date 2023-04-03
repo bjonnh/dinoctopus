@@ -22,7 +22,7 @@ namespace UI::Widgets {
     class Root : public UI::Widget<D> {
 
     public:
-        Root();
+        Root() = default;
 
         explicit Root(D &display) : Widget<D>(display) {}
     };

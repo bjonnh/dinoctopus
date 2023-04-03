@@ -13,8 +13,7 @@
 #ifndef DINOCTOPUS_2040_PIOMIDI_HPP
 #define DINOCTOPUS_2040_PIOMIDI_HPP
 
-#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/Arduino.h"
-#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/SoftwareSerial.h"
+#include <SoftwareSerial.h>
 #include "../../.pio/libdeps/pico/MIDI Library/src/midi_Defs.h"
 
 #define PIO_SERIAL_MIDI(number, tx_pin, rx_pin) SerialPIO pio_serial##number(tx_pin, rx_pin, 32); \

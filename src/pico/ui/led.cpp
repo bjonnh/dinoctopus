@@ -18,10 +18,8 @@
 // this is highly specific to the LEDs on the display I'm using. Use the Adafruit library if you don't know what
 // you are doing, but be warned that it will take a PIO.
 
-SimpleNeoPixel strip = SimpleNeoPixel(3, NEOPIXEL_PIN);
-#define C(r,g,b) SimpleNeoPixel::Color(r,g,b)
+SimpleNeoPixel strip = SimpleNeoPixel(NEOPIXEL_PIN);
 
 void UI::Manager::initStrip() {
-    strip.begin();
-    strip.show();
+    strip.white();
 }

@@ -23,11 +23,14 @@
 #include "ui/page.hpp"
 #include "matrix.hpp"
 #include "ui/verticalmenu.hpp"
+#include "midiwatch.hpp"
+
+typedef U8G2 LCD_t;
 
 namespace UI {
     class Manager {
     public:
-        explicit Manager(U8G2 &u8G2Lcd);
+        explicit Manager(LCD_t &lcd);
 
         void init();
 
@@ -40,11 +43,10 @@ namespace UI {
         static void set_routing_response(RoutingMatrix &matrix);
 
         void encoder_click();
-
         void encoder_right();
-
         void encoder_left();
 
+        bool debug_for_router();
         bool update_for_router();
 
         static RoutingMatrix current_route();
@@ -53,20 +55,28 @@ namespace UI {
 
         bool latency_watch = false;
 
-        UI::Widgets::Root<U8G2> root;
-        UI::Widgets::Horizontal_menu<U8G2> main_menu;
-        UI::Widgets::StatusBar<U8G2> status_bar;
+        UI::Widgets::Root<LCD_t> root;
+        UI::Widgets::Horizontal_menu<LCD_t> main_menu;
+        UI::Widgets::StatusBar<LCD_t> status_bar;
 
-        UI::Widgets::Page<U8G2> page_routing;
-        UI::Widgets::Matrix<U8G2> matrix;
+        UI::Widgets::Page<LCD_t> page_routing;
+        UI::Widgets::Matrix<LCD_t> matrix;
 
-        UI::Widgets::Page<U8G2> page_settings;
-        UI::Widgets::Vertical_menu<U8G2> settings_menu;
+        UI::Widgets::Page<LCD_t> page_settings;
+        UI::Widgets::Vertical_menu<LCD_t> settings_menu;
 
-        UI::Widgets::Page<U8G2> page_debug;
-        UI::Widgets::Vertical_menu<U8G2> debug_menu;
+        UI::Widgets::Page<LCD_t> page_debug;
+        UI::Widgets::Vertical_menu<LCD_t> debug_menu;
+
+        UI::Widgets::Page<LCD_t> page_watch;
+        UI::Widgets::MidiWatch<LCD_t> midi_watch;
 
         void set_usb_enabled(bool i);
+
+        void set_midi_message(const uint8_t midi_message[5]);
+
+        bool debug_mode=false;
+        bool debug_for_router_requested = false;
     private:
         char buffer[UI_CHARACTERS_PER_LINE] = {0};
 
@@ -75,7 +85,6 @@ namespace UI {
         bool updated = true;
 
         bool query_for_router_requested = false;
-
         bool update_for_router_ready = false;
 
         bool dirty = true;
@@ -84,7 +93,7 @@ namespace UI {
 
         void initLCD();
 
-        void initHardwareLCD();
+        static void initHardwareLCD();
 
         static void initEncoder();
 
@@ -94,8 +103,10 @@ namespace UI {
 
         void readEncoder();
 
-        U8G2 &u8g2_lcd;
+        LCD_t &lcd;
         bool usb_enabled;
+        uint8_t current_midi_message[5];
+        bool midi_message_updated=false;
     };
 }
 

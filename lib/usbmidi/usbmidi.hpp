@@ -13,7 +13,6 @@
 #ifndef DINOCTOPUS_2040_USBMIDI_HPP
 #define DINOCTOPUS_2040_USBMIDI_HPP
 
-#include <Arduino.h>
 #include "Adafruit_TinyUSB.h"
 #include "MIDI.h"
 #include "midi_Defs.h"

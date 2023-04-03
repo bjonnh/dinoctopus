@@ -19,7 +19,7 @@
 #include "serialmidi.hpp"
 #include "usbmidi.hpp"
 
-template <typename T, typename U>
+template<typename T, typename U>
 void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
     out.send(in.getType(), in.getData1(), in.getData2(), in.getChannel());
 }
@@ -55,7 +55,15 @@ void MidiRouter::init() {
 }
 
 #define SIMPLE_ROUTER(n) if ( MIDI_IF_##n.read() ) \
-    {                                                               \
+    {                                              \
+      if (debug) {                                 \
+        debug_midi_message[0]=n;                   \
+        debug_midi_message[1]=MIDI_IF_##n.getChannel(); \
+        debug_midi_message[2]=MIDI_IF_##n.getType();    \
+        debug_midi_message[3]=MIDI_IF_##n.getData1();   \
+        debug_midi_message[4]=MIDI_IF_##n.getData2();   \
+        midi_message_ready=true;                                             \
+      }                                             \
       if (matrix.get_element_2d(n-1, 0) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_1);   \
       if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
       if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
@@ -105,4 +113,14 @@ void MidiRouter::set_matrix(uint8_t *matrix_in) {
 
 bool MidiRouter::usb_enabled() {
     return usb_midi.active();
+}
+
+void MidiRouter::set_debug(bool i) {
+    debug = true;
+}
+
+bool MidiRouter::has_new_message() {
+    bool m = midi_message_ready;
+    midi_message_ready = false;
+    return m;
 }

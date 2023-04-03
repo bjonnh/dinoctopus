@@ -10,19 +10,40 @@
  *
  */
 
-#ifndef DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
-#define DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
+#include "ui/midiwatch.hpp"
+#include "ui/manager.hpp"
 
-class SimpleNeoPixel {
-public:
-    SimpleNeoPixel(int pin);;
 
-    void white();
+namespace UI::Widgets {
+    template class MidiWatch<LCD_t>;
 
-private:
-    int pin;
-    int slice_num;
-    int channel;
-};
+    template<> void MidiWatch<LCD_t>::draw() {
+        if (!visible)
+            return;
+        display->drawStr(5, 2.5 * UI_LINE_HEIGHT, buffer);
+    }
 
-#endif //DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
+    template<typename D>
+    bool MidiWatch<D>::clickAction() {
+        if (!this->focus or !this->visible)
+            return false;
+        this->setFocus(false);
+        this->exit();
+        return true;
+    }
+
+
+    template<typename D>
+    bool MidiWatch<D>::rightAction() {
+        if (!this->focus or !this->visible)
+            return false;
+        return true;
+    }
+
+    template<typename D>
+    bool MidiWatch<D>::leftAction() {
+        if (!this->focus or !this->visible)
+            return false;
+        return true;
+    }
+}

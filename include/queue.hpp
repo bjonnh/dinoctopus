@@ -17,10 +17,11 @@
 #include "../lib/routing-matrix/routingmatrix.hpp"
 
 enum queue_request {
-    REQUEST_LATENCY, REQUEST_ROUTING, REQUEST_SET_ROUTING, REQUEST_GET_USB_ENABLED
+    REQUEST_LATENCY, REQUEST_ROUTING, REQUEST_SET_ROUTING, REQUEST_GET_USB_ENABLED, REQUEST_DEBUG_MIDI
 };
+
 enum queue_response {
-    RESPONSE_LATENCY, RESPONSE_ROUTING, RESPONSE_SET_ROUTING, RESPONSE_GET_USB_ENABLED
+    RESPONSE_LATENCY, RESPONSE_ROUTING, RESPONSE_SET_ROUTING, RESPONSE_GET_USB_ENABLED, RESPONSE_MIDI_INFO
 };
 
 
@@ -29,9 +30,16 @@ typedef struct {
     uint8_t data[ROUTING_MATRIX_BINARY_SIZE];
 } queue_request_t;
 
+union queue_data {
+    bool b;
+    uint8_t matrix[ROUTING_MATRIX_BINARY_SIZE];
+    uint8_t latency;
+    uint8_t midi[5];
+};
+
 typedef struct {
     queue_response code;
-    uint8_t data[ROUTING_MATRIX_BINARY_SIZE];
+    queue_data data;
 } queue_response_t;
 
 #endif //DINOCTOPUS_2040_QUEUE_HPP

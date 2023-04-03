@@ -10,19 +10,33 @@
  *
  */
 
-#ifndef DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
-#define DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
+//
+// Created by bjo on 4/2/23.
+//
 
-class SimpleNeoPixel {
-public:
-    SimpleNeoPixel(int pin);;
+#ifndef DINOCTOPUS_2040_MIDIWATCH_HPP
+#define DINOCTOPUS_2040_MIDIWATCH_HPP
 
-    void white();
+#include <cstdint>
+#include "ui/widget.hpp"
+#include "ui/ui.hpp"
 
-private:
-    int pin;
-    int slice_num;
-    int channel;
-};
+namespace UI::Widgets {
+    template<typename D>
+    class MidiWatch: public UI::Widget<D> {
+    public:
+        explicit MidiWatch(Widget<D> &parent) : Widget<D>(parent) {}
 
-#endif //DINOCTOPUS_2040_SIMPLENEOPIXEL_HPP
+        void draw() override;
+
+        bool clickAction() override;
+
+        bool leftAction() override;
+
+        bool rightAction() override;
+
+        char buffer[UI_CHARACTERS_PER_LINE] = {0};
+    };
+}
+
+#endif //DINOCTOPUS_2040_MIDIWATCH_HPP

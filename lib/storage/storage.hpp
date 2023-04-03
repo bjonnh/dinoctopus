@@ -24,10 +24,11 @@ class Storage {
     const uint16_t offset_matrix_size = 8;
     const uint16_t offset_routing_table = 64;
     const uint16_t memory_size = 256;
-    uint8_t routing_buffer[ROUTING_MATRIX_BINARY_SIZE];
+    uint8_t routing_buffer[ROUTING_MATRIX_BINARY_SIZE]{0};
     char buffer[8] = {0};
 
 public:
+    Storage()= default;
     /**
      * Mandatory!
      */

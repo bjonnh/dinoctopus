@@ -46,9 +46,3 @@ void UI::Manager::initEncoder() {}
 // TODO Use another window for those
 
 void UI::Manager::initStrip() {}
-
-void UI::Manager::normalStrip() {}
-
-void UI::Manager::dirtyStrip() {}
-
-void UI::Manager::errorStrip() {}

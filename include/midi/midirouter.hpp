@@ -10,7 +10,7 @@
  *
  */
 
-#include <cstdint>  // necessary for uint8_t
+#include <cstdint>
 #include "routingmatrix.hpp"
 
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
@@ -29,8 +29,16 @@ public:
 
     void set_matrix(uint8_t *);
     bool usb_enabled();
+
+    void set_debug(bool i);
+
+    bool has_new_message();
+
+    uint8_t debug_midi_message[5];
 private:
     RoutingMatrix matrix;
+    bool debug=false;
+    bool midi_message_ready=true;
 };
 
 #endif //DINOCTOPUS_2040_MIDI_ROUTER_HPP

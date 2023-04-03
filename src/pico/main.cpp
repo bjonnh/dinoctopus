@@ -10,25 +10,23 @@
  *
  */
 
-#include <Arduino.h>  // necessary for setup/loop
-#include <SPI.h>
+#include <Arduino.h>
+#include <hardware/gpio.h>
 #include "midi/midirouter.hpp"
-#include "ui/manager.hpp"
 #include "queue.hpp"
 #include "utils_rp2040.hpp"
 #include "config.hpp"
 #include "storage.hpp"
 
 static MidiRouter midi_router;
-U8G2_ST7567_JLX12864_F_4W_HW_SPI u8g2_lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
-UI::Manager ui(reinterpret_cast<U8G2 &>(u8g2_lcd));
 
 // Core 0, running the MIDI will only receive requests never send any
 queue_t request_queue;
 queue_t response_queue;
 
 LATENCY_VARIABLES(0)
-LATENCY_VARIABLES(1)
+
+void response_midi_message(uint8_t message[5]);
 
 void setup() {
     LATENCY_INIT(0)
@@ -40,17 +38,19 @@ void setup() {
     midi_router.init();
 }
 
-void setup1() {
-    LATENCY_INIT(1)
-
-    ui.init();
-}
-
 void response_usb_status(bool status) {
     queue_response_t entry = { RESPONSE_GET_USB_ENABLED };
-    *(entry.data) = status;
+    entry.data.b = status;
     queue_add_blocking(&response_queue, &entry);
 }
+
+
+void response_midi_message(uint8_t message[5]) {
+    queue_response_t entry = { RESPONSE_MIDI_INFO };
+    memcpy(entry.data.midi, message, 5);
+    queue_add_blocking(&response_queue, &entry);
+}
+
 
 void loop() {
     static bool latency_watch_core0 = false;
@@ -66,13 +66,14 @@ void loop() {
         switch (request.code) {
             case REQUEST_LATENCY: {
                 latency_watch_core0 = true;
-                queue_response_t entry = {RESPONSE_LATENCY, static_cast<uint8_t>(processor_max_latency_0)};
+                queue_response_t entry = { RESPONSE_LATENCY };
+                entry.data.latency = static_cast<uint8_t>(processor_max_latency_0);
                 queue_add_blocking(&response_queue, &entry);
             }
                 break;
             case REQUEST_ROUTING: {
                 queue_response_t entry = {RESPONSE_ROUTING};
-                midi_router.get_matrix(entry.data);
+                midi_router.get_matrix(entry.data.matrix);
                 queue_add_blocking(&response_queue, &entry);
             }
                 break;
@@ -82,55 +83,17 @@ void loop() {
             case REQUEST_GET_USB_ENABLED:
                 response_usb_status(old_usb_status);
                 break;
+            case REQUEST_DEBUG_MIDI:
+                midi_router.set_debug(request.data[0]);
+                break;
         }
     }
     if (midi_router.usb_enabled() != old_usb_status) {
         old_usb_status = !old_usb_status;
         response_usb_status(old_usb_status);
     }
+    if (midi_router.has_new_message()) {
+        response_midi_message(midi_router.debug_midi_message);
+    }
     midi_router.loop();
-}
-
-void loop1() {
-    if (ui.latency_watch) {
-        LATENCY_CALCULATOR(1)
-        if (count_latency_1 == N_LOOPS_MAX_LATENCY_CORE1)
-            ui.set_latency(1, processor_max_latency_1);
-    }
-
-    if (queue_get_level(&response_queue) > 0) {
-        queue_response_t response;
-        queue_remove_blocking(&response_queue, &response);
-
-        switch (response.code) {
-            case RESPONSE_LATENCY:
-                if (ui.latency_watch)
-                    ui.set_latency(0, response.data[0]);
-                break;
-            case RESPONSE_ROUTING:
-                UI::Manager::current_route().load_from_array(response.data);
-                break;
-            case RESPONSE_GET_USB_ENABLED:
-                ui.set_usb_enabled(response.data[0]);
-            case RESPONSE_SET_ROUTING:
-                // Not handled by this core
-                break;
-        }
-    }
-
-    // Unless we are asking for something specific, let's just ask for latency
-    if (ui.query_for_router()) {
-        queue_request_t entry = {REQUEST_ROUTING, 0};
-        queue_add_blocking(&request_queue, &entry);
-    } else if (ui.update_for_router()) {
-        queue_request_t entry = {REQUEST_SET_ROUTING};
-        UI::Manager::current_route().save_to_array(entry.data);
-        queue_add_blocking(&request_queue, &entry);
-    } else {
-        if (ui.latency_watch) {
-            queue_request_t entry = {REQUEST_LATENCY, 0};
-            queue_add_blocking(&request_queue, &entry);
-        }
-    }
-    ui.loop();
 }

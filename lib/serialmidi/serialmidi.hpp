@@ -13,7 +13,6 @@
 #ifndef DINOCTOPUS_2040_SERIAL_MIDI_HPP
 #define DINOCTOPUS_2040_SERIAL_MIDI_HPP
 
-#include "../../../../.platformio/packages/framework-arduinopico/cores/rp2040/Arduino.h"
 #include "../../.pio/libdeps/pico/MIDI Library/src/midi_Namespace.h"
 #include "hardware/uart.h"
 #include "../../.pio/libdeps/pico/MIDI Library/src/midi_Defs.h"
