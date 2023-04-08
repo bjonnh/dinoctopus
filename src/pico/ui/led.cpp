@@ -21,5 +21,7 @@
 SimpleNeoPixel strip = SimpleNeoPixel(NEOPIXEL_PIN);
 
 void UI::Manager::initStrip() {
-    strip.white();
+    strip.color(false);
+    delay(1000);
+    strip.color(true);
 }

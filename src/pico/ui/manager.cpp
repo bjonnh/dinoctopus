@@ -29,9 +29,8 @@ void UI::Manager::initHardwareLCD() {
     SPI.setCS(1);
     SPI.setSCK(LCD_CLOCK);
     SPI.setTX(LCD_MOSI);
-
     SPI.begin();
-    SPI.beginTransaction(SPISettings(64000000, MSBFIRST, SPI_MODE0));
+    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
 }
 
 void UI::Manager::loop() {

@@ -19,14 +19,14 @@ extern queue_t request_queue;
 extern queue_t response_queue;
 
 U8G2_ST7567_JLX12864_F_4W_HW_SPI lcd(U8G2_R2, LCD_CS, LCD_RS, LCD_RESET);
+//U8G2_ST7567_JLX12864_F_4W_SW_SPI lcd(U8G2_R2, LCD_CLOCK, LCD_MOSI, LCD_CS, LCD_RS, LCD_RESET);
+
 UI::Manager ui(reinterpret_cast<LCD_t &>(lcd));
 
 LATENCY_VARIABLES(1)
 
-
 void setup1() {
     LATENCY_INIT(1)
-
     ui.init();
 }
 

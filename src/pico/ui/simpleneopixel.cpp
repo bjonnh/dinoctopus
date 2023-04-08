@@ -23,9 +23,9 @@
  * This is EXTREMELY simple and stupid. We just send all 1s to the leds so they are fully on
  * This cannot do color or brightness. We can eventually turn some of the leds down
  */
-void SimpleNeoPixel::white() {
+void SimpleNeoPixel::color(bool white) {
     pwm_set_wrap(slice_num, 166);
-    pwm_set_chan_level(slice_num, channel, 106); // 106 for on, 53 for off
+    pwm_set_chan_level(slice_num, channel, white ? 106 : 53); // 106 for on, 53 for off
     pwm_set_enabled(slice_num, true);
     uint32_t ints = save_and_disable_interrupts();
     busy_wait_us(90); // Doesn't matter if we go over we have only 3 leds

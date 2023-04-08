@@ -35,9 +35,9 @@ namespace UI::Widgets {
             display->drawStr(0, 2.5 * UI_LINE_HEIGHT, "<");
         }
         display->setDrawColor(1);
-        display->drawStr(5, 2.5 * UI_LINE_HEIGHT, " IO|   1   2   3   4 ");
+        display->drawStr(5, 2.5 * UI_LINE_HEIGHT, " IO|  1  2  3  4  5");
         display->drawHLine(10, 2.5 * UI_LINE_HEIGHT, 100);
-        for (uint8_t i = 0; i<4; i++) {
+        for (uint8_t i = 0; i<ROUTING_MATRIX_SIZE; i++) {
             if (((state == input_select) || (state == route_select)) && (p0_selected_input == (i + 1))) {
                 display->setDrawColor(0);
             }
@@ -48,13 +48,13 @@ namespace UI::Widgets {
             display->drawStr(10, (3.5 + i) * UI_LINE_HEIGHT, buffer);
             display->setDrawColor(1);
             display->drawStr(20, (3.5 + i) * UI_LINE_HEIGHT, "|");
-            for (uint8_t j = 0; j < 4; j++) {
+            for (uint8_t j = 0; j < ROUTING_MATRIX_SIZE; j++) {
                 if ((state == route_select) && (p0_selected_output == j + 1) && (p0_selected_input == i + 1))
                     display->setDrawColor(0);
                 else
                     display->setDrawColor(1);
-                snprintf(buffer, UI_CHARACTERS_PER_LINE, "   %c", matrix_sign(current_matrix.get_element_2d(i,j)));
-                display->drawStr(25 + 20 * j, (3.5 + i) * UI_LINE_HEIGHT, buffer);
+                snprintf(buffer, UI_CHARACTERS_PER_LINE, "  %c", matrix_sign(current_matrix.get_element_2d(i,j)));
+                display->drawStr(25 + 15 * j, (3.5 + i) * UI_LINE_HEIGHT, buffer);
             }
         }
         display->setDrawColor(1);

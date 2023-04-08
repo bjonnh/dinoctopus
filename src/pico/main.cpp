@@ -33,20 +33,22 @@ void setup() {
     gpio_init(BUZZER_PIN);
     gpio_set_dir(BUZZER_PIN, GPIO_OUT);
     gpio_put(BUZZER_PIN, 0);
+
+
     queue_init(&request_queue, sizeof(queue_request_t), 2);
     queue_init(&response_queue, sizeof(queue_response_t), 2);
     midi_router.init();
 }
 
 void response_usb_status(bool status) {
-    queue_response_t entry = { RESPONSE_GET_USB_ENABLED };
+    queue_response_t entry = {RESPONSE_GET_USB_ENABLED};
     entry.data.b = status;
     queue_add_blocking(&response_queue, &entry);
 }
 
 
 void response_midi_message(uint8_t message[5]) {
-    queue_response_t entry = { RESPONSE_MIDI_INFO };
+    queue_response_t entry = {RESPONSE_MIDI_INFO};
     memcpy(entry.data.midi, message, 5);
     queue_add_blocking(&response_queue, &entry);
 }
@@ -66,7 +68,7 @@ void loop() {
         switch (request.code) {
             case REQUEST_LATENCY: {
                 latency_watch_core0 = true;
-                queue_response_t entry = { RESPONSE_LATENCY };
+                queue_response_t entry = {RESPONSE_LATENCY};
                 entry.data.latency = static_cast<uint8_t>(processor_max_latency_0);
                 queue_add_blocking(&response_queue, &entry);
             }

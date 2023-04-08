@@ -17,7 +17,7 @@ class SimpleNeoPixel {
 public:
     SimpleNeoPixel(int pin);;
 
-    void white();
+    void color(bool);
 
 private:
     int pin;

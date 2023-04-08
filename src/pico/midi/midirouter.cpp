@@ -35,11 +35,11 @@ void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
 
 UsbMidi usb_midi;
 
-SERIAL_MIDI(uart0, 1, PIN_MIDI_1_RX, PIN_MIDI_1_TX)
-
+PIO_SERIAL_MIDI(1, PIN_MIDI_1_TX, PIN_MIDI_1_RX)
 PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX)
 PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX)
 PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
+SERIAL_MIDI(uart0, 5, PIN_MIDI_5_TX , PIN_MIDI_5_RX)
 
 void MidiRouter::init() {
     usb_midi.init();
@@ -47,11 +47,13 @@ void MidiRouter::init() {
     usb_midi(2).begin(MIDI_CHANNEL_OMNI);
     usb_midi(3).begin(MIDI_CHANNEL_OMNI);
     usb_midi(4).begin(MIDI_CHANNEL_OMNI);
+    usb_midi(5).begin(MIDI_CHANNEL_OMNI);
 
     MIDI_IF_1.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_2.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_3.begin(MIDI_CHANNEL_OMNI);
     MIDI_IF_4.begin(MIDI_CHANNEL_OMNI);
+    MIDI_IF_5.begin(MIDI_CHANNEL_OMNI);
 }
 
 #define SIMPLE_ROUTER(n) if ( MIDI_IF_##n.read() ) \
@@ -68,6 +70,7 @@ void MidiRouter::init() {
       if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
       if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
       if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_4);   \
+      if (matrix.get_element_2d(n-1, 4) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_5);   \
       if (usb_midi.active()) copy_midi_data(MIDI_IF_##n, usb_midi(n)); \
     }
 
@@ -76,6 +79,7 @@ void MidiRouter::loop() {
     SIMPLE_ROUTER(2)
     SIMPLE_ROUTER(3)
     SIMPLE_ROUTER(4)
+    SIMPLE_ROUTER(5)
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number
@@ -95,6 +99,9 @@ void MidiRouter::loop() {
                     break;
                 case 3:
                     MIDI_IF_4.send(type, data1, data2, channel);
+                    break;
+                case 4:
+                    MIDI_IF_5.send(type, data1, data2, channel);
                     break;
                 default:
                     MIDI_IF_1.send(type, data1, data2, channel);

@@ -18,6 +18,6 @@ namespace UI::Widgets {
     template<>
     void StatusBar<U8G2>::draw() {
         display->setDrawColor(1);
-        display->drawStr(0, 8 * UI_LINE_HEIGHT - 2, buffer);
+        display->drawStr(0, 9 * UI_LINE_HEIGHT - 2, buffer);
     }
 }

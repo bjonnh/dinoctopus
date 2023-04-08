@@ -14,14 +14,19 @@
 #include "U8g2lib.h"
 #include "ui/statusbar.hpp"
 #include "../../lib/storage/storage.hpp"
+#include "config.hpp"
 
 void UI::Manager::initLCD() {
+    //delay(100);
     initHardwareLCD();
-    lcd.begin();
+    //lcd.begin();
+    lcd.initDisplay();
+    lcd.clearDisplay();
+    lcd.setPowerSave(0);
     lcd.setContrast(180);  // This is extremely important
     lcd.setFontMode(0);
     lcd.setDrawColor(1);
-    lcd.setFont(u8g2_font_5x8_mr);
+    lcd.setFont(u8g2_font_5x7_mr);
 }
 
 UI::Manager *current_manager;

@@ -18,7 +18,7 @@
 #include <cstring>
 #include <cstdio>
 
-#define UI_LINE_HEIGHT 8
+#define UI_LINE_HEIGHT 7
 #define UI_CHARACTERS_PER_LINE 30
 
 namespace UI {
