@@ -30,16 +30,16 @@
 #define NUMBER_OF_PHYSICAL_MIDI_PORTS 5
 
 #define PIN_MIDI_1_RX 10
-#define PIN_MIDI_1_TX 18
+#define PIN_MIDI_1_TX 22
 
 #define PIN_MIDI_2_RX 11
-#define PIN_MIDI_2_TX 19
+#define PIN_MIDI_2_TX 21
 
 #define PIN_MIDI_3_RX 12
 #define PIN_MIDI_3_TX 20
 
 #define PIN_MIDI_4_RX 13
-#define PIN_MIDI_4_TX 21
+#define PIN_MIDI_4_TX 19
 
 #define PIN_MIDI_5_RX 1
 #define PIN_MIDI_5_TX 0

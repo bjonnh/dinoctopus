@@ -60,11 +60,11 @@ namespace UI::Widgets {
                 p0_selected_input = 1;
                 break;
             case input_select:
-                if (p0_selected_input < 4)
+                if (p0_selected_input < ROUTING_MATRIX_SIZE)
                     p0_selected_input++;
                 break;
             case route_select:
-                if (p0_selected_output < 4)
+                if (p0_selected_output < ROUTING_MATRIX_SIZE)
                     p0_selected_output++;
                 break;
         }

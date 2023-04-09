@@ -16,7 +16,7 @@
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
 
-#define SERIAL_MIDI(uart, n, rxpin, txpin) midi::MySerialMIDI real_serial_##n(uart, rxpin, txpin); \
+#define SERIAL_MIDI(uart, n, txpin, rxpin) midi::MySerialMIDI real_serial_##n(uart, txpin, rxpin); \
     midi::MidiInterface<midi::MySerialMIDI> MIDI_IF_##n(real_serial_##n);
 
 class MidiRouter {

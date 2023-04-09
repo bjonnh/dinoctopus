@@ -28,6 +28,8 @@ midi::MidiInterface<midi::UsbJackMIDI> &UsbMidi::operator()(uint8_t cable) {
             return MIDI_USB_3;
         case 4:
             return MIDI_USB_4;
+        case 5:
+            return MIDI_USB_5;
         default:
             return MIDI_USB_1;
     }
@@ -35,7 +37,7 @@ midi::MidiInterface<midi::UsbJackMIDI> &UsbMidi::operator()(uint8_t cable) {
 
 uint8_t UsbMidi::current_cable_limited() {
     uint8_t cable = jack_1.current_cable();
-    if (cable<1 | cable>3)
+    if (cable>NUMBER_OF_PHYSICAL_MIDI_PORTS-1)
         cable = 0;
     return cable;
 }

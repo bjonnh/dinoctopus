@@ -18,6 +18,7 @@
 #include "midi_Defs.h"
 #include <midi/Adafruit_USBD_MIDI.h>
 #include "usbcablemidi.hpp"
+#include "../../include/config.hpp"
 
 #define USB_MIDI(n) midi::UsbJackMIDI jack_##n = midi::UsbJackMIDI(usb_midi, n-1); \
     midi::MidiInterface<midi::UsbJackMIDI> MIDI_USB_##n = midi::MidiInterface<midi::UsbJackMIDI>(jack_##n);
@@ -31,13 +32,12 @@ public:
 
     midi::MidiInterface<midi::UsbJackMIDI> &operator()(uint8_t cable);;
 
-    Adafruit_USBD_MIDI usb_midi = Adafruit_USBD_MIDI(4);
+    Adafruit_USBD_MIDI usb_midi = Adafruit_USBD_MIDI(NUMBER_OF_PHYSICAL_MIDI_PORTS);
     USB_MIDI(1);
     USB_MIDI(2);
     USB_MIDI(3);
     USB_MIDI(4);
-
-
+    USB_MIDI(5);
 };
 
 #endif //DINOCTOPUS_2040_USBMIDI_HPP

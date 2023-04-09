@@ -25,7 +25,7 @@
 
 void UI::Manager::initHardwareLCD() {
     // Init the SPI
-    SPI.setRX(0);
+    SPI.setRX(4);
     SPI.setCS(1);
     SPI.setSCK(LCD_CLOCK);
     SPI.setTX(LCD_MOSI);

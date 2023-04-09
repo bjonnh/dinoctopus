@@ -23,8 +23,8 @@
 BEGIN_MIDI_NAMESPACE
     class MySerialMIDI {
     public:
-        MySerialMIDI(uart_inst_t *uart, uint rxpin, uint txpin)
-                : uart(uart), rxpin(rxpin), txpin(txpin) {
+        MySerialMIDI(uart_inst_t *uart, uint txpin, uint rxpin)
+                : uart(uart), txpin(txpin), rxpin(rxpin) {
         };
 
     public:
