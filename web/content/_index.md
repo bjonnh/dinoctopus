@@ -73,10 +73,12 @@ The Software is already available here: [https://www.github.com/bjonnh/dinoctopu
 The code documentation is at [./dox](./dox)
 
 ### Hardware
-The hardware schematics and PCBs will be made available soon.
 
-![Mainboard](./images/mainboard.png)
-![Input](./images/rxboard.png)
-![Output](./images/txboard.png)
+Schematics and PCBs are available at: [https://www.github.com/bjonnh/dinoctopus/tree/main/hardware/electronics](https://www.github.com/bjonnh/dinoctopustree/main/hardware/electronics)
+
+![Mainboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/main_board/3d.jpg?raw=true)
+![Mainboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/main_board/3d-2.jpg?raw=true)
+![RXboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/rx_board/3d.jpg?raw=true)
+![TXboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/tx_board/3d.jpg)
 
 It uses a repurposed cheap 3d printer display which is documented on [https://www.bjonnh.net/article/20221126_mini_12864/](https://www.bjonnh.net/article/20221126_mini_12864/). 
