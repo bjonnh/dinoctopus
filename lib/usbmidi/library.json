@@ -20,7 +20,6 @@
     "includeDir": "include/"
   },
   "dependencies": {
-    "adafruit/Adafruit TinyUSB Library": "^1.17.0",
     "fortyseveneffects/MIDI Library": "^5.0.2"
   }
 }

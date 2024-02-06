@@ -20,8 +20,6 @@
     "includeDir": "include/"
   },
   "dependencies": {
-    "adafruit/Adafruit TinyUSB Library": "^1.17.0",
-    "SPI": "^1.0",
     "olikraus/U8g2": "^2.34.8"
   }
 }
