@@ -13,20 +13,6 @@
 #ifndef DINOCTOPUS_2040_CONFIG_HPP
 #define DINOCTOPUS_2040_CONFIG_HPP
 
-//
-// LCD
-//
-
-#define BUZZER_PIN 8
-
-#define NEOPIXEL_PIN 9
-
-#define LCD_CS  5    // LCD CS, sometimes called EN or SS
-#define LCD_RS 6   // LCD RS, sometimes called A0 or DC
-#define LCD_CLOCK 2 // Clock (Common), sometimes called SCK or SCL real pin
-#define LCD_MOSI 3 // MOSI (common), sometimes called SDA or DATA
-#define LCD_RESET 7  // LCD reset, sometimes called RST or RSTBb
-
 #define NUMBER_OF_PHYSICAL_MIDI_PORTS 5
 
 #define PIN_MIDI_1_RX 10
@@ -44,44 +30,10 @@
 #define PIN_MIDI_5_RX 1
 #define PIN_MIDI_5_TX 0
 
-#define ENC_A 28 // Click
-#define ENC_B 16
-#define ENC_C 17
-
-//#else
-//
-//#define BUZZER_PIN 6
-//
-//#define NEOPIXEL_PIN 9
-//
-//#define LCD_CS  5    // LCD CS, sometimes called EN or SS
-//#define LCD_RS 7   // LCD RS, sometimes called A0 or DC
-//#define LCD_CLOCK 2 // Clock (Common), sometimes called SCK or SCL real pin
-//#define LCD_MOSI 3 // MOSI (common), sometimes called SDA or DATA
-//#define LCD_RESET 8  // LCD reset, sometimes called RST or RSTBb
-//
-//#define NUMBER_OF_PHYSICAL_MIDI_PORTS 4
-//
-//#define PIN_MIDI_1_RX 12
-//#define PIN_MIDI_1_TX 13
-//
-//#define PIN_MIDI_2_RX 14
-//#define PIN_MIDI_2_TX 15
-//
-//#define PIN_MIDI_3_RX 16
-//#define PIN_MIDI_3_TX 17
-//
-//#define PIN_MIDI_4_RX 18
-//#define PIN_MIDI_4_TX 19
-//
-//#define ENC_A 20
-//#define ENC_B 21
-//#define ENC_C 22
-//
-//#endif
-
 #define N_LOOPS_MAX_LATENCY_CORE0 10000
 #define N_LOOPS_MAX_LATENCY_CORE1 100
 
+#define SYSEX_COMMAND_PREFIX {0x44, 0x49, 0x4e, 0x4f}
+#define SYSEX_COMMAND_PREFIX_LENGTH 4
 
 #endif //DINOCTOPUS_2040_CONFIG_HPP

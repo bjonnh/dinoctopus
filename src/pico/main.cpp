@@ -11,7 +11,6 @@
  */
 
 #include <Arduino.h>
-#include <hardware/gpio.h>
 #include "midi/midirouter.hpp"
 #include "queue.hpp"
 #include "utils_rp2040.hpp"
@@ -30,10 +29,6 @@ void response_midi_message(uint8_t message[5]);
 
 void setup() {
     LATENCY_INIT(0)
-    gpio_init(BUZZER_PIN);
-    gpio_set_dir(BUZZER_PIN, GPIO_OUT);
-    gpio_put(BUZZER_PIN, 0);
-
 
     queue_init(&request_queue, sizeof(queue_request_t), 2);
     queue_init(&response_queue, sizeof(queue_response_t), 2);

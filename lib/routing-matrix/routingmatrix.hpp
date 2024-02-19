@@ -25,7 +25,7 @@ public:
     RoutingMatrix() {}
 
     uint32_t get_element_2d(size_t i, size_t j) {
-        return matrix[(ROUTING_MATRIX_SIZE * i + j) % ROUTING_MATRIX_ELEMENTS];
+        return matrix[(ROUTING_MATRIX_SIZE * i + j % ROUTING_MATRIX_SIZE) % ROUTING_MATRIX_ELEMENTS];
     }
 
     void load_from_array(uint8_t (*arr)) {
@@ -37,11 +37,15 @@ public:
     }
 
     void set_element_2d(size_t i, size_t j, uint32_t value) {
-        matrix[(i * ROUTING_MATRIX_SIZE + j) % ROUTING_MATRIX_ELEMENTS] = value;
+        matrix[(ROUTING_MATRIX_SIZE * i + j % ROUTING_MATRIX_SIZE) % ROUTING_MATRIX_ELEMENTS] = value;
     }
 
     void set_from_matrix(RoutingMatrix &source_matrix) {
         memcpy(matrix, source_matrix._get_elements(), ROUTING_MATRIX_BINARY_SIZE);
+    }
+
+    void reset() {
+        memset(matrix, 0, ROUTING_MATRIX_BINARY_SIZE);
     }
 
     /*

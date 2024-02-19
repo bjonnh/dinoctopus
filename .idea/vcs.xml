@@ -2,8 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/u8g2/u8g2" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/u8g2/u8g2/sys/arm-linux/c-periphery" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/web/themes/hugo-book" vcs="Git" />
   </component>
 </project>

@@ -12,6 +12,9 @@
 
 
 #include "midi/midirouter.hpp"
+
+#include <storage.hpp>
+
 #include "midi_Defs.h"
 #include "config.hpp"
 #include "MIDI.h"
@@ -19,10 +22,72 @@
 #include "serialmidi.hpp"
 #include "usbmidi.hpp"
 
-template<typename T, typename U>
-void copy_midi_data(midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
-    out.send(in.getType(), in.getData1(), in.getData2(), in.getChannel());
+
+static uint8_t prefix[SYSEX_COMMAND_PREFIX_LENGTH] = SYSEX_COMMAND_PREFIX;
+
+template<typename T>
+void processSysex(midi::MidiInterface<T> &iface, MidiRouter &midi_router, uint8_t size, const uint8_t *sysex) {
+    if (size < 3) return;
+    if (memcmp(&sysex[1], prefix, sizeof(prefix)) != 0) return;
+
+    switch (sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1]) {
+        case MidiRouter::DUMP_MATRIX:
+            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH) goto nack;
+            uint8_t matrix_out[ROUTING_MATRIX_BINARY_SIZE];
+            midi_router.matrix.save_to_array(matrix_out);
+            iface.sendSysEx(ROUTING_MATRIX_BINARY_SIZE, matrix_out);
+            return;
+        case MidiRouter::SET_MATRIX:
+            if (size != 3 + ROUTING_MATRIX_BINARY_SIZE + SYSEX_COMMAND_PREFIX_LENGTH) goto nack;
+            midi_router.matrix.load_from_array(const_cast<uint8_t *>(&sysex[SYSEX_COMMAND_PREFIX_LENGTH + 2]));
+            goto ack;
+        case MidiRouter::GET_IJ: {
+            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH + 2) goto nack;
+
+            uint8_t i = sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 1];
+            uint8_t j = sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 2];
+            uint32_t bar = midi_router.matrix.get_element_2d(i, j);
+            iface.sendSysEx(4, (const byte *) &bar);
+            return;
+        }
+        case MidiRouter::SET_IJ:
+            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH + 2 + 4) goto nack;
+            midi_router.matrix.set_element_2d(sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 1],
+                                              sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 2],
+                                              *(uint32_t *) &sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 3]);
+            goto ack;
+        case MidiRouter::SAVE:
+            storage.save_routing_matrix(midi_router.matrix);
+            goto ack;
+        case MidiRouter::LOAD:
+            storage.load_routing_matrix(midi_router.matrix);
+            goto ack;
+        case MidiRouter::RESET:
+            midi_router.matrix.reset();
+            goto ack;
+    }
+
+    // I know, and I love it
+
+nack:
+    iface.sendSysEx(1, &(midi_router.nack));
+    return;
+ack:
+    iface.sendSysEx(1, &(midi_router.ack));
 }
+
+template<typename T, typename U>
+void copy_midi_data(MidiRouter &router, midi::MidiInterface<T> &in, midi::MidiInterface<U> &out) {
+    if (in.getType() == midi::MidiType::SystemExclusive) {
+        uint8_t sysex_length = in.getSysExArrayLength();
+        const byte *sysex = in.getSysExArray();
+        out.sendSysEx(sysex_length, sysex);
+        processSysex(in, router, sysex_length, sysex);
+    } else {
+        out.send(in.getType(), in.getData1(), in.getData2(), in.getChannel());
+    }
+}
+
 
 #define FILTER_NOTE_ON 1
 #define FILTER_NOTE_OFF 2
@@ -39,10 +104,14 @@ PIO_SERIAL_MIDI(1, PIN_MIDI_1_TX, PIN_MIDI_1_RX)
 PIO_SERIAL_MIDI(2, PIN_MIDI_2_TX, PIN_MIDI_2_RX)
 PIO_SERIAL_MIDI(3, PIN_MIDI_3_TX, PIN_MIDI_3_RX)
 PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
-SERIAL_MIDI(uart0, 5, PIN_MIDI_5_TX , PIN_MIDI_5_RX)
+SERIAL_MIDI(uart0, 5, PIN_MIDI_5_TX, PIN_MIDI_5_RX)
 
 void MidiRouter::init() {
     usb_midi.init();
+    storage.init();
+
+    storage.load_routing_matrix(matrix);
+
     usb_midi(1).begin(MIDI_CHANNEL_OMNI);
     usb_midi(2).begin(MIDI_CHANNEL_OMNI);
     usb_midi(3).begin(MIDI_CHANNEL_OMNI);
@@ -56,6 +125,7 @@ void MidiRouter::init() {
     MIDI_IF_5.begin(MIDI_CHANNEL_OMNI);
 }
 
+
 #define SIMPLE_ROUTER(n) if ( MIDI_IF_##n.read() ) \
     {                                              \
       if (debug) {                                 \
@@ -66,20 +136,21 @@ void MidiRouter::init() {
         debug_midi_message[4]=MIDI_IF_##n.getData2();   \
         midi_message_ready=true;                                             \
       }                                             \
-      if (matrix.get_element_2d(n-1, 0) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_1);   \
-      if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_2);   \
-      if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_3);   \
-      if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_4);   \
-      if (matrix.get_element_2d(n-1, 4) > 0) copy_midi_data(MIDI_IF_##n, MIDI_IF_5);   \
-      if (usb_midi.active()) copy_midi_data(MIDI_IF_##n, usb_midi(n)); \
+      if (matrix.get_element_2d(n-1, 0) > 0) copy_midi_data(*this, MIDI_IF_##n, MIDI_IF_1);   \
+      if (matrix.get_element_2d(n-1, 1) > 0) copy_midi_data(*this, MIDI_IF_##n, MIDI_IF_2);   \
+      if (matrix.get_element_2d(n-1, 2) > 0) copy_midi_data(*this, MIDI_IF_##n, MIDI_IF_3);   \
+      if (matrix.get_element_2d(n-1, 3) > 0) copy_midi_data(*this, MIDI_IF_##n, MIDI_IF_4);   \
+      if (matrix.get_element_2d(n-1, 4) > 0) copy_midi_data(*this, MIDI_IF_##n, MIDI_IF_5);   \
+      if (usb_midi.active()) copy_midi_data(*this, MIDI_IF_##n, usb_midi(n)); \
     }
 
 void MidiRouter::loop() {
-    SIMPLE_ROUTER(1)
-    SIMPLE_ROUTER(2)
-    SIMPLE_ROUTER(3)
-    SIMPLE_ROUTER(4)
-    SIMPLE_ROUTER(5)
+    // This is the physical routing
+    //SIMPLE_ROUTER(1)
+    //SIMPLE_ROUTER(2)
+    //SIMPLE_ROUTER(3)
+    //SIMPLE_ROUTER(4)
+    //SIMPLE_ROUTER(5)
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number
@@ -87,9 +158,53 @@ void MidiRouter::loop() {
         if (usb_midi(1).read()) {
             uint8_t cable = usb_midi.current_cable_limited();
             midi::MidiType type = usb_midi(1).getType();
+
+
+            /*            switch (cable) {
+                            case 2:
+                                copy_midi_data(*this, usb_midi(cable), MIDI_IF_2);
+                            break;
+                            case 3:
+                                copy_midi_data(*this, usb_midi(cable), MIDI_IF_3);
+                            break;
+                            case 4:
+                                copy_midi_data(*this, usb_midi(cable), MIDI_IF_4);
+                            break;
+                            case 5:
+                                copy_midi_data(*this, usb_midi(cable), MIDI_IF_5);
+                            break;
+                            default:
+                                copy_midi_data(*this, usb_midi(cable), MIDI_IF_1);
+                            break;
+                        }
+                    }
+                    */
+            if (type == midi::MidiType::SystemExclusive) {
+                uint8_t sysex_length = usb_midi(cable).getSysExArrayLength();
+                const byte *sysex = usb_midi(cable).getSysExArray();
+                processSysex(usb_midi(cable), *this, sysex_length, sysex);
+                switch (cable) {
+                    case 1:
+                        MIDI_IF_2.sendSysEx(sysex_length, sysex);
+                        break;
+                    case 2:
+                        MIDI_IF_3.sendSysEx(sysex_length, sysex);
+                        break;
+                    case 3:
+                        MIDI_IF_4.sendSysEx(sysex_length, sysex);
+                        break;
+                    case 4:
+                        MIDI_IF_5.sendSysEx(sysex_length, sysex);
+                        break;
+                    default:
+                        MIDI_IF_1.sendSysEx(sysex_length, sysex);
+                        break;
+                }
+            }
             unsigned char data1 = usb_midi(1).getData1();
             unsigned char data2 = usb_midi(1).getData2();
             unsigned char channel = usb_midi(1).getChannel();
+
             switch (cable) {
                 case 1:
                     MIDI_IF_2.send(type, data1, data2, channel);

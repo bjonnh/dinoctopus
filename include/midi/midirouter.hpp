@@ -10,8 +10,10 @@
  *
  */
 
+#include <config.hpp>
 #include <cstdint>
 #include "routingmatrix.hpp"
+
 
 #ifndef DINOCTOPUS_2040_MIDI_ROUTER_HPP
 #define DINOCTOPUS_2040_MIDI_ROUTER_HPP
@@ -21,6 +23,19 @@
 
 class MidiRouter {
 public:
+    enum COMMANDS {
+        IDENTITY = 0x00,
+        DUMP_MATRIX = 0x01,
+        SET_MATRIX = 0x02,
+        GET_IJ = 0x03,
+        SET_IJ = 0x04,
+        SAVE = 0x05,
+        LOAD = 0x06,
+        RESET = 0x07,
+        ACK = 0x60,
+        NACK = 0x61
+    };
+
     void init();
 
     void loop();
@@ -35,10 +50,14 @@ public:
     bool has_new_message();
 
     uint8_t debug_midi_message[5];
-private:
     RoutingMatrix matrix;
+    const uint8_t nack = {0x61};
+    const uint8_t ack = {0x60};
+private:
     bool debug=false;
     bool midi_message_ready=true;
 };
+
+
 
 #endif //DINOCTOPUS_2040_MIDI_ROUTER_HPP
