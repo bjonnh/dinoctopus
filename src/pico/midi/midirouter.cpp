@@ -146,11 +146,11 @@ void MidiRouter::init() {
 
 void MidiRouter::loop() {
     // This is the physical routing
-    //SIMPLE_ROUTER(1)
-    //SIMPLE_ROUTER(2)
-    //SIMPLE_ROUTER(3)
-    //SIMPLE_ROUTER(4)
-    //SIMPLE_ROUTER(5)
+    SIMPLE_ROUTER(1)
+    SIMPLE_ROUTER(2)
+    SIMPLE_ROUTER(3)
+    SIMPLE_ROUTER(4)
+    SIMPLE_ROUTER(5)
 
     // This one has callbacks and works for all of them
     // we just need to pick up the cable number
