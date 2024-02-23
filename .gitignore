@@ -7,4 +7,3 @@ doc
 web/public
 /web/.hugo_build.lock
 tmp
-.idea
