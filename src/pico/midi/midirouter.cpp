@@ -23,38 +23,52 @@
 #include "usbmidi.hpp"
 
 
-static uint8_t prefix[SYSEX_COMMAND_PREFIX_LENGTH] = SYSEX_COMMAND_PREFIX;
-
 template<typename T>
 void processSysex(midi::MidiInterface<T> &iface, MidiRouter &midi_router, uint8_t size, const uint8_t *sysex) {
-    if (size < 3) return;
-    if (memcmp(&sysex[1], prefix, sizeof(prefix)) != 0) return;
+    if (size < midi_router.device_prefix.size() + 3) return;
 
-    switch (sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1]) {
+    uint32_t value = 0;
+
+    // Remove first and last elements
+    std::vector<uint8_t> message = std::vector<uint8_t>(sysex + 1, sysex + size - 1);
+
+    for (size_t i = 0; i < midi_router.device_prefix.size(); i++) {
+        if (message[i] != midi_router.device_prefix[i]) return;
+    }
+
+    message.erase(message.begin(), message.begin() + midi_router.device_prefix.size());
+
+    switch (message[0]) {
         case MidiRouter::DUMP_MATRIX:
-            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH) goto nack;
-            uint8_t matrix_out[ROUTING_MATRIX_BINARY_SIZE];
-            midi_router.matrix.save_to_array(matrix_out);
-            iface.sendSysEx(ROUTING_MATRIX_BINARY_SIZE, matrix_out);
+            if (message.size() != 1) goto nack;
+
+            midi_router.send_matrix(iface);
             return;
         case MidiRouter::SET_MATRIX:
-            if (size != 3 + ROUTING_MATRIX_BINARY_SIZE + SYSEX_COMMAND_PREFIX_LENGTH) goto nack;
-            midi_router.matrix.load_from_array(const_cast<uint8_t *>(&sysex[SYSEX_COMMAND_PREFIX_LENGTH + 2]));
+            if (message.size() != 1 + ROUTING_MATRIX_BINARY_SIZE) goto nack;
+            message.erase(message.begin());
+            midi_router.matrix.load_from_array(const_cast<uint8_t *>(message.data()));
             goto ack;
         case MidiRouter::GET_IJ: {
-            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH + 2) goto nack;
+            if (message.size() != 3) goto nack;
 
-            uint8_t i = sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 1];
-            uint8_t j = sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 2];
+            uint8_t i = message[1];
+            uint8_t j = message[2];
             uint32_t bar = midi_router.matrix.get_element_2d(i, j);
-            iface.sendSysEx(4, (const byte *) &bar);
+            midi_router.send_element(iface, bar);
             return;
         }
         case MidiRouter::SET_IJ:
-            if (size != 3 + SYSEX_COMMAND_PREFIX_LENGTH + 2 + 4) goto nack;
-            midi_router.matrix.set_element_2d(sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 1],
-                                              sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 2],
-                                              *(uint32_t *) &sysex[SYSEX_COMMAND_PREFIX_LENGTH + 1 + 3]);
+            if (message.size() != 7) goto nack;
+
+            value = ((message[3] & 0x7f))
+                    + ((message[4] & 0x7f) << 8)
+                    + ((message[5] & 0x7f) << 16)
+                    + ((message[6] & 0x7f) << 24);
+
+            midi_router.matrix.set_element_2d(message[1],
+                                              message[2],
+                                              value);
             goto ack;
         case MidiRouter::SAVE:
             storage.save_routing_matrix(midi_router.matrix);
@@ -70,10 +84,10 @@ void processSysex(midi::MidiInterface<T> &iface, MidiRouter &midi_router, uint8_
     // I know, and I love it
 
 nack:
-    iface.sendSysEx(1, &(midi_router.nack));
+    midi_router.send_nack(iface);
     return;
 ack:
-    iface.sendSysEx(1, &(midi_router.ack));
+    midi_router.send_ack(iface);
 }
 
 template<typename T, typename U>
@@ -107,6 +121,10 @@ PIO_SERIAL_MIDI(4, PIN_MIDI_4_TX, PIN_MIDI_4_RX)
 SERIAL_MIDI(uart0, 5, PIN_MIDI_5_TX, PIN_MIDI_5_RX)
 
 void MidiRouter::init() {
+    device_prefix.reserve(4 + 1);
+    device_prefix.insert(device_prefix.end(), SYSEX_COMMAND_PREFIX);
+    device_prefix.push_back(SYSEX_DEVICE_ID);
+
     usb_midi.init();
     storage.init();
 
@@ -245,4 +263,48 @@ bool MidiRouter::has_new_message() {
     bool m = midi_message_ready;
     midi_message_ready = false;
     return m;
+}
+
+std::vector<uint8_t> MidiRouter::create_message(std::vector<uint8_t> content) {
+    std::vector<uint8_t> message;
+
+    message.reserve(4 + 1 + content.size());
+    message.insert(message.end(), SYSEX_COMMAND_PREFIX);
+    message.push_back(SYSEX_DEVICE_ID);
+    message.push_back(0x66);
+    message.insert(message.end(), content.begin(), content.end());
+
+    return message;
+}
+
+template<typename T>
+void MidiRouter::send_matrix(midi::MidiInterface<T> iface) {
+    std::vector<uint8_t> full_message = create_message(matrix.as_vector());
+    iface.sendSysEx(full_message.size(), full_message.data());
+}
+
+template<typename T>
+void MidiRouter::send_element(midi::MidiInterface<T> iface, uint32_t value) {
+    std::vector<uint8_t> content = {
+        static_cast<uint8_t>(value & 0x7F),
+        static_cast<uint8_t>((value >> 8) & 0x7F),
+        static_cast<uint8_t>((value >> 16) & 0x7F),
+        static_cast<uint8_t>((value >> 24) & 0x7F)
+    };
+    std::vector<uint8_t> full_message = create_message(content);
+    iface.sendSysEx(full_message.size(), full_message.data());
+}
+
+template<typename T>
+void MidiRouter::send_ack(midi::MidiInterface<T> iface) {
+    std::vector<uint8_t> content = {COMMANDS::ACK};
+    std::vector<uint8_t> full_message = create_message(content);
+    iface.sendSysEx(full_message.size(), full_message.data());
+}
+
+template<typename T>
+void MidiRouter::send_nack(midi::MidiInterface<T> iface) {
+    std::vector<uint8_t> content = {COMMANDS::NACK};
+    std::vector<uint8_t> full_message = create_message(content);
+    iface.sendSysEx(full_message.size(), full_message.data());
 }

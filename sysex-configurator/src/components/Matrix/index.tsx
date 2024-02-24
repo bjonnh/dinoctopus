@@ -15,13 +15,13 @@ function Matrix({ deviceState, onUpdate, disabled }: { deviceState: DeviceState,
 
     const renderRowLabel = (rowIndex: number) => (
         <div key={`row-label-${rowIndex}`} style={{ gridColumn: '1', gridRow: rowIndex + 2 }}>
-            {`MIDI ${rowIndex + 1}`}
+            {`MIDI In ${rowIndex + 1}`}
         </div>
     );
 
     const renderColumnLabel = (colIndex: number) => (
         <div key={`col-label-${colIndex}`} style={{ gridColumn: colIndex + 2, gridRow: '1' }}>
-            {`MIDI ${colIndex + 1}`}
+            {`MIDI Out ${colIndex + 1}`}
         </div>
     );
 

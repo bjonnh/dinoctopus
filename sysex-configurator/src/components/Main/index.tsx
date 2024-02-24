@@ -2,7 +2,7 @@ import {DeviceProvider} from "../../providers/DeviceProvider"
 import {useEffect, useState} from "react"
 import DeviceAccordion from "../DeviceList"
 import Matrix from "../Matrix"
-import {Button, Checkbox, Chip, FormControlLabel, FormGroup} from "@mui/material"
+import {Button, Checkbox, Chip, FormControlLabel, FormGroup, Tooltip} from "@mui/material"
 import {useDevice} from "../../providers/DeviceProvider/useDevice.tsx"
 
 function Main() {
@@ -46,15 +46,25 @@ function Main() {
                             disabled={busyState}></Matrix>
 
                     <FormGroup row>
-                        <Button onClick={() => {
-                            dump(undefined)
-                        }} disabled={busyState}>Dump</Button>
-                        <Button onClick={send} disabled={busyState}>Send</Button>
-                        <Button onClick={load} disabled={busyState}>Load</Button>
-                        <Button onClick={save} disabled={busyState}>Save</Button>
+                        <Tooltip title="Get the values from the device (this should not really be needed)" arrow>
+                            <Button onClick={() => {
+                                dump(undefined)
+                            }} disabled={busyState}>Dump</Button>
+                        </Tooltip>
+                        <Tooltip title="Send the values to the device (useful only when Direct update is off)" arrow>
+                            <Button onClick={send} disabled={busyState || immediateUpdate}>Send</Button>
+                        </Tooltip>
+                        <Tooltip title="Load the values stored in the device" arrow>
+                            <Button onClick={load} disabled={busyState}>Load</Button>
+                        </Tooltip>
+                        <Tooltip title="Save the values to the device, this will be the default when it boots" arrow>
+                            <Button onClick={save} disabled={busyState}>Save</Button>
+                        </Tooltip>
+                        <Tooltip title="Send the updates directly to the device" arrow>
                         <FormControlLabel control={<Checkbox checked={immediateUpdate}
                                                              onChange={(e) => setImmediateUpdate(e.target.checked)}></Checkbox>}
-                                          label="Direct update"></FormControlLabel>
+                                          label="Immediate update"></FormControlLabel>
+                        </Tooltip>
                         {lastStatus && (<Chip label={`Last status: ${lastStatus}`}></Chip>)}
                     </FormGroup>
                     <hr/>

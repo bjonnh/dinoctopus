@@ -12,6 +12,8 @@
 
 #include <config.hpp>
 #include <cstdint>
+#include <MIDI.h>
+
 #include "routingmatrix.hpp"
 
 
@@ -43,21 +45,35 @@ public:
     void get_matrix(uint8_t *);
 
     void set_matrix(uint8_t *);
+
     bool usb_enabled();
 
     void set_debug(bool i);
 
     bool has_new_message();
 
+    std::vector<uint8_t> create_message(std::vector<uint8_t> content);
+
+    template<typename T>
+    void send_matrix(midi::MidiInterface<T> iface);
+
+    template<typename T>
+    void send_element(midi::MidiInterface<T> iface, uint32_t value);
+
+    template<typename T>
+    void send_ack(midi::MidiInterface<T> iface);
+
+    template<typename T>
+    void send_nack(midi::MidiInterface<T> iface);
+
     uint8_t debug_midi_message[5];
     RoutingMatrix matrix;
-    const uint8_t nack = {0x61};
-    const uint8_t ack = {0x60};
-private:
-    bool debug=false;
-    bool midi_message_ready=true;
-};
 
+    std::vector<uint8_t> device_prefix;
+private:
+    bool debug = false;
+    bool midi_message_ready = true;
+};
 
 
 #endif //DINOCTOPUS_2040_MIDI_ROUTER_HPP

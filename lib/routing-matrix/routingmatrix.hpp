@@ -15,6 +15,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <vector>
 
 #define ROUTING_MATRIX_SIZE 5
 #define ROUTING_MATRIX_ELEMENTS (ROUTING_MATRIX_SIZE*ROUTING_MATRIX_SIZE)
@@ -34,6 +35,12 @@ public:
 
     void save_to_array(uint8_t (*arr)) {
         memcpy(arr, matrix, ROUTING_MATRIX_BINARY_SIZE);
+    }
+
+    std::vector<uint8_t> as_vector() {
+        std::vector<uint8_t> vec(ROUTING_MATRIX_BINARY_SIZE);
+        memcpy(vec.data(), matrix, ROUTING_MATRIX_BINARY_SIZE);
+        return vec;
     }
 
     void set_element_2d(size_t i, size_t j, uint32_t value) {

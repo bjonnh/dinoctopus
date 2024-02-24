@@ -15,6 +15,7 @@ from mido import Message
 
 # Replace 'sysex_data' with your SysEx command bytes
 sysex_prefix = [0x44, 0x49, 0x4e, 0x4f]
+device_id = [0x00]
 sysex_data = [0x01]
 
 # Create a SysEx message
@@ -66,29 +67,33 @@ class CommandMaker:
         return self.send_command(0x07, [])
 
     def ack(self):
-        return self.last_sysex() == [0x60]
+        return self.last_sysex() == sysex_prefix + device_id + [0x66, 0x60]
 
     def nack(self):
-        return self.last_sysex() == [0x61]
+        return self.last_sysex() == sysex_prefix + device_id + [0x66, 0x61]
 
-    def last_sysex(self, counts=10000):
+    def last_sysex(self, counts=10):
         while True:
+            counts -= 1
+            sleep(0.1)
             for msg in self.inport.iter_pending():
                 if msg.type == 'sysex':
                     return list(msg.data)
-            if self.stop_the_world:
+            if self.stop_the_world or counts == 0:
                 return None
 
     def expect_last_sysex_to_eq(self, expected):
+        expected = sysex_prefix + device_id + [0x66] + expected
         val = self.last_sysex()
         if val != expected:
-            print(f"Expected {expected} but got {val}")
+            print()
+            print(f"   Expected {expected} but got {val}")
         return True
 
 def test_dump_matrix(commandMaker):
-    print("Testing DUMP_MATRIX ",end="")
+    print("Testing DUMP_MATRIX ",end="", flush=True)
     commandMaker.dump_matrix()
-    assert len(commandMaker.last_sysex()) == 100
+    assert len(commandMaker.last_sysex()) == 100 + len(sysex_prefix + device_id + [0x66])
     print("OK")
 
 def test_reset(commandMaker):
@@ -169,7 +174,10 @@ for output_port_name in mido.get_output_names():
     print(output_port_name)
     with mido.open_output(output_port_name) as outport:
         with mido.open_input(output_port_name) as inport:
-            commandMaker = CommandMaker(sysex_prefix, outport, inport)
+            for msg in inport.iter_pending():
+                pass
+            print("Ready to start")
+            commandMaker = CommandMaker(sysex_prefix + device_id, outport, inport)
             test_dump_matrix(commandMaker)
             test_reset(commandMaker)
             test_setij(commandMaker)

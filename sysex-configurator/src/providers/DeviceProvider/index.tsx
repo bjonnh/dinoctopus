@@ -7,7 +7,7 @@ import {DeviceContext} from "./deviceContext.tsx"
 
 const DEVICE_NAME = "DINoctopus:DINoctopus MIDI 1"
 const MATRIX_SIZE = 25
-const DEVICE_SIGNATURE = [0x44, 0x49, 0x4E, 0x4F]
+const DEVICE_SIGNATURE = [0x44, 0x49, 0x4E, 0x4F, 0x00]
 
 const initialState = {
     connected: false, size: MATRIX_SIZE, matrix: Array(MATRIX_SIZE).fill(0)
@@ -22,10 +22,15 @@ export function DeviceProvider({children}: { children: React.ReactNode }) {
     const [lastStatus, setLastStatus] = useState<string | undefined>(undefined)
     const [requireDump, setRequireDump] = useState(false)
     const requireDumpRef = useRef(requireDump)
+    const selectedDeviceRef = useRef(selectedDevice)
 
     useEffect(() => {
-        requireDumpRef.current = requireDump; // Update the ref when state changes
+        requireDumpRef.current = requireDump
     }, [requireDump]);
+
+    useEffect(() => {
+        selectedDeviceRef.current = selectedDevice
+    }, [selectedDevice])
 
     const connectDevice = () => {
         WebMidi.enable({sysex: true})
@@ -41,7 +46,11 @@ export function DeviceProvider({children}: { children: React.ReactNode }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         // Implement device connection logic here
         setDeviceState({...deviceState, connected: true});
-    };
+    }
+
+    function compareArrays(array1: number[], array2: number[]) {
+        return array1.length === array2.length && array1.every((value, index) => value === array2[index]);
+    }
 
     function handleDeviceClick(name: string) {
         selectedDevice.input?.removeListener("sysex")
@@ -55,22 +64,25 @@ export function DeviceProvider({children}: { children: React.ReactNode }) {
         newInput.removeListener("sysex")
         newInput.addListener("sysex", (data) => {
             if (data.message?.data) {
-                const msg = data.message.data
-                if (msg.length == 102) {
+                const raw_msg = data.message.data
+
+                if (!compareArrays(raw_msg.slice(1, 7), [...DEVICE_SIGNATURE, 0x66])) return
+                const msg = raw_msg.slice(7, raw_msg.length - 1)
+                if (msg.length == 100) {
                     const matrix = Array(MATRIX_SIZE).fill(0)
-                    for (let i = 1; i < msg.length - 1; i += 4) {
-                        matrix[(i - 1) / 4] = msg[i] + (msg[i + 1] << 8) + (msg[i + 2] << 16) + (msg[i + 3] << 24);
+                    for (let i = 0; i < msg.length; i += 4) {
+                        matrix[i / 4] = msg[i] + (msg[i + 1] << 8) + (msg[i + 2] << 16) + (msg[i + 3] << 24);
                     }
                     setDeviceState({...deviceState, matrix: matrix})
                     setBusyState(false)
-                } else if (msg.length == 3) {
+                } else if (msg.length == 1) {
                     if (requireDumpRef.current) {
-                        setTimeout(() => {
-                            dump()
-                        }) // We need that or we can't get the results back
                         setRequireDump(false)
+                        setTimeout(() => {
+                            dump(selectedDeviceRef.current)
+                        }, 100) // We need that or we can't get the results back
                     }
-                    if (msg[1] == 0x60) {
+                    if (msg[0] == 0x60) {
                         setLastStatus("ACK")
                     } else if (msg[0] == 0x61) {
                         setLastStatus("NACK")
