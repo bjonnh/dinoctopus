@@ -43,12 +43,10 @@ jobs:
           node-version: '18.x'
       - name: Build sysex-configurator
         run: |
-          ls
           cd sysex-configurator
           npm install
           npm run build
           cp -rf dist ../web/static/sysex-configurator
-        working-directory: web
       - name: Build
         run: |
           hugo mod get -u
