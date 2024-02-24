@@ -8,5 +8,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: "0.0.0.0"
-  }
+  },
+  // This is valid for me publishing on the github pages, but you may want to change that
+  base: '/dinoctopus/sysex-configurator/'
 })
