@@ -1,12 +1,14 @@
-function Matrix({ deviceState, onCheckboxChange, disabled }: { deviceState: DeviceState, onCheckboxChange: (index: number, newValue: number) => void, disabled: boolean }) {
-    const gridSize = 5; // Assuming a 5x5 matrix for simplicity, adjust as necessary
+import {DeviceState} from "../../interfaces/DeviceState.tsx"
+
+function Matrix({ deviceState, onUpdate, disabled }: { deviceState: DeviceState, onUpdate: (index: number, newValue: number) => void, disabled: boolean }) {
+    const gridSize = Math.sqrt(deviceState.size) // it's better be square
 
     const renderCheckbox = (index: number) => (
         <input
             type="checkbox"
             checked={deviceState.matrix[index] == 1}
             disabled={disabled}
-            onChange={(e) => onCheckboxChange(index, e.target.checked ? 1 : 0)}
+            onChange={(e) => onUpdate(index, e.target.checked ? 1 : 0)}
             key={`checkbox-${index}`}
         />
     );
