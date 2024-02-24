@@ -47,7 +47,7 @@ jobs:
           npm install
           npm run build
           mkdir -p ../web/static/sysex-configurator
-          cp -rf dist ../web/static/sysex-configurator
+          cp -rf dist/* ../web/static/sysex-configurator
       - name: Build
         run: |
           hugo mod get -u

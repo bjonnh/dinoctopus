@@ -10,21 +10,18 @@ type: docs
 
 DINOctopus is a small device made to merge/split/mix MIDI signals and act as a USB card as well.
 
+![A cute little dinosaur that's also an octopus](./images/logo.svg)
+
 <--->
 
 ![A design of the prototype](./images/cad.jpeg)
 
 {{< /columns >}}
 
-## Interface
-
-The settings can be seen and modified on the integrated display using the integrated rotary encoder:
-
-![LCD display](./images/lcd.png)
 
 ## Structure
 
-This is a general diagram of when the device has 8 physical ports (4 in and 4 out).
+This is a general diagram of when the device has 10 physical ports (5 in and 5 out).
 All the physical ports can be routed to any other port. 
 
 {{< mermaid >}}
@@ -34,30 +31,41 @@ MIDI_1_IN[Midi Input 1] -.-> MIDI_1_OUT[Midi Output 1]
 MIDI_1_IN[Midi Input 1] -.-> MIDI_2_OUT[Midi Output 2]
 MIDI_1_IN[Midi Input 1] -.-> MIDI_3_OUT[Midi Output 3]
 MIDI_1_IN[Midi Input 1] -.-> MIDI_4_OUT[Midi Output 4]
+MIDI_1_IN[Midi Input 1] -.-> MIDI_5_OUT[Midi Output 5]
 MIDI_2_IN[Midi Input 2] -.-> MIDI_1_OUT[Midi Output 1]
 MIDI_2_IN[Midi Input 2] -.-> MIDI_2_OUT[Midi Output 2]
 MIDI_2_IN[Midi Input 2] -.-> MIDI_3_OUT[Midi Output 3]
 MIDI_2_IN[Midi Input 2] -.-> MIDI_4_OUT[Midi Output 4]
+MIDI_2_IN[Midi Input 2] -.-> MIDI_5_OUT[Midi Output 5]
 MIDI_3_IN[Midi Input 3] -.-> MIDI_1_OUT[Midi Output 1]
 MIDI_3_IN[Midi Input 3] -.-> MIDI_2_OUT[Midi Output 2]
 MIDI_3_IN[Midi Input 3] -.-> MIDI_3_OUT[Midi Output 3]
 MIDI_3_IN[Midi Input 3] -.-> MIDI_4_OUT[Midi Output 4]
+MIDI_3_IN[Midi Input 3] -.-> MIDI_5_OUT[Midi Output 5]
 MIDI_4_IN[Midi Input 4] -.-> MIDI_1_OUT[Midi Output 1]
 MIDI_4_IN[Midi Input 4] -.-> MIDI_2_OUT[Midi Output 2]
 MIDI_4_IN[Midi Input 4] -.-> MIDI_3_OUT[Midi Output 3]
 MIDI_4_IN[Midi Input 4] -.-> MIDI_4_OUT[Midi Output 4]
+MIDI_4_IN[Midi Input 4] -.-> MIDI_5_OUT[Midi Output 5]
+MIDI_5_IN[Midi Input 5] -.-> MIDI_1_OUT[Midi Output 1]
+MIDI_5_IN[Midi Input 5] -.-> MIDI_2_OUT[Midi Output 2]
+MIDI_5_IN[Midi Input 5] -.-> MIDI_3_OUT[Midi Output 3]
+MIDI_5_IN[Midi Input 5] -.-> MIDI_4_OUT[Midi Output 4]
+MIDI_5_IN[Midi Input 5] -.-> MIDI_5_OUT[Midi Output 5]
 end
 subgraph USB_in
 USB_1_IN[USB In 1] --> MIDI_1_IN[Midi Input 1]
 USB_2_IN[USB In 2] --> MIDI_2_IN[Midi Input 2]
 USB_3_IN[USB In 3] --> MIDI_3_IN[Midi Input 3]
-USB_4_IN[USB In 4] --> MIDI_4_IN[Midi Input 4] 
+USB_4_IN[USB In 4] --> MIDI_4_IN[Midi Input 4]
+USB_5_IN[USB In 5] --> MIDI_5_IN[Midi Input 5]
 end
 subgraph USB_out
 MIDI_1_OUT[Midi Output 1] --> USB_1_OUT[USB Out 1]
 MIDI_2_OUT[Midi Output 2] --> USB_2_OUT[USB Out 2]
 MIDI_3_OUT[Midi Output 3] --> USB_3_OUT[USB Out 3]
 MIDI_4_OUT[Midi Output 4] --> USB_4_OUT[USB Out 4]
+MIDI_5_OUT[Midi Output 5] --> USB_5_OUT[USB Out 5]
 end
 
 {{< /mermaid >}}
@@ -66,13 +74,28 @@ The USB ports are virtual and will through a single cable be displayed as multip
 
 ![The USB ports as seen in QJackCtl on Linux](./images/usb_midi.png)
 
+## Configuration
+
+The configuration is done using SysEX, there is a WebMidi implementation here:
+[SysEx Configurator](./sysex-configurator)
+
+![The SysEx configurator](./images/sysex-configurator.png)
+
 ## Open Source Hardware and Software
 ### Software
 The Software is already available here: [https://www.github.com/bjonnh/dinoctopus](https://www.github.com/bjonnh/dinoctopus)
 
+There are builds of the UF2 files that can be directly sent to a RP2040 board by USB.
+Plug it while pressing the BOOTSEL button, and it will appear as a USB drive, just copy the file to it.
+
+Latest release is available at:
+
+
 The code documentation is at [./dox](./dox)
 
 ### Hardware
+
+The hardware is not really up to date, I'll be fixing that.
 
 Schematics and PCBs are available at: [https://www.github.com/bjonnh/dinoctopus/tree/main/hardware/electronics](https://www.github.com/bjonnh/dinoctopustree/main/hardware/electronics)
 
@@ -81,4 +104,14 @@ Schematics and PCBs are available at: [https://www.github.com/bjonnh/dinoctopus/
 ![RXboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/rx_board/3d.jpg?raw=true)
 ![TXboard](https://github.com/bjonnh/dinoctopus/blob/main/hardware/electronics/tx_board/3d.jpg)
 
-It uses a repurposed cheap 3d printer display which is documented on [https://www.bjonnh.net/article/20221126_mini_12864/](https://www.bjonnh.net/article/20221126_mini_12864/). 
+### History
+
+It used a repurposed cheap 3d printer display which is documented on [https://www.bjonnh.net/article/20221126_mini_12864/](https://www.bjonnh.net/article/20221126_mini_12864/). 
+
+I switched to a pure SysEx approach to facilitate things and reduce cost and size.
+
+### Interface
+
+The settings can be seen and modified on the integrated display using the integrated rotary encoder:
+
+![LCD display](./images/lcd.png)

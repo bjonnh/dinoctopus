@@ -2,9 +2,10 @@ baseURL = 'https://bjonnh.github.io/dinoctopus'
 languageCode = 'en-us'
 title = 'DINOctopus'
 theme = 'hugo-book'
-disableKinds = ['taxonomy', 'taxonomyTerm']
+disableKinds = ['taxonomy', 'taxonomyTerm', 'blog']
 [params]
 BookTheme = 'auto'
+BookSearch = false
 BookRepo = 'https://github.com/bjonnh/dinoctopus'
 [markup.goldmark.renderer]
 unsafe= true
