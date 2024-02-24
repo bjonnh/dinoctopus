@@ -43,6 +43,7 @@ jobs:
           node-version: '18.x'
       - name: Build sysex-configurator
         run: |
+          ls
           cd sysex-configurator
           npm install
           npm run build
