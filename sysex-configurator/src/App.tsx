@@ -3,7 +3,7 @@ import {Input, Output, WebMidi} from "webmidi";
 
 import './App.css'
 import Matrix from "./components/Matrix";
-import {Accordion, Button} from "@mui/material";
+import {Button} from "@mui/material";
 import DeviceAccordion from "./components/DeviceList";
 
 interface IOData {
@@ -18,7 +18,6 @@ function App() {
     const [midiInputs, setmidiInputs] = useState<Input[]>([])
     const [midiOutputs, setmidiOutputs] = useState<Output[]>([])
     const [selectedDevice, setSelectedDevice] = useState<IOData>({input: undefined, output: undefined})
-    const [showDevices, setShowDevices] = useState(false)
     const [deviceState, setDeviceState] = useState<DeviceState>({size: 25, matrix: Array(MATRIX_SIZE).fill(0)})
     const [loadingState, setLoadingState] = useState(false)
     const [lastStatus, setLastStatus] = useState<string | undefined>(undefined)
@@ -29,16 +28,6 @@ function App() {
         requireDumpRef.current = requireDump; // Update the ref when state changes
     }, [requireDump]);
 
-    useEffect(() => {
-        WebMidi.enable({sysex: true})
-            .then(() => {
-                setmidiInputs(WebMidi.inputs)
-                setmidiOutputs(WebMidi.outputs)
-                const matching = WebMidi.inputs.find(obj => obj.name.includes(DEVICE_NAME))
-                if (matching) handleDeviceClick(matching.name)
-            })
-            .catch(err => console.log(err));
-    }, []);
 
     function handleDeviceClick(name: string) {
         selectedDevice.input?.removeListener("sysex")
@@ -81,9 +70,23 @@ function App() {
 
 
         setTimeout(() => {
-            dump_device({ input: newInput, output: newOutput })
+            dump_device({input: newInput, output: newOutput})
         }, 100)
     }
+
+    useEffect(() => {
+        WebMidi.enable({sysex: true})
+            .then(() => {
+                setmidiInputs(WebMidi.inputs)
+                setmidiOutputs(WebMidi.outputs)
+                const matching = WebMidi.inputs.find(obj => obj.name.includes(DEVICE_NAME))
+                if (matching) {
+                    handleDeviceClick(matching.name)
+                }
+            })
+            .catch(err => console.log(err));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     function onCheckboxChange(index: number, newValue: number) {
         const oldDeviceState = deviceState
@@ -91,8 +94,7 @@ function App() {
         setDeviceState({size: MATRIX_SIZE, matrix: oldDeviceState.matrix})
     }
 
-    function dump_device(ioData: IOData|undefined) {
-        console.log("Dumping")
+    function dump_device(ioData: IOData | undefined = undefined) {
         const device = ioData || selectedDevice
         if (device.output === undefined) return;
         setLoadingState(true)
@@ -140,13 +142,16 @@ function App() {
     return (<>
         <h1>DINoctopus</h1>
         <div className="card">
-            <DeviceAccordion midiInputs={midiInputs} midiOutputs={midiOutputs} handleDeviceClick={handleDeviceClick} selectedDevice={selectedDevice}></DeviceAccordion>
+            <DeviceAccordion midiInputs={midiInputs} midiOutputs={midiOutputs} handleDeviceClick={handleDeviceClick}
+                             selectedDevice={selectedDevice}></DeviceAccordion>
 
             {selectedDevice.input && selectedDevice.output && (<div>
 
                 <Matrix deviceState={deviceState} onCheckboxChange={onCheckboxChange} disabled={loadingState}></Matrix>
 
-                <Button onClick={dump_device} disabled={loadingState}>Dump</Button>
+                <Button onClick={() => {
+                    dump_device(undefined)
+                }} disabled={loadingState}>Dump</Button>
                 <Button onClick={send_device} disabled={loadingState}>Send</Button>
                 <Button onClick={load_device} disabled={loadingState}>Load</Button>
                 <Button onClick={save_device} disabled={loadingState}>Save</Button>
@@ -156,8 +161,6 @@ function App() {
 
         </div>
     </>)
-
-
 }
 
 export default App
