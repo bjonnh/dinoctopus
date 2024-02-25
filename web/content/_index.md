@@ -83,15 +83,15 @@ The configuration is done using SysEX, there is a WebMidi implementation here:
 
 ## Open Source Hardware and Software
 ### Software
-The Software is already available here: [https://www.github.com/bjonnh/dinoctopus](https://www.github.com/bjonnh/dinoctopus)
+
+The firmware is available here: [https://www.github.com/bjonnh/dinoctopus](https://www.github.com/bjonnh/dinoctopus)
 
 There are builds of the UF2 files that can be directly sent to a RP2040 board by USB.
 Plug it while pressing the BOOTSEL button, and it will appear as a USB drive, just copy the file to it.
 
-Latest release is available at:
+Latest release is always available at: [https://github.com/bjonnh/dinoctopus/releases/latest](https://github.com/bjonnh/dinoctopus/releases/latest)
 
-
-The code documentation is at [./dox](./dox)
+The C++ code documentation is at [./dox](./dox) but that's probably not super useful.
 
 #### SysEX messages
 
@@ -100,10 +100,19 @@ This is the structure of the messages:
 F0 44 49 4E 4F 00 <command> [optional_data] F7
 ```
 
+Where
+
+```
+44 49 4E 4F  : Identifier of the device (DINO)
+00            : Device number (0)
+```
+
+F0 and F7 are the normal sysex delimiters
+
 and the replies:
 
 ```
-F0 44 49 4E 4F 00 99 <response> F7
+F0 44 49 4E 4F 00 66 <response> F7
 ```
 
 
@@ -155,7 +164,12 @@ I will probably send the sysex differently at some point or just ignore that 1 b
 
 ### Hardware
 
-The hardware is not really up to date, I'll be fixing that.
+The hardware is not really up to date, I'll be fixing that next.
+
+What I recommend for now is to build the TX and RX boards and connect them to a RP2040 board (like the Raspberry Pi Pico).
+
+I made two boards so they can be stacked to make the device smaller. There is really nothing special about them, they
+are just pulled up TXs and the RXs with their optocouplers.
 
 Schematics and PCBs are available at: [https://www.github.com/bjonnh/dinoctopus/tree/main/hardware/electronics](https://www.github.com/bjonnh/dinoctopustree/main/hardware/electronics)
 
