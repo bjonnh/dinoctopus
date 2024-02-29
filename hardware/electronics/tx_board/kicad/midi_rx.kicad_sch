@@ -1,0 +1,820 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid f33d3bda-44a2-4f60-9bae-3aa629118e16)
+
+  (paper "A4")
+
+  (lib_symbols
+    (symbol "Adafruit MIDI FeatherWing-eagle-import:AUDIO_STEREOJACK" (in_bom yes) (on_board yes)
+      (property "Reference" "X" (at -7.62 3.81 0)
+        (effects (font (size 1.778 1.5113)) (justify left bottom))
+      )
+      (property "Value" "AUDIO_STEREOJACK" (at -7.62 -10.16 0)
+        (effects (font (size 1.778 1.5113)) (justify left bottom))
+      )
+      (property "Footprint" "Adafruit MIDI FeatherWing:STX3100" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_locked" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (symbol "AUDIO_STEREOJACK_1_0"
+        (circle (center -10.16 -5.08) (radius 0.127)
+          (stroke (width 0.4064) (type default))
+          (fill (type none))
+        )
+        (circle (center -10.16 2.54) (radius 0.127)
+          (stroke (width 0.4064) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -10.16 -5.08)
+            (xy -3.81 -5.08)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -10.16 -2.54)
+            (xy -7.62 -2.54)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -10.16 0)
+            (xy -7.62 0)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -10.16 2.54)
+            (xy -6.35 2.54)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -8.001 -3.429)
+            (xy -7.239 -3.429)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -8.001 0.762)
+            (xy -7.239 0.762)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.62 -4.445)
+            (xy -8.001 -3.429)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.62 -2.54)
+            (xy -7.62 -4.445)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.62 0)
+            (xy -7.62 1.905)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.62 1.905)
+            (xy -8.001 0.762)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.239 -3.429)
+            (xy -7.62 -4.445)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -7.239 0.762)
+            (xy -7.62 1.905)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -6.35 2.54)
+            (xy -3.81 0)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -3.81 0)
+            (xy -3.175 0.635)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -1.27 -2.54)
+            (xy -3.81 -5.08)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy -0.635 -3.175)
+            (xy -1.27 -2.54)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.27 -5.08)
+            (xy 1.27 2.54)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.27 -5.08)
+            (xy 2.54 -5.08)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.27 2.54)
+            (xy 3.81 2.54)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 2.54 -7.62)
+            (xy -10.16 -7.62)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 2.54 -5.08)
+            (xy 2.54 -7.62)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 2.54 -5.08)
+            (xy 3.81 -5.08)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 3.81 -5.08)
+            (xy 3.81 2.54)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (pin passive line (at -12.7 -7.62 0) (length 2.54)
+          (name "1" (effects (font (size 0 0))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at -12.7 -5.08 0) (length 2.54)
+          (name "2" (effects (font (size 0 0))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at -12.7 -2.54 0) (length 2.54)
+          (name "3" (effects (font (size 0 0))))
+          (number "3" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at -12.7 0 0) (length 2.54)
+          (name "4" (effects (font (size 0 0))))
+          (number "4" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at -12.7 2.54 0) (length 2.54)
+          (name "5" (effects (font (size 0 0))))
+          (number "5" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
+    (symbol "Adafruit MIDI FeatherWing-eagle-import:GND" (power) (in_bom yes) (on_board yes)
+      (property "Reference" "#GND" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "GND" (at -2.54 -2.54 0)
+        (effects (font (size 1.778 1.5113)) (justify left bottom))
+      )
+      (property "Footprint" "Adafruit MIDI FeatherWing:" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_locked" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (symbol "GND_1_0"
+        (polyline
+          (pts
+            (xy -1.905 0)
+            (xy 1.905 0)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+        (pin power_in line (at 0 2.54 270) (length 2.54)
+          (name "GND" (effects (font (size 0 0))))
+          (number "1" (effects (font (size 0 0))))
+        )
+      )
+    )
+    (symbol "Device:R" (pin_numbers hide) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "R" (at 2.032 0 90)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "R" (at 0 0 90)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at -1.778 0 90)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "~" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "R res resistor" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Resistor" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "R_*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "R_0_1"
+        (rectangle (start -1.016 -2.54) (end 1.016 2.54)
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "R_1_1"
+        (pin passive line (at 0 3.81 270) (length 1.27)
+          (name "~" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 0 -3.81 90) (length 1.27)
+          (name "~" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
+    (symbol "power:+3V3" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "#PWR" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "+3V3" (at 0 3.556 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "global power" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Power symbol creates a global label with name \"+3V3\"" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "+3V3_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "+3V3_1_1"
+        (pin power_in line (at 0 0 90) (length 0) hide
+          (name "+3V3" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
+  )
+
+  (junction (at 125.73 121.92) (diameter 0) (color 0 0 0 0)
+    (uuid 0e3f6286-0a23-4411-b223-d49191d49362)
+  )
+  (junction (at 125.73 129.54) (diameter 0) (color 0 0 0 0)
+    (uuid 132e57d2-503d-428e-a44b-4399673e4922)
+  )
+
+  (wire (pts (xy 113.03 116.84) (xy 113.03 121.92))
+    (stroke (width 0) (type default))
+    (uuid 401a3ef7-b392-4c27-a2f4-91fab986667e)
+  )
+  (wire (pts (xy 154.94 111.76) (xy 180.34 111.76))
+    (stroke (width 0) (type default))
+    (uuid 605848a5-266d-4d2e-a06e-609eb6e3acec)
+  )
+  (wire (pts (xy 186.69 77.47) (xy 196.85 77.47))
+    (stroke (width 0) (type default))
+    (uuid 60bca0ae-1647-4f06-8bc2-45afc618ee72)
+  )
+  (wire (pts (xy 180.34 82.55) (xy 196.85 82.55))
+    (stroke (width 0) (type default))
+    (uuid 6d0c5a7f-6a15-47e2-b143-2f847d9ca985)
+  )
+  (wire (pts (xy 125.73 111.76) (xy 125.73 121.92))
+    (stroke (width 0) (type default))
+    (uuid 7f04badc-855a-4714-b449-f3f6c01e54d6)
+  )
+  (wire (pts (xy 186.69 77.47) (xy 186.69 76.2))
+    (stroke (width 0) (type default))
+    (uuid 857e2d69-554c-4cd0-b09e-0b59c4d8a239)
+  )
+  (wire (pts (xy 113.03 129.54) (xy 125.73 129.54))
+    (stroke (width 0) (type default))
+    (uuid a2a3d793-050c-4b61-855f-b59bd2757d89)
+  )
+  (wire (pts (xy 125.73 132.08) (xy 125.73 137.16))
+    (stroke (width 0) (type default))
+    (uuid b1ebad60-56df-49ee-936e-5660c961e5f5)
+  )
+  (wire (pts (xy 195.58 87.63) (xy 195.58 85.09))
+    (stroke (width 0) (type default))
+    (uuid bff644c7-4ee9-4880-bc88-127d2aef45d3)
+  )
+  (wire (pts (xy 195.58 85.09) (xy 196.85 85.09))
+    (stroke (width 0) (type default))
+    (uuid c10495c4-6d66-483d-a98d-7ac1e19aad66)
+  )
+  (wire (pts (xy 125.73 121.92) (xy 125.73 124.46))
+    (stroke (width 0) (type default))
+    (uuid c1081067-e7fb-474b-949f-a82d5df8e147)
+  )
+  (wire (pts (xy 125.73 111.76) (xy 147.32 111.76))
+    (stroke (width 0) (type default))
+    (uuid e0b42f95-09f4-46f5-b13d-ab98dd0547ad)
+  )
+  (wire (pts (xy 180.34 82.55) (xy 180.34 111.76))
+    (stroke (width 0) (type default))
+    (uuid e951f5da-210c-415c-b255-c86f0d985b4c)
+  )
+  (wire (pts (xy 125.73 127) (xy 125.73 129.54))
+    (stroke (width 0) (type default))
+    (uuid f92c8dca-43e2-4104-aff2-2355409bd401)
+  )
+
+  (text "Inspired from the Adafruit Featherboard Midi\nCC-BY-SA 3.0\n"
+    (at 179.07 118.11 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 898190f5-f573-4fba-a44c-eb2754125fe3)
+  )
+
+  (hierarchical_label "TX" (shape input) (at 196.85 82.55 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 69a11d45-3e51-4c4f-91af-34f77bd9e875)
+  )
+  (hierarchical_label "RGND" (shape input) (at 196.85 85.09 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7dcb4645-8b36-4127-aea0-8bcc8d219bb9)
+  )
+  (hierarchical_label "3V3" (shape input) (at 196.85 77.47 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cf0eb709-d261-4ae2-bb18-1d15ca9ae285)
+  )
+
+  (symbol (lib_id "Adafruit MIDI FeatherWing-eagle-import:AUDIO_STEREOJACK") (at 138.43 124.46 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 30108e91-7043-42cd-9559-854c1726986a)
+    (property "Reference" "TX0" (at 137.16 135.89 0)
+      (effects (font (size 1.778 1.5113)))
+    )
+    (property "Value" "AUDIO_STEREOJACK" (at 135.89 118.11 0)
+      (effects (font (size 1.778 1.5113)))
+    )
+    (property "Footprint" "Adafruit MIDI FeatherWing:STX3100" (at 138.43 124.46 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Datasheet" "" (at 138.43 124.46 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8720127b-d8c1-4c57-a7de-0065d39cefea))
+    (pin "2" (uuid 098f7c42-d733-43cd-a708-b0dc86954758))
+    (pin "3" (uuid 1ac16ec2-5943-41d7-a4c5-8c72d8bfd32d))
+    (pin "4" (uuid b60f49b6-2c08-4fee-be35-9fa2513fb4ac))
+    (pin "5" (uuid 1310292e-0890-430f-b2ae-841ce1af017c))
+    (instances
+      (project "v05"
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/5500e2e6-974e-463d-b7ca-1fe5cf5b8927"
+          (reference "TX0") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/d38c681a-eec2-4415-b501-b04f5a0035fe"
+          (reference "TX1") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/07d048f3-5800-46f7-9a9e-4504a8146518"
+          (reference "TX2") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/46728f58-d3ab-4a53-b4dc-5f519d6a669f"
+          (reference "TX3") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/f94011e0-e56d-42c1-bd56-fe6e60d3c835"
+          (reference "TX4") (unit 1)
+        )
+      )
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "TX1") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "TX2") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "TX3") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "TX4") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "TX5") (unit 1)
+        )
+      )
+      (project "v04"
+        (path "/f2bce025-8176-42b7-ad43-7c43b9b7d3fb"
+          (reference "X2") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Adafruit MIDI FeatherWing-eagle-import:GND") (at 195.58 90.17 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 40b81653-56c7-4ed3-950c-58b1c2d8270d)
+    (property "Reference" "#GND03" (at 195.58 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 195.58 92.71 0)
+      (effects (font (size 1.778 1.5113)))
+    )
+    (property "Footprint" "Adafruit MIDI FeatherWing:" (at 195.58 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 195.58 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 74071dd6-b3d5-44cb-8403-6d9a441fbdc3))
+    (instances
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "#GND03") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "#GND05") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "#GND07") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "#GND09") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "#GND011") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R") (at 151.13 111.76 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 58933e58-294f-4c0b-afc4-33e294de36de)
+    (property "Reference" "R3" (at 151.13 106.68 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "10" (at 151.13 109.22 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 151.13 109.982 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 151.13 111.76 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 321a2d55-adc2-4dda-8bcf-91acdc4c91f2))
+    (pin "2" (uuid 4fe85a3b-66e9-4363-afa0-b83094899fe0))
+    (instances
+      (project "v05"
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/5500e2e6-974e-463d-b7ca-1fe5cf5b8927"
+          (reference "R3") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/d38c681a-eec2-4415-b501-b04f5a0035fe"
+          (reference "R7") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/07d048f3-5800-46f7-9a9e-4504a8146518"
+          (reference "R11") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/46728f58-d3ab-4a53-b4dc-5f519d6a669f"
+          (reference "R15") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/f94011e0-e56d-42c1-bd56-fe6e60d3c835"
+          (reference "R19") (unit 1)
+        )
+      )
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "R2") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "R4") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "R6") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "R8") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "R10") (unit 1)
+        )
+      )
+      (project "v04"
+        (path "/f2bce025-8176-42b7-ad43-7c43b9b7d3fb"
+          (reference "R4") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Adafruit MIDI FeatherWing-eagle-import:GND") (at 125.73 139.7 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 6c1d7e26-969d-4348-8608-867cf16decb3)
+    (property "Reference" "#GND02" (at 125.73 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 125.73 142.24 0)
+      (effects (font (size 1.778 1.5113)))
+    )
+    (property "Footprint" "Adafruit MIDI FeatherWing:" (at 125.73 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 125.73 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 282aa13b-415c-4676-9b32-95db5fd66d2c))
+    (instances
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "#GND02") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "#GND04") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "#GND06") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "#GND08") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "#GND010") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+3V3") (at 113.03 116.84 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 725a4916-570a-4220-a4c0-31b82b2bd3e4)
+    (property "Reference" "#PWR04" (at 113.03 120.65 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3" (at 113.03 113.03 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 113.03 116.84 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 113.03 116.84 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a17804e6-26f7-4fbc-88a0-655abd2bf8fd))
+    (instances
+      (project "v05"
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/5500e2e6-974e-463d-b7ca-1fe5cf5b8927"
+          (reference "#PWR04") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/d38c681a-eec2-4415-b501-b04f5a0035fe"
+          (reference "#PWR011") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/07d048f3-5800-46f7-9a9e-4504a8146518"
+          (reference "#PWR018") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/46728f58-d3ab-4a53-b4dc-5f519d6a669f"
+          (reference "#PWR025") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/f94011e0-e56d-42c1-bd56-fe6e60d3c835"
+          (reference "#PWR032") (unit 1)
+        )
+      )
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "#PWR02") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "#PWR04") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "#PWR06") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "#PWR08") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "#PWR010") (unit 1)
+        )
+      )
+      (project "v04"
+        (path "/f2bce025-8176-42b7-ad43-7c43b9b7d3fb"
+          (reference "#PWR07") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R") (at 113.03 125.73 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid ba0630a3-e271-4fab-8196-de5f3307937a)
+    (property "Reference" "R2" (at 115.57 125.095 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Value" "33" (at 115.57 127.635 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 114.808 125.73 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 113.03 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fbf38e35-a9f3-406b-ba87-3e2baa05fbff))
+    (pin "2" (uuid 4503977b-f1ca-4165-baa2-5eb407870bc9))
+    (instances
+      (project "v05"
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/5500e2e6-974e-463d-b7ca-1fe5cf5b8927"
+          (reference "R2") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/d38c681a-eec2-4415-b501-b04f5a0035fe"
+          (reference "R6") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/07d048f3-5800-46f7-9a9e-4504a8146518"
+          (reference "R10") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/46728f58-d3ab-4a53-b4dc-5f519d6a669f"
+          (reference "R14") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/f94011e0-e56d-42c1-bd56-fe6e60d3c835"
+          (reference "R18") (unit 1)
+        )
+      )
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "R1") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "R3") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "R5") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "R7") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "R9") (unit 1)
+        )
+      )
+      (project "v04"
+        (path "/f2bce025-8176-42b7-ad43-7c43b9b7d3fb"
+          (reference "R3") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+3V3") (at 186.69 76.2 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid c8df38a2-098d-431c-9629-6c92104c51fe)
+    (property "Reference" "#PWR09" (at 186.69 80.01 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3" (at 186.69 72.39 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 186.69 76.2 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 186.69 76.2 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ade8c871-8a6a-4dd5-b35e-b38d63febf02))
+    (instances
+      (project "v05"
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/5500e2e6-974e-463d-b7ca-1fe5cf5b8927"
+          (reference "#PWR09") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/d38c681a-eec2-4415-b501-b04f5a0035fe"
+          (reference "#PWR016") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/07d048f3-5800-46f7-9a9e-4504a8146518"
+          (reference "#PWR023") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/46728f58-d3ab-4a53-b4dc-5f519d6a669f"
+          (reference "#PWR030") (unit 1)
+        )
+        (path "/7aa79645-bd7a-4e51-8f75-518c8be83792/f94011e0-e56d-42c1-bd56-fe6e60d3c835"
+          (reference "#PWR037") (unit 1)
+        )
+      )
+      (project "midi_tx_board"
+        (path "/b027d1da-790a-4429-b304-73ab171db060/d86c8bf9-f56b-4e07-868a-57381a270947"
+          (reference "#PWR03") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/2832e16d-d0a7-4633-a4d8-b738544c5cbb"
+          (reference "#PWR05") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/e46800bb-957f-4e76-9078-518062d759a0"
+          (reference "#PWR07") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/acd0ecb1-49f2-462d-865d-9a9175a6c5cd"
+          (reference "#PWR09") (unit 1)
+        )
+        (path "/b027d1da-790a-4429-b304-73ab171db060/4aeed320-3003-4d59-bd00-5840c64dba5f"
+          (reference "#PWR011") (unit 1)
+        )
+      )
+      (project "v04"
+        (path "/f2bce025-8176-42b7-ad43-7c43b9b7d3fb"
+          (reference "#PWR01") (unit 1)
+        )
+      )
+    )
+  )
+)

@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/home/bjo/Software/dinoctopus/hardware/electronics/tx_board/kicad/midi_tx_board.kicad_sch</source>
+    <date>Wed 28 Feb 2024 07:46:18 PM CST</date>
+    <tool>Eeschema 7.0.10</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_tx_board.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/TX1/" tstamps="/d86c8bf9-f56b-4e07-868a-57381a270947/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_rx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/TX2/" tstamps="/2832e16d-d0a7-4633-a4d8-b738544c5cbb/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_rx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/TX3/" tstamps="/e46800bb-957f-4e76-9078-518062d759a0/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_rx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/TX4/" tstamps="/acd0ecb1-49f2-462d-865d-9a9175a6c5cd/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_rx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/TX5/" tstamps="/4aeed320-3003-4d59-bd00-5840c64dba5f/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>midi_rx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="J1">
+      <value>TX</value>
+      <footprint>Connectors_JST:JST_XH_B05B-XH-A_05x2.50mm_Straight</footprint>
+      <libsource lib="Connector" part="Conn_01x05_Socket" description="Generic connector, single row, 01x05, script generated"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="midi_tx_board.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x05, script generated"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cdff5b64-3b5c-4bc5-8167-1c84136b7f63</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>PW</value>
+      <footprint>Connectors_JST:JST_XH_B02B-XH-A_02x2.50mm_Straight</footprint>
+      <libsource lib="Connector" part="Conn_01x02_Socket" description="Generic connector, single row, 01x02, script generated"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="midi_tx_board.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x02, script generated"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>987a37e5-7217-4ad0-9e8a-0787308d727c</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX1"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX1/" tstamps="/d86c8bf9-f56b-4e07-868a-57381a270947/"/>
+      <tstamps>ba0630a3-e271-4fab-8196-de5f3307937a</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>10</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX1"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX1/" tstamps="/d86c8bf9-f56b-4e07-868a-57381a270947/"/>
+      <tstamps>58933e58-294f-4c0b-afc4-33e294de36de</tstamps>
+    </comp>
+    <comp ref="TX1">
+      <value>AUDIO_STEREOJACK</value>
+      <footprint>Adafruit MIDI FeatherWing:STX3100</footprint>
+      <libsource lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK" description=""/>
+      <property name="Sheetname" value="TX1"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <sheetpath names="/TX1/" tstamps="/d86c8bf9-f56b-4e07-868a-57381a270947/"/>
+      <tstamps>30108e91-7043-42cd-9559-854c1726986a</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX2"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX2/" tstamps="/2832e16d-d0a7-4633-a4d8-b738544c5cbb/"/>
+      <tstamps>ba0630a3-e271-4fab-8196-de5f3307937a</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>10</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX2"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX2/" tstamps="/2832e16d-d0a7-4633-a4d8-b738544c5cbb/"/>
+      <tstamps>58933e58-294f-4c0b-afc4-33e294de36de</tstamps>
+    </comp>
+    <comp ref="TX2">
+      <value>AUDIO_STEREOJACK</value>
+      <footprint>Adafruit MIDI FeatherWing:STX3100</footprint>
+      <libsource lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK" description=""/>
+      <property name="Sheetname" value="TX2"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <sheetpath names="/TX2/" tstamps="/2832e16d-d0a7-4633-a4d8-b738544c5cbb/"/>
+      <tstamps>30108e91-7043-42cd-9559-854c1726986a</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX3"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX3/" tstamps="/e46800bb-957f-4e76-9078-518062d759a0/"/>
+      <tstamps>ba0630a3-e271-4fab-8196-de5f3307937a</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>10</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX3"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX3/" tstamps="/e46800bb-957f-4e76-9078-518062d759a0/"/>
+      <tstamps>58933e58-294f-4c0b-afc4-33e294de36de</tstamps>
+    </comp>
+    <comp ref="TX3">
+      <value>AUDIO_STEREOJACK</value>
+      <footprint>Adafruit MIDI FeatherWing:STX3100</footprint>
+      <libsource lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK" description=""/>
+      <property name="Sheetname" value="TX3"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <sheetpath names="/TX3/" tstamps="/e46800bb-957f-4e76-9078-518062d759a0/"/>
+      <tstamps>30108e91-7043-42cd-9559-854c1726986a</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX4"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX4/" tstamps="/acd0ecb1-49f2-462d-865d-9a9175a6c5cd/"/>
+      <tstamps>ba0630a3-e271-4fab-8196-de5f3307937a</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>10</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX4"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX4/" tstamps="/acd0ecb1-49f2-462d-865d-9a9175a6c5cd/"/>
+      <tstamps>58933e58-294f-4c0b-afc4-33e294de36de</tstamps>
+    </comp>
+    <comp ref="TX4">
+      <value>AUDIO_STEREOJACK</value>
+      <footprint>Adafruit MIDI FeatherWing:STX3100</footprint>
+      <libsource lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK" description=""/>
+      <property name="Sheetname" value="TX4"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <sheetpath names="/TX4/" tstamps="/acd0ecb1-49f2-462d-865d-9a9175a6c5cd/"/>
+      <tstamps>30108e91-7043-42cd-9559-854c1726986a</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX5"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX5/" tstamps="/4aeed320-3003-4d59-bd00-5840c64dba5f/"/>
+      <tstamps>ba0630a3-e271-4fab-8196-de5f3307937a</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>10</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="TX5"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/TX5/" tstamps="/4aeed320-3003-4d59-bd00-5840c64dba5f/"/>
+      <tstamps>58933e58-294f-4c0b-afc4-33e294de36de</tstamps>
+    </comp>
+    <comp ref="TX5">
+      <value>AUDIO_STEREOJACK</value>
+      <footprint>Adafruit MIDI FeatherWing:STX3100</footprint>
+      <libsource lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK" description=""/>
+      <property name="Sheetname" value="TX5"/>
+      <property name="Sheetfile" value="midi_rx.kicad_sch"/>
+      <sheetpath names="/TX5/" tstamps="/4aeed320-3003-4d59-bd00-5840c64dba5f/"/>
+      <tstamps>30108e91-7043-42cd-9559-854c1726986a</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Adafruit MIDI FeatherWing-eagle-import" part="AUDIO_STEREOJACK">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">AUDIO_STEREOJACK</field>
+        <field name="Footprint">Adafruit MIDI FeatherWing:STX3100</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x02_Socket">
+      <description>Generic connector, single row, 01x02, script generated</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Socket</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x05_Socket">
+      <description>Generic connector, single row, 01x05, script generated</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x05_Socket</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>/usr/share/kicad/symbols//Connector.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>/usr/share/kicad/symbols//Device.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3">
+      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+    </net>
+    <net code="2" name="/TX1/TX">
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+    </net>
+    <net code="3" name="/TX2/TX">
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+    </net>
+    <net code="4" name="/TX3/TX">
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+    </net>
+    <net code="5" name="/TX4/TX">
+      <node ref="J1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+    </net>
+    <net code="6" name="/TX5/TX">
+      <node ref="J1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+    </net>
+    <net code="7" name="GND">
+      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="TX1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TX2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TX3" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TX4" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TX5" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="8" name="Net-(R1-Pad1)">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="TX1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TX1" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="9" name="Net-(R2-Pad2)">
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="TX1" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="TX1" pin="5" pinfunction="5" pintype="passive"/>
+    </net>
+    <net code="10" name="Net-(R3-Pad1)">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="TX2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TX2" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(R4-Pad2)">
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="TX2" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="TX2" pin="5" pinfunction="5" pintype="passive"/>
+    </net>
+    <net code="12" name="Net-(R5-Pad1)">
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="TX3" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TX3" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="13" name="Net-(R6-Pad2)">
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="TX3" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="TX3" pin="5" pinfunction="5" pintype="passive"/>
+    </net>
+    <net code="14" name="Net-(R7-Pad1)">
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="TX4" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TX4" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="15" name="Net-(R8-Pad2)">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="TX4" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="TX4" pin="5" pinfunction="5" pintype="passive"/>
+    </net>
+    <net code="16" name="Net-(R9-Pad1)">
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="TX5" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TX5" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="17" name="Net-(R10-Pad2)">
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="TX5" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="TX5" pin="5" pinfunction="5" pintype="passive"/>
+    </net>
+  </nets>
+</export>
