@@ -910,110 +910,130 @@
 		)
 	)
 	(junction
-		(at 130.81 72.39)
+		(at 97.79 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6711010f-35e5-4a30-93d1-ce9403ffefe5")
+		(uuid "483e143b-3e25-4bfd-8439-06dbeacfa7c3")
 	)
 	(junction
-		(at 144.78 90.17)
+		(at 111.76 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a0c6ef65-b8fa-4554-8c92-46e7b28b63ff")
+		(uuid "ff6d8883-6772-40ab-9f6f-2e1c7a6ea467")
 	)
 	(wire
 		(pts
-			(xy 130.81 85.09) (xy 130.81 80.01)
+			(xy 119.38 90.17) (xy 142.24 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0a40a2ec-68d0-4e1f-a967-cbdb4eca9979")
+		(uuid "1f0847ae-66b6-49cc-a501-5e1df103de14")
 	)
 	(wire
 		(pts
-			(xy 140.97 90.17) (xy 144.78 90.17)
+			(xy 111.76 87.63) (xy 111.76 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "13fba04e-3fb7-4538-bdf2-e24280a8d5e6")
+		(uuid "267ba8b0-4051-4baa-930e-509b53b21477")
 	)
 	(wire
 		(pts
-			(xy 152.4 90.17) (xy 156.21 90.17)
+			(xy 97.79 85.09) (xy 142.24 85.09)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "45224cea-4d43-4500-a97b-1a1187a16ef9")
+		(uuid "3a3aca0d-c3ed-4bde-a85a-76589de0dbdd")
 	)
 	(wire
 		(pts
-			(xy 144.78 87.63) (xy 144.78 90.17)
+			(xy 97.79 73.66) (xy 97.79 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4552d5fa-7d6e-40b1-ac3a-8d68364d17f6")
+		(uuid "92d1ca1c-fc37-46f8-ad47-f41c94bf35af")
 	)
 	(wire
 		(pts
-			(xy 140.97 69.85) (xy 156.21 69.85)
+			(xy 107.95 90.17) (xy 111.76 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4600f6fe-7a3f-42cc-ba34-d73b22de000c")
+		(uuid "9e7b26cb-9bd1-4152-8b13-b862f9978d96")
 	)
 	(wire
 		(pts
-			(xy 120.65 87.63) (xy 144.78 87.63)
+			(xy 97.79 85.09) (xy 97.79 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5aadcb75-48cf-420a-8b61-ab990ce4b06a")
+		(uuid "a745eef6-5586-44ca-87c8-813d6740214d")
 	)
 	(wire
 		(pts
-			(xy 130.81 85.09) (xy 156.21 85.09)
+			(xy 107.95 69.85) (xy 142.24 69.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6cd046c3-7797-47d8-bc7e-46177cd65cfb")
+		(uuid "d04f2a2b-a527-4f42-9351-62b7feeabdae")
 	)
 	(wire
 		(pts
-			(xy 156.21 69.85) (xy 156.21 82.55)
+			(xy 142.24 69.85) (xy 142.24 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e986137c-718a-4644-a240-7bc5bf9fe659")
+		(uuid "d619ab24-84a9-44d9-93f3-eb93b461cf6a")
 	)
 	(wire
 		(pts
-			(xy 120.65 72.39) (xy 130.81 72.39)
+			(xy 87.63 72.39) (xy 97.79 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "fda4fce0-c552-41cb-9be5-fdd6a4cbd12a")
+		(uuid "e66af2ee-98d1-4665-b618-c99c09b4269b")
+	)
+	(wire
+		(pts
+			(xy 87.63 87.63) (xy 111.76 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e954edb4-fcb5-4bf4-94db-cec50b19be4b")
+	)
+	(text "Type A is 1-2 Connected"
+		(exclude_from_sim no)
+		(at 131.318 99.314 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "46749e93-d6c2-49a0-84ed-b0ea454067eb")
 	)
 	(hierarchical_label "TX"
 		(shape input)
-		(at 140.97 90.17 180)
+		(at 107.95 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1021,45 +1041,38 @@
 			)
 			(justify right)
 		)
-		(uuid "7c11f475-a67e-46e5-9553-e9d7e0807aa0")
+		(uuid "59b25d8f-aaa7-4a8d-9461-feb9a707dde9")
 	)
 	(symbol
-		(lib_id "Device:LED")
-		(at 120.65 83.82 90)
+		(lib_id "Device:R")
+		(at 97.79 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "20075b77-ecf1-4e44-a939-cbb17d5bcd5b")
-		(property "Reference" "DT1"
-			(at 124.46 84.1374 90)
+		(fields_autoplaced yes)
+		(uuid "61bd7e71-042e-47f3-b263-04bb617c7807")
+		(property "Reference" "R2"
+			(at 100.33 76.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
-		(property "Value" "LED"
-			(at 124.46 86.6774 90)
+		(property "Value" "33"
+			(at 100.33 78.7399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 117.602 83.312 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 120.65 83.82 0)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 96.012 77.47 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1067,8 +1080,26 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Light emitting diode"
-			(at 120.65 83.82 0)
+		(property "Datasheet" "~"
+			(at 97.79 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 97.79 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" " C17634 "
+			(at 97.79 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1077,10 +1108,103 @@
 			)
 		)
 		(pin "1"
-			(uuid "6366fdcb-dd29-4b7a-b245-d005b3cd182b")
+			(uuid "ed17a5a8-14a0-4bac-b178-db38c4dd6c90")
 		)
 		(pin "2"
-			(uuid "c1ea26e1-0344-4061-b768-154ad33ddb2c")
+			(uuid "d974ea26-fd76-43d1-bc66-89ff51872fcf")
+		)
+		(instances
+			(project "dinoctopus_v2"
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
+					(reference "R2")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
+					(reference "R5")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
+					(reference "R8")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
+					(reference "R21")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
+					(reference "R24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 87.63 83.82 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6b6f6338-bdee-4de2-bd86-5e103003c656")
+		(property "Reference" "DT1"
+			(at 91.44 84.1374 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED"
+			(at 91.44 86.6774 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 84.582 83.312 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 87.63 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 87.63 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C72038"
+			(at 87.63 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1abed0a4-1dde-40eb-8023-c66727989bf5")
+		)
+		(pin "2"
+			(uuid "149be889-44d0-47f2-8b3e-a20905d98e0b")
 		)
 		(instances
 			(project "dinoctopus_v2"
@@ -1108,35 +1232,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 120.65 76.2 0)
+		(lib_id "power:GND")
+		(at 107.95 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "314525ca-7d0a-47d5-8f07-329c1cdb31a5")
-		(property "Reference" "R21"
-			(at 123.19 74.9299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2.2K"
-			(at 123.19 77.4699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 118.872 76.2 90)
+		(uuid "71d2c267-5ee2-43a5-af37-d2d4db369468")
+		(property "Reference" "#PWR03"
+			(at 107.95 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1144,8 +1250,16 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 120.65 76.2 0)
+		(property "Value" "GND"
+			(at 107.95 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 107.95 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1153,8 +1267,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 120.65 76.2 0)
+		(property "Datasheet" ""
+			(at 107.95 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 107.95 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1163,27 +1286,116 @@
 			)
 		)
 		(pin "1"
-			(uuid "08020285-26e0-40e3-9031-20e55b73d12f")
-		)
-		(pin "2"
-			(uuid "aed36554-2ac2-41c9-a1fe-b0007359324c")
+			(uuid "44ef2726-ec39-4b62-8bed-e7093de0bea1")
 		)
 		(instances
 			(project "dinoctopus_v2"
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
-					(reference "R21")
+					(reference "#PWR03")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
-					(reference "R22")
+					(reference "#PWR05")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
-					(reference "R23")
+					(reference "#PWR07")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
-					(reference "R24")
+					(reference "#PWR09")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
+					(reference "#PWR024")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 115.57 90.17 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a34d442c-c999-4934-b324-33811f5af965")
+		(property "Reference" "R3"
+			(at 115.57 93.472 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10"
+			(at 115.57 95.504 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 115.57 91.948 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 115.57 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 115.57 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17415 "
+			(at 115.57 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4fae2212-20e7-45a6-8b5a-2aeaece46d1d")
+		)
+		(pin "2"
+			(uuid "a561c6a1-4379-45e2-86a8-a2cf75f458e1")
+		)
+		(instances
+			(project "dinoctopus_v2"
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
+					(reference "R3")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
+					(reference "R6")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
+					(reference "R9")
+					(unit 1)
+				)
+				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
+					(reference "R22")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
@@ -1195,16 +1407,16 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 130.81 72.39 0)
+		(at 97.79 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "77550980-508c-4355-ace5-dfe84ea09bda")
+		(uuid "acbfc9e5-e582-4587-84cb-488b7fe0e569")
 		(property "Reference" "#PWR01"
-			(at 130.81 76.2 0)
+			(at 97.79 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1213,7 +1425,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 130.81 67.31 0)
+			(at 97.79 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1221,7 +1433,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 130.81 72.39 0)
+			(at 97.79 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1230,7 +1442,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 130.81 72.39 0)
+			(at 97.79 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1239,7 +1451,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 130.81 72.39 0)
+			(at 97.79 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1248,7 +1460,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "05761e27-7f1d-419f-9764-cb5ce8f113a2")
+			(uuid "bdecef44-1389-455f-89de-4f7338ed9e30")
 		)
 		(instances
 			(project "dinoctopus_v2"
@@ -1257,105 +1469,19 @@
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
-					(reference "#PWR03")
+					(reference "#PWR04")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
-					(reference "#PWR05")
+					(reference "#PWR06")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
-					(reference "#PWR07")
+					(reference "#PWR08")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
-					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 130.81 76.2 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7913b583-c726-4b74-866e-498385212e2d")
-		(property "Reference" "R1"
-			(at 133.35 74.9299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "33"
-			(at 133.35 77.4699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 129.032 76.2 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 130.81 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 130.81 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3dadd709-5fc8-44ad-a12f-d4287b88165e")
-		)
-		(pin "2"
-			(uuid "816e03b5-e8f1-4457-a0e7-821cd497844f")
-		)
-		(instances
-			(project "dinoctopus_v2"
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
-					(reference "R1")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
-					(reference "R3")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
-					(reference "R5")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
-					(reference "R7")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
-					(reference "R9")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -1363,16 +1489,16 @@
 	)
 	(symbol
 		(lib_id "MIDI_projects:SJ-3524-SMT")
-		(at 168.91 87.63 0)
+		(at 154.94 87.63 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
-		(uuid "aee92f88-fe59-49bf-8cc7-7ce0d3baf8d3")
+		(dnp yes)
+		(uuid "c972a295-98d0-441a-9abd-fd3ad6db6d69")
 		(property "Reference" "J11-O1"
-			(at 168.91 74.93 0)
+			(at 154.94 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1380,15 +1506,15 @@
 			)
 		)
 		(property "Value" "SJ-3524-SMT"
-			(at 168.91 77.47 0)
+			(at 154.94 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "MIDI_projects:CUI_SJ-3524-SMT"
-			(at 166.624 77.47 0)
+		(property "Footprint" "Library:CUI_SJ-3524-SMT"
+			(at 152.654 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1398,7 +1524,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 168.91 87.63 0)
+			(at 154.94 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1407,7 +1533,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 168.91 87.63 0)
+			(at 154.94 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1416,7 +1542,7 @@
 			)
 		)
 		(property "PARTREV" "1.03"
-			(at 164.084 82.042 0)
+			(at 150.114 82.042 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1426,7 +1552,7 @@
 			)
 		)
 		(property "MF" "CUI Inc"
-			(at 172.72 92.456 0)
+			(at 158.75 92.456 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1436,7 +1562,7 @@
 			)
 		)
 		(property "STANDARD" ""
-			(at 166.624 97.79 0)
+			(at 152.654 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1445,17 +1571,25 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" ""
+			(at 154.94 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "3"
-			(uuid "f524a984-94aa-495a-983d-722f7cf2bdf4")
+			(uuid "98da99a5-fd6e-43cf-aaaa-b67a862f79e5")
 		)
 		(pin "2"
-			(uuid "1fd97d2c-a621-4f4e-9537-313f05fa8f73")
+			(uuid "712d1f96-f805-42a5-b506-3a365241a5ed")
 		)
 		(pin "1"
-			(uuid "3e13516c-2fbf-4a2f-bded-9da556ea4344")
+			(uuid "f91a1360-d4e7-4e6e-af1e-5a801bc02808")
 		)
 		(pin "4"
-			(uuid "617687b7-bb23-42f2-b80c-39f10e481eac")
+			(uuid "9eb59559-26fd-45d0-9d19-7371b9855f19")
 		)
 		(instances
 			(project "dinoctopus_v2"
@@ -1483,114 +1617,35 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 140.97 69.85 0)
+		(lib_id "Device:R")
+		(at 87.63 76.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "b17e4c63-792c-48b5-86bb-bfff0e8ce43b")
-		(property "Reference" "#PWR04"
-			(at 140.97 76.2 0)
+		(uuid "fd20ee98-a385-4ceb-a1e4-7453bf93e7b0")
+		(property "Reference" "R1"
+			(at 90.17 74.9299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Value" "GND"
-			(at 140.97 74.93 0)
+		(property "Value" "2.2K"
+			(at 90.17 77.4699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 140.97 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 140.97 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "855dbc47-5031-4790-8abf-fcb73f6f1812")
-		)
-		(instances
-			(project "dinoctopus_v2"
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
-					(reference "#PWR04")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
-					(reference "#PWR06")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
-					(reference "#PWR08")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
-					(reference "#PWR0101")
-					(unit 1)
-				)
-				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
-					(reference "#PWR010")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 148.59 90.17 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d143704d-b838-4cfc-859a-687d0b78c752")
-		(property "Reference" "R2"
-			(at 148.59 93.472 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10"
-			(at 148.59 95.504 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 148.59 91.948 90)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 85.852 76.2 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1599,7 +1654,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 148.59 90.17 0)
+			(at 87.63 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1608,7 +1663,16 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 148.59 90.17 0)
+			(at 87.63 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17520"
+			(at 87.63 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1617,15 +1681,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "56af32b5-7267-45a7-a6be-721730e80869")
+			(uuid "9fdeaa76-6261-49c0-9b12-da731c34f12f")
 		)
 		(pin "2"
-			(uuid "779b8b7d-feda-4b29-9619-eb1461fcbd51")
+			(uuid "43fccef4-60af-40e0-8542-cd57d9b20d38")
 		)
 		(instances
 			(project "dinoctopus_v2"
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/e41d1471-dfd4-454e-991d-302e3492a1d2"
-					(reference "R2")
+					(reference "R1")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/bde3e8c5-f511-4910-9cc6-6bdfa76443a5"
@@ -1633,15 +1697,15 @@
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/8bb0275b-8fc2-44db-b3a8-b704c02f0456"
-					(reference "R6")
+					(reference "R7")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/9b0dd759-e593-4403-8069-807ae3d556b1"
-					(reference "R8")
+					(reference "R10")
 					(unit 1)
 				)
 				(path "/7c6c2d1f-d81f-45f2-99e6-075fc53a5e89/0b4d9dd0-b7e9-4eb3-8acf-4aeffacefde9"
-					(reference "R10")
+					(reference "R23")
 					(unit 1)
 				)
 			)

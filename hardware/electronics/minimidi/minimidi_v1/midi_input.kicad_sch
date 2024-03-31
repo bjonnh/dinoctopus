@@ -2076,7 +2076,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f8b2f91-88f7-4d4b-9fcd-ec63928cfcdd")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR02"
 			(at 105.41 55.88 0)
 			(effects
 				(font
@@ -2160,7 +2160,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0201_0603Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 132.08 68.58 0)
 			(effects
 				(font
@@ -2221,7 +2221,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5adb6490-670f-467b-bd0a-aabbfd4af4f3")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR011"
 			(at 105.41 91.44 0)
 			(effects
 				(font
@@ -2360,7 +2360,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8ce5760f-fc92-4623-a644-ca9aca11a446")
-		(property "Reference" "U3"
+		(property "Reference" "U1"
 			(at 115.57 68.6114 0)
 			(effects
 				(font
@@ -2553,7 +2553,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a50aec85-7e7a-4eab-b831-a7ee7b6af084")
-		(property "Reference" "D2"
+		(property "Reference" "D1"
 			(at 86.36 72.3899 90)
 			(effects
 				(font

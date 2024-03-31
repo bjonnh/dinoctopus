@@ -1,4 +1,4 @@
-23164304382283004
+23159171557627399
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -63482,41 +63482,20 @@ Yellow 5381 Series LED
 0
 2
 2
-MIDI_projects
+Library
 CUI_SJ-3524-SMT
 
 
 0
 4
 4
-MIDI_projects
-JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal
-JST SH series connector, SM04B-SRSS-TB (http://www.jst-mfg.com/product/pdf/eng/eSH.pdf), generated with kicad-footprint-generator
-connector JST SH horizontal
+Library
+Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal
+3.5 mm, Stereo, Right Angle, Surface Mount (SMT), Audio Jack Connector (https://www.cui.com/product/resource/sj-352x-smt-series.pdf)
+3.5mm audio cui horizontal jack stereo
 0
-6
-5
-MIDI_projects
-RPi_Pico_Holes_
-Through hole straight pin header, 2x20, 2.54mm pitch, double rows
-Through hole pin header THT 2x20 2.54mm double row
-0
-40
-40
-MIDI_projects
-RPi_Pico_SMD_Only
-Through hole straight pin header, 2x20, 2.54mm pitch, double rows
-Through hole pin header THT 2x20 2.54mm double row
-0
-80
-40
-MIDI_projects
-RPi_Pico_SMD_TH
-Through hole straight pin header, 2x20, 2.54mm pitch, double rows
-Through hole pin header THT 2x20 2.54mm double row
-0
-86
-43
+4
+4
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet

@@ -1180,7 +1180,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 85.09) (xy 130.81 80.01)
+			(xy 130.81 85.09) (xy 130.81 81.28)
 		)
 		(stroke
 			(width 0)
@@ -1267,6 +1267,16 @@
 			(type default)
 		)
 		(uuid "5aadcb75-48cf-420a-8b61-ab990ce4b06a")
+	)
+	(wire
+		(pts
+			(xy 130.81 73.66) (xy 130.81 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6eb28394-f571-49dc-a3b1-c09518919482")
 	)
 	(wire
 		(pts
@@ -1552,7 +1562,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" " C441982 "
+		(property "LCSC" "C17520"
 			(at 120.65 76.2 0)
 			(effects
 				(font
@@ -1717,7 +1727,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 130.81 76.2 0)
+		(at 130.81 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1726,7 +1736,7 @@
 		(fields_autoplaced yes)
 		(uuid "7913b583-c726-4b74-866e-498385212e2d")
 		(property "Reference" "R1"
-			(at 133.35 74.9299 0)
+			(at 133.35 76.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1735,7 +1745,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 133.35 77.4699 0)
+			(at 133.35 78.7399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1743,8 +1753,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 129.032 76.2 90)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 129.032 77.47 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1753,7 +1763,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 130.81 76.2 0)
+			(at 130.81 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1762,7 +1772,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 130.81 76.2 0)
+			(at 130.81 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1770,8 +1780,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C137308 "
-			(at 130.81 76.2 0)
+		(property "LCSC" " C17634 "
+			(at 130.81 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1909,7 +1919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b17e4c63-792c-48b5-86bb-bfff0e8ce43b")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR010"
 			(at 140.97 76.2 0)
 			(effects
 				(font
@@ -2063,7 +2073,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 148.59 91.948 90)
 			(effects
 				(font
@@ -2090,7 +2100,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C140052"
+		(property "LCSC" "C17415 "
 			(at 148.59 90.17 90)
 			(effects
 				(font
