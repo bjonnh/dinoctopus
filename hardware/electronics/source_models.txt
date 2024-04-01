@@ -1,0 +1,1 @@
+New rpico 2040 models from: https://github.com/recursivenomad/ki-lime-pi-pico.git
