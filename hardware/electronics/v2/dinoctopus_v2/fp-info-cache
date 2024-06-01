@@ -1,4 +1,4 @@
-23193409687879585
+23164304382283004
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -63482,62 +63482,41 @@ Yellow 5381 Series LED
 0
 2
 2
-Library
+MIDI_projects
 CUI_SJ-3524-SMT
 
 
 0
 4
 4
-Library
+MIDI_projects
 JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal
 JST SH series connector, SM04B-SRSS-TB (http://www.jst-mfg.com/product/pdf/eng/eSH.pdf), generated with kicad-footprint-generator
 connector JST SH horizontal
 0
 6
 5
-Library
-Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal
-3.5 mm, Stereo, Right Angle, Surface Mount (SMT), Audio Jack Connector (https://www.cui.com/product/resource/sj-352x-smt-series.pdf)
-3.5mm audio cui horizontal jack stereo
-0
-4
-4
-Library
+MIDI_projects
 RPi_Pico_Holes_
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 40
 40
-Library
-RPi_Pico_Holes_on_header
-Through hole straight pin header, 2x20, 2.54mm pitch, double rows
-Through hole pin header THT 2x20 2.54mm double row
-0
-40
-40
-Library
+MIDI_projects
 RPi_Pico_SMD_Only
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 80
 40
-Library
-rx_with_light_pipe
-LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
+MIDI_projects
+RPi_Pico_SMD_TH
+Through hole straight pin header, 2x20, 2.54mm pitch, double rows
+Through hole pin header THT 2x20 2.54mm double row
 0
-2
-2
-Library
-tx_with_light_pipe
-LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
+86
+43
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -63797,104 +63776,6 @@ ESP8266 WiFi microcontroller
 0
 16
 16
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common
-Raspberry Pi Pico (wireless & original) versatile footprint for surface-mount or through-hole hand soldering, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-80
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common_MountingHoles
-Raspberry Pi Pico (wireless & original) versatile footprint for surface-mount or through-hole hand soldering, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-80
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common_SMD
-Raspberry Pi Pico (wireless & original) common surface-mount footprint for reflow or hand soldering, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-40
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common_SMD_MountingHoles
-Raspberry Pi Pico (wireless & original) common surface-mount footprint for reflow or hand soldering, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-40
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common_THT
-Raspberry Pi Pico (wireless & original) common through-hole footprint, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-40
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Common_THT_MountingHoles
-Raspberry Pi Pico (wireless & original) common through-hole footprint, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb antenna handsolder
-0
-40
-40
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_OptionalKeepoutRF
-Supplementary RF keepout zone for the Raspberry Pi Pico W (wireless), to be added to other Raspberry Pi Pico footprints, https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
-Raspberry Pi Pico module keepout rf wireless extra addon
-0
-0
-0
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_OptionalPinLabels
-Supplementary pin labels for the Raspberry Pi Pico (wireless & original), to be added to other Raspberry Pi Pico footprints, https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module label extra addon
-0
-0
-0
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Original_SMD
-Raspberry Pi Pico (original only) surface-mount footprint for reflow soldering with test points and debug pads (not compatible with Pico W), https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb swd
-0
-53
-49
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Original_SMD_MountingHoles
-Raspberry Pi Pico (original only) surface-mount footprint for reflow soldering with test points and debug pads (not compatible with Pico W), https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module usb pcb swd
-0
-53
-49
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_Original_SMD_MountingHoles_Castellated_HandSolder
-Raspberry Pi Pico (original only) surface-mount footprint with debug pads and castellated test points for hand soldering; requires completion of partial edge (not compatible with Pico W), https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
-Raspberry Pi Pico module castellated usb pcb swd handsolder
-0
-52
-49
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_W_SMD
-Raspberry Pi Pico W (wireless only) surface-mount footprint for reflow soldering with test points and debug pads (not compatible with original Pico), https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
-Raspberry Pi Pico module usb pcb swd antenna
-0
-53
-49
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_W_SMD_MountingHoles
-Raspberry Pi Pico W (wireless only) surface-mount footprint for reflow soldering with test points and debug pads (not compatible with original Pico), https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
-Raspberry Pi Pico module usb pcb swd antenna
-0
-53
-49
-Module_RaspberryPi_Pico
-RaspberryPi_Pico_W_SMD_MountingHoles_Castellated_HandSolder
-Raspberry Pi Pico W (wireless only) surface-mount footprint with castellated test points and debug access for hand soldering; requires completion of partial edge (not compatible with original Pico), https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
-Raspberry Pi Pico module castellated usb pcb swd antenna handsolder
-0
-55
-49
 Motors
 Vybronics_VZ30C1T8219732L
 Vibration motor, 2.3-3.2V, 14000rpm, 0.7G, https://www.vybronics.com/wp-content/uploads/datasheet-files/Vybronics-VZ30C1T8219732L-datasheet.pdf
